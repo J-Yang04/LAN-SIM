@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bpa3d85c7dy7r"]
+
+[ext_resource type="Script" uid="uid://d3l5m08io4720" path="res://Scripts/mount_selection_box.gd" id="1_thoor"]
+
+[node name="MountSelectionBox" type="VBoxContainer" unique_id=1904130003]
+custom_minimum_size = Vector2(100, 100)
+offset_left = 200.0
+offset_top = 600.0
+offset_right = 300.0
+offset_bottom = 700.0
+script = ExtResource("1_thoor")

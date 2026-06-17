@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://b471dk3gf070f"]
+
+[ext_resource type="Texture2D" uid="uid://chgvhw77inc7o" path="res://Assets/Weapon Assault Rifle.webp" id="1_7viyr"]
+[ext_resource type="Script" uid="uid://c0oq3bl3vfhfs" path="res://Scripts/weapon_pick_button.gd" id="1_s0rl6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s0rl6"]
+font_size = 20
+
+[node name="WeaponBox" type="ColorRect" unique_id=987231135]
+custom_minimum_size = Vector2(200, 100)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.45, 0.22049999, 0.22049999, 1)
+script = ExtResource("1_s0rl6")
+
+[node name="WeaponBoxLabel" type="Label" parent="." unique_id=63284015]
+layout_mode = 0
+offset_left = 10.0
+offset_right = 161.0
+offset_bottom = 28.0
+text = "//WEAPON NAME//"
+label_settings = SubResource("LabelSettings_s0rl6")
+
+[node name="WeaponIcon" type="TextureRect" parent="." unique_id=165620254]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 190.0
+offset_bottom = 90.0
+texture = ExtResource("1_7viyr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WeaponPickButton" type="Button" parent="." unique_id=305170990]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+flat = true

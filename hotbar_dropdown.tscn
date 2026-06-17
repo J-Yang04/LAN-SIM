@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://t1h1cgyuvrhi"]
+
+[ext_resource type="Script" uid="uid://bphuv088jyb64" path="res://Scripts/hotbar_dropdown.gd" id="1_w058v"]
+
+[node name="HotbarDropdown" type="VBoxContainer" unique_id=1608160695]
+clip_contents = true
+custom_minimum_size = Vector2(100, 100)
+offset_right = 100.0
+offset_bottom = 100.0
+alignment = 2
+script = ExtResource("1_w058v")
+
+[node name="HotbarDropdownButton" type="Button" parent="." unique_id=296368257]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+toggle_mode = true
+text = "HOTBAR DROPDOWN"
+text_overrun_behavior = 2
+autowrap_mode = 2
+
+[connection signal="toggled" from="HotbarDropdownButton" to="." method="_on_hotbar_dropdown_button_toggled"]

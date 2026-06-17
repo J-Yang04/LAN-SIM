@@ -1,0 +1,316 @@
+[gd_scene format=4 uid="uid://b8tegctad223i"]
+
+[ext_resource type="Texture2D" uid="uid://bg2w8p81x2x05" path="res://Assets/LANSIM Combat Overlay.png" id="1_h3ybn"]
+[ext_resource type="Script" uid="uid://c2bsvpaafmxkq" path="res://Scripts/combat_runner.gd" id="1_txwsu"]
+[ext_resource type="Script" uid="uid://bmcm85vd2hna5" path="res://Scripts/lansim_combat_overlay.gd" id="3_yud4q"]
+[ext_resource type="Texture2D" uid="uid://ciw41i0ffi4ln" path="res://Assets/hexagonTerrain_sheet.png" id="4_geka0"]
+[ext_resource type="PackedScene" uid="uid://bapsvxbw58h2x" path="res://attack_mount_select_box.tscn" id="4_n6mx6"]
+[ext_resource type="Script" uid="uid://c7isj8bupf8m4" path="res://Scripts/combat_tilemap.gd" id="5_n6mx6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h3ybn"]
+font_size = 54
+
+[sub_resource type="LabelSettings" id="LabelSettings_txwsu"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_yud4q"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_vhvux"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_geka0"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_3xyow"]
+font_size = 30
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dc8e4"]
+resource_name = "hexterrain"
+texture = ExtResource("4_geka0")
+separation = Vector2i(2, 2)
+texture_region_size = Vector2i(120, 140)
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+4:10/0 = 0
+5:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+3:11/0 = 0
+4:11/0 = 0
+5:11/0 = 0
+0:12/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+4:12/0 = 0
+5:12/0 = 0
+0:13/0 = 0
+1:13/0 = 0
+2:13/0 = 0
+3:13/0 = 0
+4:13/0 = 0
+5:13/0 = 0
+0:0/0 = 0
+1:0/0 = 0
+6:0/next_alternative_id = 3
+6:0/0 = 0
+1:8/0 = 0
+0:8/0 = 0
+0:9/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_tulow"]
+tile_shape = 3
+tile_size = Vector2i(120, 140)
+occlusion_layer_0/light_mask = 1
+sources/0 = SubResource("TileSetAtlasSource_dc8e4")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dc8e4"]
+size = Vector2(1920, 1080)
+
+[node name="CombatUIRunner" type="CanvasLayer" unique_id=1515455157]
+script = ExtResource("1_txwsu")
+
+[node name="LansimCombatOverlay" type="Sprite2D" parent="." unique_id=1766867713]
+z_index = 3
+texture = ExtResource("1_h3ybn")
+centered = false
+script = ExtResource("3_yud4q")
+
+[node name="CombatModeLabel" type="Label" parent="LansimCombatOverlay" unique_id=11878897]
+offset_left = 8.0
+offset_top = -8.0
+offset_right = 416.0
+offset_bottom = 66.0
+text = "COMBAT MODE"
+label_settings = SubResource("LabelSettings_h3ybn")
+
+[node name="TurnCounterLabel" type="Label" parent="LansimCombatOverlay" unique_id=753288366]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -216.0
+offset_top = 56.0
+offset_right = 10.0
+offset_bottom = 111.0
+grow_horizontal = 0
+text = "ROUND 00"
+label_settings = SubResource("LabelSettings_txwsu")
+
+[node name="TurnStatusLabel" type="Label" parent="LansimCombatOverlay" unique_id=1510820190]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -592.0
+offset_right = -23.0
+offset_bottom = 55.0
+grow_horizontal = 0
+text = "TURN STATUS"
+label_settings = SubResource("LabelSettings_yud4q")
+horizontal_alignment = 2
+
+[node name="HotbarContainer" type="HBoxContainer" parent="LansimCombatOverlay" unique_id=1783812516]
+custom_minimum_size = Vector2(1500, 200)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -750.0
+offset_top = -240.0
+offset_right = 750.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HotbarLeft" type="HBoxContainer" parent="LansimCombatOverlay/HotbarContainer" unique_id=822979063]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HotbarRight" type="HBoxContainer" parent="LansimCombatOverlay/HotbarContainer" unique_id=1917466362]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="StartTurnButton" type="Button" parent="LansimCombatOverlay" unique_id=606344204]
+self_modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(400, 120)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 260.0
+offset_right = 200.0
+offset_bottom = 380.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="LansimCombatOverlay/StartTurnButton" unique_id=387023521]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "//MECH NAME//
+//ACTIVATE//"
+label_settings = SubResource("LabelSettings_vhvux")
+horizontal_alignment = 1
+
+[node name="EndTurnButton" type="Button" parent="LansimCombatOverlay" unique_id=878593760]
+custom_minimum_size = Vector2(100, 100)
+offset_left = 16.0
+offset_top = 840.0
+offset_right = 116.0
+offset_bottom = 940.0
+
+[node name="Label" type="Label" parent="LansimCombatOverlay/EndTurnButton" unique_id=1174913164]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -43.5
+offset_right = 76.0
+offset_bottom = 43.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "END
+TURN"
+label_settings = SubResource("LabelSettings_geka0")
+horizontal_alignment = 1
+
+[node name="WeaponSelectBox" type="MarginContainer" parent="LansimCombatOverlay" unique_id=979241007]
+visible = false
+custom_minimum_size = Vector2(100, 210)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -162.0
+offset_top = -380.0
+offset_right = 162.0
+offset_bottom = -170.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="LansimCombatOverlay/WeaponSelectBox" unique_id=1885085392]
+layout_mode = 2
+color = Color(0.21, 0.21, 0.21, 1)
+
+[node name="MountSelectContainer" type="HBoxContainer" parent="LansimCombatOverlay/WeaponSelectBox" unique_id=2138755793]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MountBox" parent="LansimCombatOverlay/WeaponSelectBox/MountSelectContainer" unique_id=1988407849 instance=ExtResource("4_n6mx6")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LansimCombatOverlay/WeaponSelectBox" unique_id=866331855]
+layout_mode = 2
+size_flags_vertical = 0
+text = "//SELECT WEAPONS//"
+label_settings = SubResource("LabelSettings_3xyow")
+horizontal_alignment = 1
+
+[node name="DemoInstructions" type="Label" parent="LansimCombatOverlay" unique_id=207415026]
+offset_top = 50.0
+offset_right = 40.0
+offset_bottom = 73.0
+text = "Click move to start moving, Click move while moving to cancel movement."
+
+[node name="CombatTileMap" type="TileMapLayer" parent="." unique_id=2121466653 groups=["Combat_Group"]]
+z_index = -2
+tile_map_data = PackedByteArray("AAAEAAIAAAAAAA0AAAABAAMAAAAAAA0AAAADAAQAAAAAAA0AAAAEAAQAAAAAAA0AAAAFAAMAAAAAAA0AAAAFAAIAAAAAAA0AAAAFAAAAAAAEAAwAAAABAAQAAAAAAA0AAAAAAAMAAAAEAAkAAAABAAIAAAAEAAsAAAABAAEAAAAAAA0AAAACAAAAAAAEAAsAAAAAAAIAAAAEAAUAAAABAAAAAAAEAAsAAAAAAAQAAAADAAwAAAADAAAAAAAEAAoAAAACAAEAAAADAAwAAAACAAIAAAAAAA0AAAACAAMAAAAAAA0AAAADAAIAAAAEAAQAAAADAAEAAAAEAAoAAAAEAAAAAAADAA0AAAAEAAEAAAAAAA0AAAAFAAEAAAAAAA0AAAADAAMAAAAAAA0AAAAEAAMAAAAAAA0AAAAFAAQAAAADAAQAAAACAAQAAAAAAA0AAAAAAAAAAAAEAAkAAAAAAAEAAAAEAAwAAAAGAAAAAAAEAAwAAAAHAAAAAAAEAAgAAAAIAAAAAAAEAAkAAAAJAAAAAAAEAAkAAAAKAAAAAAAEAAQAAAALAAAAAAAEAAwAAAAMAAAAAAAEAAgAAAALAAEAAAAEAAUAAAAMAAIAAAAEAAsAAAALAAMAAAAEAAMAAAAMAAQAAAADAA0AAAALAAUAAAADAAwAAAALAAcAAAAEAAYAAAALAAkAAAAEAAYAAAAMAAoAAAADAA0AAAALAAsAAAAEAAsAAAAKAAsAAAAEAAUAAAAJAAsAAAAEAAoAAAAIAAsAAAAEAA0AAAAHAAsAAAAEAAMAAAAGAAsAAAAEAAYAAAAFAAsAAAAEAAoAAAAEAAsAAAAEAAMAAAADAAsAAAADAAwAAAACAAsAAAAEAAYAAAABAAsAAAAEAAoAAAAAAAsAAAAEAA0AAAAAAAoAAAAEAAoAAAAAAAkAAAAEAAYAAAAAAAgAAAAEAA0AAAAAAAcAAAAEAAwAAAAAAAYAAAAEAAUAAAAAAAUAAAAEAAMAAAAFAAYAAAAEAAoAAAAFAAUAAAAEAAwAAAAGAAQAAAAEAAgAAAAGAAMAAAAEAAsAAAAHAAIAAAAEAAwAAAAHAAEAAAAEAAoAAAAGAAEAAAAEAA0AAAAGAAIAAAAEAAgAAAAIAAIAAAAEAAsAAAAIAAEAAAADAAwAAAAJAAIAAAAEAAkAAAAJAAEAAAAEAAYAAAAKAAIAAAADAA0AAAAKAAEAAAAEAAYAAAALAAIAAAAEAA0AAAAKAAMAAAAEAAYAAAAJAAMAAAAEAAcAAAAIAAMAAAAEAAwAAAAHAAMAAAAEAAsAAAAHAAQAAAAEAAYAAAAGAAUAAAAEAAcAAAAGAAYAAAAEAAkAAAAFAAcAAAAEAAYAAAAEAAcAAAAEAAgAAAAEAAYAAAADAA0AAAAEAAUAAAAEAA0AAAADAAUAAAAEAAQAAAACAAUAAAAEAAMAAAABAAUAAAAEAAkAAAABAAYAAAAEAA0AAAABAAcAAAAEAAgAAAACAAYAAAAEAAgAAAADAAYAAAAEAA0AAAADAAcAAAAEAAoAAAADAAgAAAADAA0AAAACAAgAAAAEAA0AAAABAAgAAAADAA0AAAABAAkAAAAEAA0AAAABAAoAAAAEAAgAAAACAAoAAAAEAAMAAAACAAkAAAAEAAkAAAADAAoAAAAEAAcAAAADAAkAAAAEAAMAAAAEAAgAAAADAAwAAAAEAAkAAAAEAAoAAAAFAAgAAAADAA0AAAAFAAkAAAAEAAMAAAAGAAgAAAAEAAkAAAAGAAcAAAADAAwAAAAHAAYAAAAEAA0AAAAHAAUAAAAEAAYAAAAIAAQAAAAEAAsAAAAIAAUAAAAEAAsAAAAJAAQAAAAEAAcAAAAJAAUAAAAEAAYAAAAKAAQAAAAEAAkAAAALAAQAAAAEAAcAAAAKAAYAAAAEAAUAAAAJAAYAAAAEAAoAAAAIAAYAAAAEAAUAAAAHAAcAAAAEAAMAAAAHAAgAAAADAAwAAAAGAAkAAAAEAAUAAAAGAAoAAAAEAAwAAAAFAAoAAAAEAAwAAAAEAAoAAAAEAAkAAAAHAAoAAAAEAAYAAAAHAAkAAAAEAAsAAAAIAAgAAAAEAAcAAAAIAAcAAAAEAAoAAAAJAAgAAAAEAAMAAAAKAAcAAAAEAAMAAAAKAAkAAAAEAAQAAAAJAAkAAAAEAAUAAAAIAAkAAAAEAAQAAAAIAAoAAAAEAAgAAAAJAAoAAAAEAAcAAAAKAAoAAAAEAAYAAAALAAoAAAAEAAMAAAANAAAAAAAFAAEAAAAMAAEAAAAFAAEAAAAMAAUAAAAFAAEAAAAMAAcAAAAFAAEAAAAMAAkAAAAFAAEAAAANAAoAAAAFAAEAAAAMAAsAAAAFAAEAAAANAAsAAAAFAAEAAAANAAkAAAAFAAEAAAANAAUAAAAFAAEAAAANAAMAAAAFAAEAAAANAAEAAAAFAAEAAAAOAAsAAAAFAAEAAAAOAAoAAAAFAAEAAAAOAAkAAAAFAAEAAAAOAAgAAAAFAAEAAAAOAAcAAAAFAAEAAAAOAAYAAAAFAAEAAAAOAAUAAAAFAAEAAAAOAAQAAAAFAAEAAAAOAAMAAAAFAAEAAAAOAAIAAAAFAAEAAAAOAAEAAAAFAAEAAAAOAAAAAAAFAAEAAAA=")
+tile_set = SubResource("TileSet_tulow")
+navigation_enabled = false
+script = ExtResource("5_n6mx6")
+
+[node name="Area2D" type="Area2D" parent="CombatTileMap" unique_id=859423277]
+position = Vector2(960, 540)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatTileMap/Area2D" unique_id=477014799]
+shape = SubResource("RectangleShape2D_dc8e4")
+
+[node name="MovementTileGrid" type="Control" parent="." unique_id=920164270]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="LansimCombatOverlay/StartTurnButton" to="LansimCombatOverlay" method="_on_start_turn_button_pressed"]
+[connection signal="pressed" from="LansimCombatOverlay/EndTurnButton" to="LansimCombatOverlay" method="_on_end_turn_button_pressed"]

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://8gih2rbfbbjl"]
+
+[ext_resource type="Script" uid="uid://f803h5r2kmpm" path="res://Scripts/WeaponPickList.gd" id="1_fwkbf"]
+
+[node name="Control" type="ItemList" unique_id=1738871278]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 512.0
+offset_right = -984.0
+offset_bottom = -128.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fwkbf")
+
+[connection signal="item_selected" from="." to="." method="_on_item_selected"]

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bapsvxbw58h2x"]
+
+[ext_resource type="Script" uid="uid://b0xyemipmxdov" path="res://Scripts/attack_mount_select_box.gd" id="1_8uncn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fyy1x"]
+font_size = 20
+
+[node name="MountBox" type="MarginContainer" unique_id=1988407849]
+custom_minimum_size = Vector2(0, 160)
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_8uncn")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=252313289]
+layout_mode = 2
+color = Color(0.33, 0.33, 0.33, 1)
+
+[node name="MountBoxLabel" type="Label" parent="." unique_id=1266570402]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "//MOUNT NAME//"
+label_settings = SubResource("LabelSettings_fyy1x")
+
+[node name="WeaponPickMarginBox" type="MarginContainer" parent="." unique_id=577425953]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="WeaponBoxContainer" type="HBoxContainer" parent="WeaponPickMarginBox" unique_id=185526956]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 20

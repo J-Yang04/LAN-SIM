@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://hp1jsgdvth18"]
+
+[ext_resource type="Texture2D" uid="uid://d02tstsaxshvn" path="res://Assets/LANSIM Movement Icon.png" id="1_lpnjv"]
+[ext_resource type="Script" uid="uid://cndwaqwca5eui" path="res://Scripts/movement_tile.gd" id="2_qb111"]
+
+[node name="MovementTileArea" type="Area2D" unique_id=835322564]
+script = ExtResource("2_qb111")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=134280327]
+polygon = PackedVector2Array(0, -70, 60, -34.64, 60, 34.64, 0, 70, -60, 34.64, -60, -34.64)
+
+[node name="MovementTile" type="Sprite2D" parent="." unique_id=1385795493]
+visible = false
+texture = ExtResource("1_lpnjv")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
