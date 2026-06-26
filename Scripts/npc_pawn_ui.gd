@@ -1,19 +1,16 @@
 extends VBoxContainer
 
-var hp_container:FlowContainer
-var struct_container:HBoxContainer
-var heat_container
-var stress_container
-var parent_mech
-
-func _ready() -> void:
-	hp_container = get_child(0)
-	struct_container = get_child(1)
-	heat_container = get_child(2)
-	stress_container = get_child(3)
-	parent_mech = get_parent()
+@onready var hp_container:= $HPContainer as FlowContainer
+@onready var struct_container:= $StructContainer as HBoxContainer
+@onready var heat_container:= $HeatContainer as FlowContainer
+@onready var stress_container:= $StressContainer as HBoxContainer
+@onready var hp_label:= $HPLabel as Label
+@onready var heat_label:= $HeatLabel as Label
+@onready var parent:= get_parent() as NPCPawn
 
 func refresh_ui() -> void:
+	hp_label.text = "HP: " + str(parent.hp)
+	heat_label.text = "Heat: " + str(parent.heat)
 	for child:Object in hp_container.get_children():
 		child.queue_free()
 	for child:Object in struct_container.get_children():
@@ -22,24 +19,23 @@ func refresh_ui() -> void:
 		child.queue_free()
 	for child:Object in stress_container.get_children():
 		child.queue_free()
-	for i in parent_mech.get_hp():
+	for i in parent.hp:
 		var hpsquare = ColorRect.new()
 		hp_container.add_child(hpsquare)
 		hpsquare.custom_minimum_size = Vector2(15, 10)
 		hpsquare.set_color(Color(0.0, 0.0, i * 0.06))
-	for i in parent_mech.structure:
+	for i in parent.structure:
 		var structsquare = ColorRect.new()
 		struct_container.add_child(structsquare)
 		structsquare.custom_minimum_size = Vector2(40, 15)
 		structsquare.set_color(Color(0.0, 0.0, i * 0.2))
-	for i in parent_mech.heat:
+	for i in parent.heat:
 		var heatsquare = ColorRect.new()
 		heat_container.add_child(heatsquare)
 		heatsquare.custom_minimum_size = Vector2(15, 10)
 		heatsquare.set_color(Color(i * 0.06, 0.0, 0.0))
-	for i in parent_mech.stress:
+	for i in parent.stress:
 		var stresssquare = ColorRect.new()
 		stress_container.add_child(stresssquare)
 		stresssquare.custom_minimum_size = Vector2(40, 15)
 		stresssquare.set_color(Color(i * 0.2, 0.0, 0.0))
-	

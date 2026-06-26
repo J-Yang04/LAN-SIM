@@ -30,10 +30,14 @@ func get_threat() -> int:
 
 ## Gets the maximum range of a weapon, which is its listed range plus its largest pattern.
 func get_max_range() -> int:
-	var max_range:int = wrange.get(Enums.RangeType.RANGE, 0)
+	var max_range:int
+	if wrange.has(Enums.RangeType.RANGE):
+		max_range = wrange.get(Enums.RangeType.RANGE)
+	else:
+		max_range = wrange.get(Enums.RangeType.THREAT, 0)
 	var max_pattern:int = 0
 	for range_type in wrange:
-		if range_type != Enums.RangeType.RANGE:
+		if range_type != Enums.RangeType.RANGE and range_type != Enums.RangeType.THREAT:
 			if wrange[range_type] > max_pattern:
 				max_pattern = wrange[range_type]
 	return max_range + max_pattern

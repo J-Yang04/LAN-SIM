@@ -1,0 +1,221 @@
+[
+  {
+    "id": "npcc_mirage",
+    "name": "Mirage",
+    "role": "support",
+    "info": {
+      "flavor": "Mirage-class mechs are often found in the employ of HORIZON-aligned militant groups. With no originating manufacturer, they are one of the few open-source non-HORUS pattern groups available to cells that know where to look. Mirages deploy advanced liturgicode to wrap themselves and their allies in veils of illusion and misdirection. While it’s clear that the warping effects that surround these mechs are caused by sensor distortion, they are powerful enough to affect even organic systems – exercise caution when engaging.",
+      "tactics": "Mirages are potent support mechs, able to teleport their allies around at will and shut down ranged attackers with Warp Sensors. They can make allied characters Invisible, but become vulnerable while doing so. These strengths come at a price: weapons and systems that ignore cover – such as Seeking weapons – can get around Warp Sensors, and Mirages don’t deal any damage on their own.",
+      "terse": "Support mech that can teleport allies and shut down ranged attackers."
+    },
+    "stats": {
+      "armor": 0,
+      "hp": [10, 12, 14],
+      "evade": [10, 12, 14],
+      "edef": [12, 15, 18],
+      "heatcap": 6,
+      "speed": [5, 6, 7],
+      "sensor": [15, 15, 20],
+      "save": [11, 14, 17],
+      "hull": -2,
+      "agility": [1, 2, 3],
+      "systems": [2, 3, 4],
+      "engineering": [1, 2, 3],
+      "size": 0.5,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_warp_sensors_mirage",
+    "name": "Warp Sensors",
+    "origin": "npcc_mirage",
+    "base": true,
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Impale Systems",
+        "activation": "Quick Tech",
+        "detail": "Make a tech attack against a target within Sensors. On a success, they take {2/3/4} Heat and all attacks they make until the end of their next turn treat their targets as having soft cover.",
+        "attack": "tech",
+        "damage": [
+          {
+            "type": "Heat",
+            "val": [2, 3, 4]
+          }
+        ],
+        "add_special": [
+          {
+            "attribute": "Impale Systems Target",
+            "detail": "All attacks you make until the end of your next turn treat your targets as having soft cover."
+          }
+        ]
+      }
+    ],
+    "attack_bonus": [2, 4, 6],
+    "accuracy": 1,
+    "tags": [
+      {
+        "id": "tg_npc_system"
+      }
+    ]
+  },
+  {
+    "id": "npcf_reality_flicker_mirage",
+    "name": "Reality Flicker",
+    "origin": "npcc_mirage",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Mirage teleports when they make a standard move.",
+    "active_effects": [
+      {
+        "name": "Reality Flicker",
+        "detail": "You teleport when they make a standard move."
+      }
+    ]
+  },
+  {
+    "id": "npcf_dataveil_mirage",
+    "name": "Dataveil",
+    "base": true,
+    "origin": "npcc_mirage",
+    "type": "System",
+    "effect": "By default, the Mirage is Invisible and can transfer this status to another character within line of sight as a quick action. When they do so, the Mirage ceases to be Invisible, and only regains the status when they transfer it back as a quick action or transfer it to another character; otherwise, this effect lasts until the Mirage is destroyed.",
+    "actions": [
+      {
+        "name": "Transfer Dataveil",
+        "activation": "Quick",
+        "detail": "Transfer your Dataveil to another character within line of sight, or a transferred Dataveil back to you. While a character has the Dataveil they are Invisible. This effect lasts until you are destroyed.",
+        "add_special": [
+          {
+            "attribute": "Dataveil Target",
+            "detail": "You are Invisible while you have the Mirage's Dataveil."
+          }
+        ],
+        "add_status": [
+          {
+            "id": "invisible"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_glitch_scanners_mirage",
+    "name": "Glitch Scanners",
+    "base": true,
+    "origin": "npcc_mirage",
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Glitch Scanners",
+        "activation": "Quick",
+        "detail": "Your advanced electronic countermeasures play havoc with enemy systems, causing them to register false positives on the battlefield. Teleport up to two allied characters within Sensors, moving them 5 spaces in any direction – revealing their “true” locations. This movement ignores engagement and doesn’t provoke reactions."
+      },
+      {
+        "name": "Blip",
+        "activation": "Reaction",
+        "frequency": "1/round",
+        "trigger": "A hostile character takes action in line of sight.",
+        "detail": "You may teleport one allied character within Sensors 5 spaces in any direction."
+      }
+    ]
+  },
+  {
+    "id": "npcf_illusory_subroutines_mirage",
+    "name": "Illusory Subroutines",
+    "origin": "npcc_mirage",
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Illusory Subroutines",
+        "activation": "Quick Tech",
+        "detail": "Make a tech attack against a target within Sensors. On a success, the target treats all characters allied to you as Invisible until the start of their next turn.",
+        "attack": "tech",
+        "add_special": [
+          {
+            "attribute": "Illusory Subroutines Target",
+            "detail": "Treat all characters allied to the Mirage are Invisible until the start of your next turn."
+          }
+        ]
+      }
+    ],
+    "attack_bonus": [2, 4, 6]
+  },
+  {
+    "id": "npcf_warp_targeting_mirage",
+    "name": "Warp Targeting",
+    "origin": "npcc_mirage",
+    "type": "Trait",
+    "effect": "All allied characters within range 50 benefit from soft cover. If the Mirage takes damage, this effect ends until the start of their next turn.",
+    "active_effects": [
+      {
+        "name": "Warp Targeting",
+        "detail": "All allied characters within range 50 benefit from soft cover. If you takes damage, this effect ends until the start of their next turn."
+      }
+    ]
+  },
+  {
+    "id": "npcf_metafold_shove_mirage",
+    "name": "Metafold Shove",
+    "origin": "npcc_mirage",
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Metafold Shove",
+        "activation": "Quick Tech",
+        "detail": "Make a tech attack against a hostile character within range 5. On a success, the target swaps position with an allied character within your line of sight and chosen by you, both teleporting. Flying characters can’t be swapped with characters that aren’t flying, and vice versa.",
+        "attack": "tech",
+        "range": [
+          {
+            "type": "Range",
+            "val": 5
+          }
+        ]
+      }
+    ],
+    "attack_bonus": [1, 2, 3]
+  },
+  {
+    "id": "npcf_manifest_false_idols_mirage",
+    "name": "Manifest False Idols",
+    "origin": "npcc_mirage",
+    "type": "Tech",
+    "deployables": [
+      {
+        "name": "Manifest False Idols",
+        "activation": "Full Tech",
+        "detail": "Create three Size 1 data constructs in free spaces within line of sight and range 5. These constructs provide soft cover but can be passed through. When hostile characters pass through a construct, the construct disappears and they must succeed on a Systems save or take 2 heat and become Jammed until the end of their next turn.<br>At any point during the Mirage’s turn, they can teleport an allied character within line of sight to the location of a data construct as a quick action, causing the construct to disappear, as long as there is space to do so."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_multiplicity_mirage",
+    "name": "Multiplicity",
+    "origin": "npcc_mirage",
+    "type": "Reaction",
+    "actions": [
+      {
+        "name": "Multiplicity",
+        "activation": "Reaction",
+        "frequency": "1/round",
+        "trigger": "A allied character in line of sight is hit.",
+        "detail": "The attacker must make a Systems save. On a failure, your ally gains Immunity to the attack’s damage and effects and may teleport up to 5 spaces in the direction of their choice.",
+        "save": "systems"
+      }
+    ]
+  },
+  {
+    "id": "npcf_blip_mirage",
+    "name": "Blip (DEPRECATED)",
+    "origin": "npcc_mirage",
+    "type": "Reaction",
+    "deprecated": true,
+    "effect": "This ability is now collected in the Glitch Scanners trait. This feature can be safely removed from your NPCs."
+  }
+]

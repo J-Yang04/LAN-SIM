@@ -1,0 +1,124 @@
+[
+  {
+	"id": "npct_commander",
+	"template": true,
+	"name": "Commander",
+	"description": "Commanders operate on a grand scale, controlling fleets and armies across worlds and interstellar space. They may not be the deadliest soldiers, but they bring out the best in their forces.",
+	"optionalMin": 1,
+	"optionalMax": 1,
+	"caveat": "<b>Commander Traits</b> do not function of the commander is <b>Jammed</b>"
+  },
+  {
+	"id": "npcf_reinforced_commander",
+	"name": "Reinforced",
+	"origin": "npct_commander",
+	"base": true,
+	"type": "Trait",
+	"effect": "The Commander gains +1 Structure and +1 Stress.",
+	"bonuses": [
+	  {
+		"id": "structure",
+		"val": 1
+	  },
+	  {
+		"id": "stress",
+		"val": 1
+	  }
+	]
+  },
+  {
+	"id": "npcf_voice_of_authority_commander",
+	"name": "Voice Of Authority",
+	"origin": "npct_commander",
+	"base": true,
+	"type": "Reaction",
+	"actions": [
+	  {
+		"name": "Voice Of Authority",
+		"activation": "Reaction",
+		"frequency": "1/round",
+		"trigger": "An allied character fails an attack, check or save, and you aren't Jammed.",
+		"detail": "The ally can reroll it."
+	  }
+	]
+  },
+  {
+	"id": "npcf_bolster_network_commander",
+	"name": "Bolster Network",
+	"origin": "npct_commander",
+	"type": "Trait",
+	"effect": "As long as the Commander isn't Jammed, all allied characters within line of sight (excluding the Commander) gain +1 Accuracy on Systems saves, and tech attacks made against them receive +1 Difficulty.",
+	"active_effects": [
+	  {
+		"name": "Bolster Network",
+		"detail": "As long as you aren't Jammed, all allied characters within line of sight (excluding you) gain +1 Accuracy on Systems saves, and tech attacks made against them receive +1 Difficulty."
+	  }
+	]
+  },
+  {
+	"id": "npcf_press_the_attack_commander",
+	"name": "Press The Attack",
+	"origin": "npct_commander",
+	"type": "Reaction",
+	"actions": [
+	  {
+		"name": "Press The Attack",
+		"activation": "Reaction",
+		"frequency": "1/round",
+		"trigger": "A target damages an allied character and you aren't Jammed.",
+		"detail": "You can attack the target, and deal half damage, heat or Burn if successful."
+	  }
+	],
+	"tags": [
+	  {
+		"id": "tg_npc_trait"
+	  }
+	]
+  },
+  {
+	"id": "npcf_press_on_commander",
+	"name": "Press On!",
+	"origin": "npct_commander",
+	"type": "Trait",
+	"actions": [
+	  {
+		"name": "Press On!",
+		"activation": "Quick",
+		"detail": "Clear either the Stunned condition or the Jammed condition currently affecting an allied character within line of sight. This cannot be used if you are Jammed."
+	  }
+	],
+	"tags": [
+	  {
+		"id": "tg_recharge",
+		"val": 4
+	  }
+	]
+  },
+  {
+	"id": "npcf_quick_march_commander",
+	"name": "Quick March",
+	"origin": "npct_commander",
+	"type": "Trait",
+	"actions": [
+	  {
+		"name": "Quick March",
+		"activation": "Protocol",
+		"frequency": "1/round",
+		"detail": "If you aren't Jammed, one allied character within line of sight may Boost."
+	  }
+	]
+  },
+  {
+	"id": "npcf_military_discipline_commander",
+	"name": "Military Discipline",
+	"origin": "npct_commander",
+	"type": "Trait",
+	"effect": "As long as the Commander isn't Jammed, allied characters adjacent to the Commander gain +1 Accuracy on all attacks, saves and checks.",
+	"active_effects": [
+	  {
+		"name": "Military Discipline",
+		"detail": "As long as the you aren't Jammed, you gain +1 Accuracy on all attacks, saves and checks while adjacent to the Commander."
+	  }
+	]
+  }
+]

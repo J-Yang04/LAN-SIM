@@ -1,0 +1,212 @@
+[
+  {
+    "id": "npcc_bombard",
+    "name": "Bombard",
+    "role": "artillery",
+    "info": {
+      "flavor": "Alta All-Theater Ballistics’ archetypal Bombard chassis and their licensed facsimiles are a common sight in flashpoints across the galaxy. Built for staying power across long-uptime deployments, Bombard-type mechs are an accessible solution for armed forces looking to quickly deploy artillery to a theater. Chassis configured to the parameters of this class are usually positioned in fortified positions miles behind the line; one especially asymmetrical deployment strategy involves placing Bombard batteries above the theater of operations – typically on a local moon, locked-orbit natural satellite, or on a purpose-built orbital platform. From their vantage point, the battery can then rain shells down upon the world below, far removed from the dangers of combat.",
+      "tactics": "Bombards are very long-range artillery mechs designed to punish characters that stay close together to take advantage of adjacency bonuses. They are relatively fragile up close, but resilient at a distance, so place them far back to maximize their effectiveness. Bombards’ Earthshaker Shells are great for preventing enemy movement and providing cover, but can harm allies as well.",
+      "terse": "Long-range artillery that can punish enemies that stay close together."
+    },
+    "stats": {
+      "armor": 0,
+      "hp": [10, 13, 16],
+      "evade": [7, 8, 8],
+      "edef": [12, 14, 16],
+      "heatcap": 8,
+      "speed": [2, 2, 3],
+      "sensor": 15,
+      "save": [11, 13, 16],
+      "hull": [0, 1, 1],
+      "agility": -1,
+      "systems": [1, 2, 3],
+      "engineering": [2, 3, 5],
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_bombard_cannon_bombard",
+    "name": "Bombard Cannon",
+    "origin": "npcc_bombard",
+    "base": true,
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_arcing"
+      },
+      {
+        "id": "tg_ordnance"
+      }
+    ],
+    "weapon_type": "Superheavy Cannon",
+    "attack_bonus": [2, 4, 6],
+    "accuracy": -1,
+    "damage": [
+      {
+        "type": "Explosive",
+        "val": [5, 7, 8]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 25
+      },
+      {
+        "type": "Blast",
+        "val": 2
+      }
+    ]
+  },
+  {
+    "id": "npcf_cluster_munitions_bombard",
+    "name": "Cluster Munitions",
+    "origin": "npcc_bombard",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Bombard’s attacks deal +{2/3/4} damage to all targets for each target beyond the first.",
+    "active_effects": [
+      {
+        "name": "Cluster Munitions",
+        "detail": "Your attacks deal +{2/3/4} damage to all targets for each target beyond the first."
+      }
+    ]
+  },
+  {
+    "id": "npcf_earthshaker_shells_bombard",
+    "name": "Earthshaker Shells",
+    "origin": "npcc_bombard",
+    "base": true,
+    "type": "System",
+    "effect": "When attacking with the Bombard Cannon, the Bombard may also fire a special earthshaker shell. In addition to any damage, characters within Burst 3 of the targeted space must succeed on a Hull save or be knocked Prone. Debris or broken earth is thrown up by the impact, creating two Size 1 segments of hard cover in free spaces of the Bombard’s choice (within the affected area).",
+    "mod": "npcf_bombard_cannon_bombard",
+    "actions": [
+      {
+        "name": "Earthshaker Shell",
+        "activation": "Free",
+        "detail": "In addition to Bombard Cannon damage, characters within Burst 3 of the targeted space must succeed on a Hull save or be knocked Prone. Additionally, create two Size 1 segments of hard cover in free spaces within the affected area.",
+        "add_status": [
+          {
+            "id": "prone",
+            "save": "hull",
+            "aoe": "burst 3"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      }
+    ]
+  },
+  {
+    "id": "npcf_siege_armor_bombard",
+    "name": "Siege Armor",
+    "base": true,
+    "origin": "npcc_bombard",
+    "type": "Trait",
+    "effect": "The Bombard has Resistance to all damage from attacks that originate beyond range 3.",
+    "active_effects": [
+      {
+        "name": "Siege Armor",
+        "detail": "You have Resistance to all damage from attacks that originate beyond range 3."
+      }
+    ]
+  },
+  {
+    "id": "npcf_high_impact_shells_bombard",
+    "name": "High-Impact Shells",
+    "origin": "npcc_bombard",
+    "type": "Trait",
+    "effect": "On a hit, the Bombard Cannon knocks targets 3 spaces away from the Bombard.",
+    "mod": "npcf_bombard_cannon_bombard",
+    "on_hit": [
+      {
+        "name": "High-Impact Shells",
+        "detail": "On a hit, the Bombard Cannon knocks targets 3 spaces away from you."
+      }
+    ]
+  },
+  {
+    "id": "npcf_bunker_buster_bombard",
+    "name": "Bunker Buster",
+    "origin": "npcc_bombard",
+    "type": "Trait",
+    "effect": "The Bombard Cannon deals {10/15/20} AP Explosive damage to objects and terrain in the affected area, no roll required.",
+    "mod": "npcf_bombard_cannon_bombard"
+  },
+  {
+    "id": "npcf_flare_drone_bombard",
+    "name": "Flare Drone",
+    "origin": "npcc_bombard",
+    "type": "System",
+    "deployables": [
+      {
+        "name": "Flare Drone",
+        "activation": "Quick",
+        "size": 0.5,
+        "hp": [10, 20, 30],
+        "evasion": 10,
+        "edef": 10,
+        "type": "Drone",
+        "detail": "This drone can be deployed to a space within line of sight and range 25, where it hovers in place and begins projecting bright light in a Burst 2 area. All characters in the affected area – including those that move into the affected area or start their turn within it – lose Invisible and Hidden, and cannot Hide or turn Invisible within the area.<br>Additionally, the Bombard gains +1 Accuracy to attacks against characters within the affected area.<br>The drone can take damage from the Bombard’s attacks, and the Bombard can only have one drone deployed at a time; if a new drone is deployed, the old one disintegrates."
+      }
+    ]
+  },
+  {
+    "id": "npcf_repeater_cannon_bombard",
+    "name": "Repeater Cannon",
+    "origin": "npcc_bombard",
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_knockback",
+        "val": 3
+      },
+      {
+        "id": "tg_loading"
+      },
+      {
+        "id": "tg_ordnance"
+      }
+    ],
+    "weapon_type": "Main Cannon",
+    "attack_bonus": [1, 2, 3],
+    "damage": [
+      {
+        "type": "Explosive",
+        "val": [3, 4, 5]
+      }
+    ],
+    "range": [
+      {
+        "type": "Cone",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_cluster_seeker_bombs_bombard",
+    "name": "Cluster-Seeker Bombs",
+    "origin": "npcc_bombard",
+    "type": "Trait",
+    "effect": "When the Bombard attacks with the Bombard Cannon, three characters of their choice within range 3 of the targeted space take {2/3/4} Explosive damage, hit or miss.",
+    "mod": "npcf_bombard_cannon_bombard",
+    "active_effects": [
+      {
+        "name": "Cluster-Seeker Bombs",
+        "detail": "When you with the Bombard Cannon, three characters of their choice within range 3 of the targeted space take {2/3/4} Explosive damage, hit or miss.",
+        "damage": [
+          {
+            "type": "Explosive",
+            "val": [2, 3, 4],
+            "aoe": true
+          }
+        ]
+      }
+    ]
+  }
+]

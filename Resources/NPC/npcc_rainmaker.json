@@ -1,0 +1,229 @@
+[
+  {
+    "id": "npcc_rainmaker",
+    "name": "Rainmaker",
+    "role": "artillery",
+    "info": {
+      "flavor": "The tongue-in-cheek “Rainmaker” nickname describes mechs and pilots that specialize in the use of rockets and missiles. Favored by flexible combat units, Rainmakers are mobile platforms loaded with ordnance and capable of handling engagements at any range, against any target.",
+      "tactics": "Rainmakers are one part artillery and one part controller. Their Javelin Rockets force characters to avoid certain areas or take guaranteed damage. They can also dish out delayed damage through optional systems like Hound Missiles and Atlas Missiles. Like other artillery mechs, Rainmakers are relatively vulnerable on their own.",
+      "terse": "Artillery mech that can force enemies to avoid certain areas."
+    },
+    "stats": {
+      "armor": 1,
+      "hp": [10, 12, 14],
+      "evade": [8, 10, 12],
+      "edef": [8, 10, 12],
+      "heatcap": 8,
+      "speed": 3,
+      "sensor": 15,
+      "save": [10, 12, 14],
+      "hull": 0,
+      "agility": [0, 1, 1],
+      "systems": [2, 3, 3],
+      "engineering": [0, 0, 1],
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_missile_pods_rainmaker",
+    "name": "Missile Pods",
+    "origin": "npcc_rainmaker",
+    "base": true,
+    "type": "Weapon",
+    "attacks": [3, 3, 3],
+    "tags": [
+      {
+        "id": "tg_arcing"
+      },
+      {
+        "id": "tg_reliable",
+        "val": "{2/3/3}"
+      },
+      {
+        "id": "tg_knockback",
+        "val": 1
+      }
+    ],
+    "weapon_type": "Main Launcher",
+    "attack_bonus": [2, 4, 6],
+    "damage": [
+      {
+        "type": "Explosive",
+        "val": [4, 5, 6]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 20
+      }
+    ]
+  },
+  {
+    "id": "npcf_javelin_rockets_rainmaker",
+    "name": "Javelin Rockets",
+    "origin": "npcc_rainmaker",
+    "base": true,
+    "type": "System",
+    "actions": [
+      {
+        "name": "Javelin Rockets",
+        "activation": "Quick",
+        "detail": "Choose 3 free spaces within line of sight and range 20 that are not adjacent to each other. All characters know which spaces have been chosen. You fire a volley of auto-targeting rockets into the air: the next time a hostile character moves through, starts their turn in, or passes above one of the chosen spaces – no more than 10 spaces up – they are hit by a rocket, taking {5/6/7} kinetic damage. Each space can only be triggered once.<br>This effect lasts until the start of your next turn.",
+        "active_effects": [
+          {
+            "name": "Javelin Rockets Targeting",
+            "detail": "The next time a hostile character moves through, starts their turn in, or passes above one of the chosen spaces – no more than 10 spaces up – they are hit by a rocket, taking {5/6/7} kinetic damage. Each space can only be triggered once. This effect lasts until the start of your next turn.",
+            "damage": {
+              "type": "Kinetic",
+              "val": [5, 6, 7]
+            },
+            "duration": "next_turn_start_self"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_huntsman_rainmaker",
+    "name": "Huntsman",
+    "origin": "npcc_rainmaker",
+    "base": true,
+    "type": "Trait",
+    "effect": "Against characters with Lock On, the Rainmaker’s weapons gain Smart, Seeking, and AP.",
+    "active_effects": [
+      {
+        "name": "Huntsman",
+        "detail": "Against characters with Lock On, your weapons gain Smart, Seeking, and AP."
+      }
+    ]
+  },
+  {
+    "id": "npcf_hades_missiles_rainmaker",
+    "name": "Hades Missiles",
+    "origin": "npcc_rainmaker",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Hades Missiles",
+        "activation": "Quick",
+        "detail": "All characters in a Cone 3 area starting within range 20 of you take {4/6/8} Energy damage and 2 heat, half if they pass an Agility save. This system doesn’t need line of sight, just a possible route to the target.",
+        "damage": {
+          "type": "Energy",
+          "val": [4, 6, 8],
+          "save": "agility",
+          "aoe": "Cone 3"
+        }
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_hound_missiles_rainmaker",
+    "name": "Hound Missiles",
+    "origin": "npcc_rainmaker",
+    "type": "System",
+    "deployables": [
+      {
+        "name": "Hound Missile",
+        "activation": "Quick",
+        "size": 0.5,
+        "hp": [10, 15, 20],
+        "evasion": 10,
+        "edef": 10,
+        "type": "Drone",
+        "detail": "Deploy a Hound Missile in an adjacent space and pick a target in range 20 and line of sight. At the start of the Rainmaker’s turns the missile flies 3 spaces towards its target, 6 if the target has Lock On. It moves directly, maneuvering round cover and terrain if needed. When it collides with a character or reaches its target, it creates a Burst 1 explosion. Characters in the affected area take {16/20/24} Energy damage, half if they pass an Agility save.",
+        "damage": {
+          "type": "Energy",
+          "val": [16, 20, 24],
+          "save": "agility",
+          "save_half": true,
+          "aoe": "Burst 1"
+        }
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      }
+    ]
+  },
+  {
+    "id": "npcf_endless_rain_rainmaker",
+    "name": "Endless Rain",
+    "origin": "npcc_rainmaker",
+    "type": "Trait",
+    "effect": "The Rainmaker picks 6 spaces for Javelin Rockets, not 3.",
+    "mod": "npcf_javelin_rockets_rainmaker"
+  },
+  {
+    "id": "npcf_volley_rainmaker",
+    "name": "Volley",
+    "origin": "npcc_rainmaker",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Volley",
+        "activation": "Full",
+        "detail": "Pick characters in range 20 and line of sight. They take {4/6/8} Explosive damage, half if they pass an Agility save.",
+        "damage": {
+          "type": "Explosive",
+          "val": [4, 6, 8],
+          "save": "agility",
+          "save_half": true
+        }
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_atlas_missiles_rainmaker",
+    "name": "Atlas Missiles",
+    "origin": "npcc_rainmaker",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Atlas Missiles",
+        "activation": "Full",
+        "detail": "Choose a space of ground in line of sight and Range 30, obvious to all characters with line of sight to the space. You launche a missile that lands at the end of the next round making a Blast 2 explosion; affected characters take {16/20/24} Explosive damage, half if they pass an Agility save.",
+        "range": [
+          {
+            "type": "Range",
+            "val": 30
+          }
+        ],
+        "active_effects": [
+          {
+            "name": "Atlas Missile Targeting",
+            "detail": "At the end of the next round, create a Blast 2 explosion at the chosen space; affected characters take {16/20/24} Explosive damage, half if they pass an Agility save.",
+            "damage": {
+              "type": "Explosive",
+              "val": [16, 20, 24],
+              "save": "agility",
+              "save_half": true,
+              "aoe": "Blast 2"
+            }
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      }
+    ]
+  }
+]

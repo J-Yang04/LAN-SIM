@@ -1,0 +1,122 @@
+[
+  {
+    "id": "npct_ship",
+    "template": true,
+    "name": "Ship",
+    "description": "Whether civilian or military, Ships are defined by their flight capability and designed for space travel. Although they are mostly used outside the bounds of an atmosphere, most can operate closer to the ground when needed.<br>This template can be applied to any Mech NPC. They lose the Mech tag and become a Ship instead.",
+    "forceTag": "ship",
+    "prohibitTemplates": ["npct_vehicle"]
+  },
+  {
+    "id": "npcf_flier_ship",
+    "name": "Flier",
+    "origin": "npct_ship",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Ship moves normally in zero-g environments. In-atmosphere, it hovers. It gains Immunity to Immobilized, Stunned and Prone.",
+    "active_effects": [
+      {
+        "name": "Flier",
+        "detail": "You move normally in zero-g environments. In-atmosphere, you hover. You have Immunity to Immobilized, Stunned and Prone.",
+        "add_resist": [
+          {
+            "immunity": "immobilized",
+            "target": "self"
+          },
+          {
+            "immunity": "stunned",
+            "target": "self"
+          },
+          {
+            "immunity": "prone",
+            "target": "self"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_massive_size_ship",
+    "name": "Massive Size",
+    "origin": "npct_ship",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Ship is Size 4. Though it is larger than most mechs, it is small by ship standards; larger ships are too heavily armored to be damaged by mech-scale weapons.",
+    "bonuses": [
+      {
+        "id": "sizes",
+        "val": [4]
+      },
+      {
+        "id": "size",
+        "val": 4,
+        "override": true
+      }
+    ]
+  },
+
+  {
+    "id": "npcf_crew_ship",
+    "name": "Crew",
+    "origin": "npct_ship",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Ship has at least two crewmembers."
+  },
+  {
+    "id": "npcf_armored_hull_ship",
+    "name": "Armored Hull",
+    "origin": "npct_ship",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Ship gains +5 HP.",
+    "bonuses": [
+      {
+        "id": "hp",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_no_manipulators_ship",
+    "name": "No Manipulators",
+    "origin": "npct_ship",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Ship can’t pick up objects, manipulate objects or the environment, or Grapple.",
+    "active_effects": [
+      {
+        "name": "No Manipulators",
+        "detail": "You can’t pick up objects, manipulate objects or the environment, or Grapple."
+      }
+    ]
+  },
+  {
+    "id": "npcf_limited_melee_attacks_ship",
+    "name": "Limited Melee Attacks",
+    "origin": "npct_ship",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Ship can’t make melee attacks other than Ram.",
+    "active_effects": [
+      {
+        "name": "Limited Melee Attacks",
+        "detail": "You can’t make melee attacks other than Ram."
+      }
+    ]
+  },
+  {
+    "id": "npcf_transport_ship",
+    "name": "Transport",
+    "origin": "npct_ship",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Ship can transport one Squad or characters whose combined Size is less than its own Size.",
+    "active_effects": [
+      {
+        "name": "Transport",
+        "detail": "You can transport one Squad or characters whose combined Size is less than your own Size."
+      }
+    ]
+  }
+]

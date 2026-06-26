@@ -1,0 +1,217 @@
+[
+  {
+    "id": "npcc_scourer",
+    "name": "Scourer",
+    "role": "striker",
+    "info": {
+      "flavor": "Scourer-class mechs are distinctive for carrying deadly Energy damage weapons powered by massive-output recursive power plants. These mechs are found across the galaxy in specialist roles, supporting conventional ground troops with powerful beam attacks that stop electronic threats as easily as they stop enemy soldiers.",
+      "tactics": "Scourers deal a great deal of damage when they focus on single targets, attacking them multiple times. They can be used to crack tough or slow moving opponents very easily. However, they are much less effective when forced to switch targets, and need to stay still to make the most of their weapons.",
+      "terse": "Striker that can deal high damage to single targets."
+    },
+    "stats": {
+      "armor": 2,
+      "hp": [10, 13, 15],
+      "evade": [8, 9, 10],
+      "edef": 8,
+      "heatcap": [8, 8, 12],
+      "speed": 4,
+      "sensor": 10,
+      "save": [10, 12, 14],
+      "hull": [1, 2, 3],
+      "agility": [0, 1, 1],
+      "systems": [0, 0, 1],
+      "engineering": [1, 2, 4],
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_thermal_lance_scourer",
+    "name": "Thermal Lance",
+    "origin": "npcc_scourer",
+    "base": true,
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_heat_self",
+        "val": 4
+      }
+    ],
+    "weapon_type": "Heavy Cannon",
+    "attack_bonus": [1, 2, 3],
+    "accuracy": 1,
+    "damage": [
+      {
+        "type": "Energy",
+        "val": [6, 8, 10]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 8
+      }
+    ]
+  },
+  {
+    "id": "npcf_focus_down_scourer",
+    "name": "Focus Down",
+    "origin": "npcc_scourer",
+    "base": true,
+    "type": "Trait",
+    "effect": "When the Scourer hits with the Thermal Lance, targets take {5/7/8} Burn if they were also successfully hit with the Thermal Lance in the previous round.",
+    "active_effects": [
+      {
+        "name": "Focus Down",
+        "detail": "When you hit with the Thermal Lance, targets take {5/7/8} Burn if they were also successfully hit with the Thermal Lance in the previous round.",
+        "damage": {
+          "type": "Burn",
+          "val": [5, 7, 8]
+        }
+      }
+    ]
+  },
+  {
+    "id": "npcf_cooling_module_scourer",
+    "name": "Cooling Module",
+    "origin": "npcc_scourer",
+    "base": true,
+    "type": "System",
+    "effect": "At the start of their turn, the Scourer clears all heat if they haven’t moved – including involuntary movement – since the end of their previous turn.",
+    "active_effects": [
+      {
+        "name": "Cooling Module",
+        "condition": "You haven’t moved since the end of your pervious turn, including involuntary movement.",
+        "detail": "Clear all heat at the start of your turn."
+      }
+    ]
+  },
+  {
+    "id": "npcf_ablative_shielding_scourer",
+    "name": "Ablative Shielding",
+    "origin": "npcc_scourer",
+    "base": true,
+    "type": "System",
+    "effect": "The Scourer has Resistance to Energy damage.",
+    "add_resist": [
+      {
+        "resistance": "Energy"
+      }
+    ]
+  },
+  {
+    "id": "npcf_supercharged_scourer",
+    "name": "Supercharged",
+    "origin": "npcc_scourer",
+    "type": "Trait",
+    "effect": "Characters affected by Focus Down are also Shredded and Slowed until the end of their next turn.",
+    "mod": "npcf_focus_down_scourer",
+    "active_effects": [
+      {
+        "name": "Supercharged",
+        "detail": "Characters affected by Focus Down are also Shredded and Slowed until the end of their next turn.",
+        "add_status": [
+          {
+            "id": "shredded",
+            "duration": "next_turn_end_target"
+          },
+          {
+            "id": "slow",
+            "duration": "next_turn_end_target"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_emergency_vent_scourer",
+    "name": "Emergency Vent",
+    "origin": "npcc_scourer",
+    "type": "Trait",
+    "effect": "When the Scourer exceeds their Heat Cap or becomes Stunned, they become Invisible until the start of their next turn.",
+    "active_effects": [
+      {
+        "name": "Emergency Vent",
+        "detail": "When you exceed your Heat Cap or become Stunned, you become Invisible until the start of your next turn."
+      }
+    ]
+  },
+  {
+    "id": "npcf_pulse_laser_scourer",
+    "name": "Pulse Laser",
+    "origin": "npcc_scourer",
+    "type": "Weapon",
+    "attacks": [1, 2, 2],
+    "weapon_type": "Main Cannon",
+    "attack_bonus": [2, 4, 6],
+    "damage": [
+      {
+        "type": "Energy",
+        "val": 4
+      }
+    ],
+    "range": [
+      {
+        "type": "Line",
+        "val": 10
+      }
+    ]
+  },
+  {
+    "id": "npcf_flash_lens_scourer",
+    "name": "Flash Lens",
+    "origin": "npcc_scourer",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Flash Lens",
+        "activation": "Quick",
+        "detail": "All characters in a Cone 5 area drawn from you must pass a Systems save or become Jammed until the start of your next turn.",
+        "add_status": [
+          {
+            "id": "jammed",
+            "duration": "start_next_turn_self",
+            "aoe": "Cone 5"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      }
+    ]
+  },
+  {
+    "id": "npcf_melt_scourer",
+    "name": "Melt",
+    "origin": "npcc_scourer",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Melt",
+        "activation": "Quick",
+        "detail": "Make a ranged attack against an object, deployable or Drone within Range 10, dealing 20 AP Energy damage on a success.",
+        "attack": "ranged",
+        "damage": {
+          "type": "Energy",
+          "val": 20,
+          "ap": true
+        },
+        "range": [
+          {
+            "type": "Range",
+            "val": 10
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  }
+]

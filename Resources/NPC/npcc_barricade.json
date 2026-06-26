@@ -1,0 +1,233 @@
+[
+  {
+    "id": "npcc_barricade",
+    "name": "Barricade",
+    "role": "controller",
+    "info": {
+      "flavor": "Veld Systems’ Keeper Pattern 5 is a common guard mech made famous after the platform’s performance during the Battle of Sing Rama Sing. During the battle, Audrey Reimaus of the Seraphs’ Company used a Keeper P5 to singlehandedly secure Rama City’s main uplift tower, thus guaranteeing an evacuation corridor for the city’s civilian population.",
+      "tactics": "Barricades are at their best when locking down fast-moving targets. They can use their Mobile Printer to create hard cover for allies or to prevent melee mechs from moving through an area.",
+      "terse": "Mobile controller that can lock down fast enemies and create hard cover."
+    },
+    "stats": {
+      "armor": 1,
+      "hp": [12, 16, 20],
+      "evade": [6, 7, 8],
+      "edef": [9, 11, 13],
+      "heatcap": [10, 11, 12],
+      "speed": [3, 3, 4],
+      "sensor": 15,
+      "save": [12, 15, 18],
+      "hull": [0, 1, 2],
+      "agility": -2,
+      "systems": [1, 1, 2],
+      "engineering": [3, 5, 6],
+      "size": 2,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_graviton_lance_barricade",
+    "name": "Graviton Lance",
+    "origin": "npcc_barricade",
+    "base": true,
+    "type": "Weapon",
+    "attacks": [1, 2, 2],
+    "weapon_type": "Main Cannon",
+    "attack_bonus": [1, 2, 3],
+    "accuracy": 1,
+    "damage": [
+      {
+        "type": "Energy",
+        "val": 2
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 10
+      }
+    ],
+    "on_hit": {
+      "detail": "Target is Slowed until the end of their next turn.",
+      "add_status": [
+        {
+          "id": "slow",
+          "duration": "next_turn_end_target"
+        }
+      ]
+    }
+  },
+  {
+    "id": "npcf_mobile_printer_barricade",
+    "name": "Mobile Printer",
+    "origin": "npcc_barricade",
+    "base": true,
+    "type": "System",
+    "deployables": [
+      {
+        "name": "Print Cube",
+        "activation": "Protocol",
+        "size": 2,
+        "hp": 20,
+        "evasion": 5,
+        "type": "Deployable",
+        "detail": "Print a Size 2 cube in a free and adjacent area. The cube provides hard cover."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_shock_plating_barricade",
+    "name": "Shock Plating",
+    "origin": "npcc_barricade",
+    "base": true,
+    "type": "System",
+    "effect": "The Barricade has Resistance to kinetic damage.",
+    "add_resist": [
+      {
+        "resistance": "kinetic",
+        "target": "self"
+      }
+    ]
+  },
+  {
+    "id": "npcf_bulwark_mods_barricade",
+    "name": "Bulwark Mods",
+    "origin": "npcc_barricade",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Barricade ignores difficult terrain and dangerous terrain.",
+    "active_effects": [
+      {
+        "name": "Bulwark Mods",
+        "detail": "You ignore difficult terrain and dangerous terrain."
+      }
+    ]
+  },
+  {
+    "id": "npcf_drag_down_barricade",
+    "name": "Drag Down",
+    "origin": "npcc_barricade",
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Drag Down",
+        "activation": "Quick Tech",
+        "detail": "Make a tech attack against a character within Sensors. On a success, they take 2 AP Energy damage per space that they voluntarily move until the end of their next turn.",
+        "attack": "tech"
+      }
+    ],
+    "attack_bonus": [1, 2, 3],
+    "accuracy": 1,
+    "tags": [
+      {
+        "id": "tg_npc_system"
+      }
+    ]
+  },
+  {
+    "id": "npcf_seismic_repulsor_barricade",
+    "name": "Seismic Repulsor",
+    "origin": "npcc_barricade",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Seismic Repulsor",
+        "activation": "Quick",
+        "detail": "All non-flying characters within a Burst 3 area must pass a Hull save or be knocked 3 spaces back from the Barricade and knocked Prone. The affected area becomes difficult terrain for the rest of the scene.",
+        "range": [
+          {
+            "type": "Range",
+            "val": 3
+          },
+          {
+            "type": "Burst",
+            "val": 3
+          }
+        ],
+        "save": "hull"
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      }
+    ]
+  },
+  {
+    "id": "npcf_extrudite_barricade",
+    "name": "Extrudite",
+    "origin": "npcc_barricade",
+    "type": "Trait",
+    "effect": "The Barricade can print two separate cubes at a time with Mobile Printer, instead of one.",
+    "mod": "npcf_mobile_printer_barricade",
+    "bonuses": [
+      {
+        "id": "deploy_count",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_hunger_pursuit_limpets_barricade",
+    "name": "Hunger/Pursuit Limpets",
+    "origin": "npcc_barricade",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Deploy Hunger/Pursuit Limpets",
+        "activation": "Quick",
+        "detail": "You rapidly print and deploy a field of tiny, mobile mines in a free Size 4 area adjacent to you. The affected area becomes difficult terrain; additionally, hostile characters that enter the area for the first time in a round or start their turn there must succeed on a Systems save or be Slowed until the end of their next turn.",
+        "add_status": [
+          {
+            "id": "slow",
+            "duration": "next_turn_end_target",
+            "aoe": true
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      }
+    ]
+  },
+  {
+    "id": "npcf_titan_snare_drone_barricade",
+    "name": "Titan-Snare Drone",
+    "origin": "npcc_barricade",
+    "type": "System",
+    "deployables": [
+      {
+        "name": "Titan-Snare Drone",
+        "activation": "Quick",
+        "size": 0.5,
+        "hp": [5, 10, 15],
+        "evasion": [10, 12, 14],
+        "edef": [10, 12, 14],
+        "type": "Drone",
+        "detail": "This drone can be printed and deployed to any free adjacent space. When hostile characters move into or start their turn within range 3 of the drone, it emits a pulse, and they become Immobilized until the drone is destroyed.",
+        "add_status": [
+          {
+            "id": "immobilized",
+            "aoe": "burst 3"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_limited",
+        "val": 1
+      }
+    ]
+  }
+]

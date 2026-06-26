@@ -1,41 +1,41 @@
-extends CanvasLayer
+class_name CombatRunner extends CanvasLayer
 
 # Preload constants
 const PLAYER_MECH_PAWN = preload("res://PlayerMechPawn.tscn")
 const MOVEMENT_TILE = preload("res://movement_tile.tscn")
+const NPC_PAWN = preload("res://NPCPawn.tscn")
 
-var combat_map:TileMapLayer
-var combat_ui
+@onready var combat_ui:= $LansimCombatOverlay as CombatUI ## Combat Overlay
+@onready var combat_map:= $CombatTileMap as CombatMap ## Combat Map
+## A grid of movement hints that show when previewing movement.
+@onready var movement_tile_grid:= $MovementTileGrid as Control
+## A grid of range indicators that show when previewing range.
+@onready var range_tile_grid:= $RangeTileGrid as Control
 
+## The tile being hovered by the mouse
+var hovered_tile:Vector2i
+
+## An array containing references to all the player mech sheets.
 var player_mechsheets:Array
-## An array containing references to all the player mechs.
+## An array containing references to all the player mech pawns.
 var player_mech_pawns:Array
 ## The index of the currently active friendly mech. If no mech is active, this defaults to -1. THIS IS THE MAIN REFERENCE OF ALL PLAYER MECH PAWNS
 var active_mech_index:int = -1
-## The index of the friendly mech currently being inspected. A mech should always be in focus. If there's an active mech, it should be the same as the focused mech.
-var focused_mech_index:int = 0
 ## An array containing the PIDs of all the player mechs that have already taken their turns.
 var player_expended_mechs:Array[int]
-var enemy_mech_pawns:Array
+## An array containing each NPC pawn.
+var npc_pawns:Array[NPCPawn]
 ## An array of every character in the combat. Does not include deployables or terrain.
 var combat_roster:Array
 
-## A grid of movement hints that show when previewing movement.
-var movement_tile_grid
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = false
-	combat_map = get_node("CombatTileMap")
-	combat_ui = get_node("LansimCombatOverlay")
-	movement_tile_grid = get_node("MovementTileGrid")
 	Global.start_combat.connect(_on_combat_start)
 	Global.start_turn.connect(_on_start_turn)
 	Global.end_turn.connect(_on_end_turn)
 	Global.hotbar_button_pressed.connect(_on_hotbar_button_pressed)
 	combat_map.get_child(0).input_event.connect(_on_map_clicked)
 	combat_map.enabled = false
-	add_to_group("Combat_Group")
 	# Create a grid of movement tiles for displaying movement ranges.
 	for tile in combat_map.get_used_cells():
 		var movement_tile = MOVEMENT_TILE.instantiate()
@@ -43,14 +43,24 @@ func _ready() -> void:
 		movement_tile.position = combat_map.map_to_local(tile)
 		movement_tile.movement_tile_area_entered.connect(_on_movement_tile_hover)
 		movement_tile_grid.add_child(movement_tile)
+	# then create a grid of range tiles.
+	for tile in combat_map.get_used_cells():
+		var range_tile = MOVEMENT_TILE.instantiate()
+		range_tile.tile_grid = tile
+		range_tile.position = combat_map.map_to_local(tile)
+		range_tile.movement_tile_area_entered.connect(_on_movement_tile_hover)
+		range_tile_grid.add_child(range_tile)
 
 ## This is the main method that starts a combat scene.
 func _on_combat_start(ActiveRoster:Array[PlayerMechSheet]) -> void:
 	Global.in_combat = true
 	combat_map.enabled = true
 	visible = true
+	var npcs = generate_npc_pawns(3)
+	init_npc_pawns(npcs)
+	place_npc_pawns([70, 71, 73])
 	init_combat(ActiveRoster)
-	place_player_mech_pawns([35, 36, 50])
+	place_player_mech_pawns([46, 50])
 	Global.in_select_active_mech = true
 	Global.start_round.emit(1)
 	cycle_focused_mech()
@@ -88,9 +98,20 @@ func take_action(action:Action):
 
 ## Starts the process of making a normal attack.
 func initiate_attack_action(action:Action):
+	Global.ui_state = "weapon select"
 	var filled_mounts = combat_roster[action.get_owner()].get_filled_mounts()
 	combat_ui.show_weapon_select(filled_mounts)
-	pass
+	hide_movement_range()
+
+## Cancel the attack and go back to normal UI.
+func cancel_attack_action():
+	Global.ui_state = "normal"
+	combat_ui.hide_weapon_select()
+
+func init_target_select(Weapon:MechWeapon, MechFiring:int = active_mech_index):
+	var weapon_range:int = Weapon.get_max_range()
+	display_weapon_range(weapon_range, MechFiring)
+	Global.Targeting_Weapon = Weapon
 
 ## Starts the process of selecting a target within range. Takes a point of origin and a pattern.
 func pick_target(Origin:int, Pattern:Array):
@@ -123,7 +144,7 @@ func init_player_mech_pawns(Mechsheets:Array[PlayerMechSheet]) -> void:
 	player_mech_pawns.clear()
 	var pid = 0
 	for sheet in Mechsheets:
-		var mech_pawn = PLAYER_MECH_PAWN.instantiate()
+		var mech_pawn:PlayerMechPawn = PLAYER_MECH_PAWN.instantiate()
 		add_child(mech_pawn)
 		mech_pawn.hydrate_pawn(sheet)
 		player_mech_pawns.append(mech_pawn)
@@ -132,33 +153,62 @@ func init_player_mech_pawns(Mechsheets:Array[PlayerMechSheet]) -> void:
 		pid += 1
 
 ## Places the player mechs in the given deployment zone on the map. The zone is given as an array of Astar indexes.
-func place_player_mech_pawns(Deployment_Area:Array[int]) -> void:
+func place_player_mech_pawns(Area:Array[int]) -> void:
+	var count = 0
 	for pawn in player_mech_pawns:
-		for index in Deployment_Area:
-			if combat_map.index_is_open(index):
-				pawn.position = combat_map.map_to_local(combat_map.convert_index_to_grid(index))
-				pawn.move_target = pawn.position
-				combat_map.astar.set_point_disabled(index)
-				break
+		pawn.position = combat_map.map_to_local(combat_map.convert_index_to_grid(Area[count]))
+		pawn.move_target = pawn.position
+		combat_map.astar.set_point_disabled(Area[count])
+		count += 1
+
+func init_npc_pawns(Pawns:Array[NPCPawn]) -> void:
+	for pawn in Pawns:
+		pawn.pid = npc_pawns.size()
+		npc_pawns.append(pawn)
+
+func place_npc_pawns(Area:Array[int]) -> void:
+	var count = 0
+	for pawn:NPCPawn in npc_pawns:
+		pawn.position = combat_map.map_to_local(combat_map.convert_index_to_grid(Area[count]))
+		pawn.move_target = pawn.position
+		combat_map.astar.set_point_disabled(Area[count])
+		count += 1
+
+func generate_npc_pawns(Quantity:int) -> Array[NPCPawn]:
+	var pawns:Array[NPCPawn]
+	for i in Quantity:
+		var new_npc:NPCPawn = NPC_PAWN.instantiate()
+		add_child(new_npc)
+		new_npc.hydrate_pawn(Data.random_npc(), 1)
+		npc_pawns.append(new_npc)
+	return pawns
 
 func _input(event: InputEvent) -> void:
 	if Global.in_combat:
 		if event.is_action_pressed("cycle_target") and active_mech_index == -1 and Global.in_select_active_mech == true:
 			cycle_focused_mech()
+		elif event is InputEventMouseMotion:
+			if Global.ui_state == "target select" and combat_map.local_to_map(event.position) != hovered_tile:
+				hovered_tile = combat_map.local_to_map(event.position)
+				print(combat_map.get_los(combat_map.local_to_map(player_mech_pawns[Global.focused_mech_index].position), hovered_tile))
 
 func _on_map_clicked(_viewport:Viewport, event:InputEvent, _shape_idx: int) -> void:
 	if Global.in_combat:
-		if event.is_action_pressed("click_move"):
+		if event.is_action_pressed("click_move") and Global.ui_state == "normal":
 			if Global.in_select_active_mech == false:
 				var click_index = combat_map.get_mouse_index()
 				if combat_map.index_is_open(click_index) and get_active_mech().moving == false:
 					step_active_mech(combat_map.get_local_path(combat_map.local_to_index(get_active_mech().position), click_index))
 				else:
 					get_active_mech().cancel_movement()
+		elif event.is_action("click"):
+			if Global.ui_state == "target select":
+				## PLACEHOLDER
+				pass
 
 ## Shows a movement path preview as the mouse moves.
 func _on_movement_tile_hover(Tile_Grid:Vector2i) -> void:
-	if visible:
+	if visible and Global.ui_state == "normal":
 		highlight_movement_path(Tile_Grid, Global.focused_mech_index)
 
 ## Finds the next INACTIVE mech and focuses it.
@@ -169,7 +219,6 @@ func cycle_focused_mech() -> void:
 			new_focus = get_next_mech(new_focus)
 		Global.focused_mech_index = new_focus
 		display_movement_range(get_focused_mech().movement_remaining, Global.focused_mech_index)
-		
 
 ## Returns the next valid player mech PID. Once at the end of the list of player mechs, flips to zero.
 func get_next_mech(PID:int) -> int:
@@ -214,9 +263,9 @@ func display_movement_range(Distance:int, PID:int) -> void:
 	range_zone.remove_at(0) # Remove the origin tile.
 	for movement_tile in movement_tile_grid.get_children():
 		if movement_tile.tile_grid in range_zone:
-			movement_tile.get_child(1).show()
+			movement_tile.show()
 		else:
-			movement_tile.get_child(1).hide()
+			movement_tile.hide()
 
 ## Highlights a path in the displayed movement range grid, starting at a mech.
 func highlight_movement_path(Tile_Grid:Vector2i, PID:int) -> void:
@@ -230,8 +279,14 @@ func highlight_movement_path(Tile_Grid:Vector2i, PID:int) -> void:
 ## Hides the range indication.
 func hide_movement_range() -> void:
 	for movement_tile in movement_tile_grid.get_children():
-		movement_tile.get_child(1).hide()
+		movement_tile.hide()
 
-## Creates a player object, probably a mech. Does not add it to the scene, only instantiates it.
-func create_player():
-	return PLAYER_MECH_PAWN.instantiate()
+## Display the max range of a weapon.
+func display_weapon_range(Distance:int, PID:int) -> void:
+	var range_zone = combat_map.get_tiles_in_range2(player_mech_pawns[PID].position, Distance)
+	for tile in movement_tile_grid.get_children():
+		if tile.tile_grid in range_zone:
+			tile.modulate = Color.BLUE
+			tile.show()
+		else:
+			tile.hide()

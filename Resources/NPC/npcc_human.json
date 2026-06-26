@@ -1,0 +1,127 @@
+[
+  {
+    "id": "npcc_human",
+    "name": "Human",
+    "role": "biological",
+    "info": {
+      "flavor": "All kinds of people end up on the battlefield, including pilots, VIPs, and bystanders.<br>You will mostly use Human NPCs when someone climbs out of their mech mid-battle; if you want a proper group of infantry, use the Squad class instead. Humans can never take other templates, and cannot gain structure.",
+      "tactics": "",
+      "terse": "Unmounted pilots, VIPs, and bystanders."
+    },
+    "stats": {
+      "armor": 0,
+      "hp": 6,
+      "evade": 10,
+      "edef": 10,
+      "heatcap": 0,
+      "speed": 4,
+      "sensor": 5,
+      "save": 10,
+      "hull": [1, 2, 3],
+      "agility": [1, 2, 3],
+      "systems": [1, 2, 3],
+      "engineering": [1, 2, 3],
+      "size": 0.5,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_ranged_weapon_human",
+    "name": "Ranged Weapon",
+    "origin": "npcc_human",
+    "type": "Weapon",
+    "weapon_type": "",
+    "attack_bonus": [1, 2, 3],
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [1, 2, 3]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_melee_weapon_human",
+    "name": "Melee Weapon",
+    "origin": "npcc_human",
+    "type": "Weapon",
+    "weapon_type": "",
+    "attack_bonus": [1, 2, 3],
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [1, 2, 3]
+      }
+    ],
+    "range": [
+      {
+        "type": "Threat",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_anti_armor_weapon_human",
+    "name": "Anti-Armor Weapon",
+    "origin": "npcc_human",
+    "type": "Weapon",
+    "weapon_type": "",
+    "attack_bonus": [1, 2, 3],
+    "damage": [
+      {
+        "type": "variable",
+        "val": [3, 4, 5]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 8
+      }
+    ]
+  },
+  {
+    "id": "npcf_veteran_human",
+    "name": "Veteran",
+    "origin": "npcc_human",
+    "type": "Trait",
+    "effect": "+{2/4/6} HP",
+    "bonuses": [
+      {
+        "id": "hp",
+        "val": [2, 4, 6]
+      }
+    ]
+  },
+  {
+    "id": "npcf_armored_human",
+    "name": "Armored",
+    "origin": "npcc_human",
+    "type": "Trait",
+    "effect": "+1 Armor",
+    "bonuses": [
+      {
+        "id": "armor",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_armored_human_enhanced",
+    "name": "Armored (Enhanced)",
+    "origin": "npcc_human",
+    "type": "Trait",
+    "effect": "+2 Armor",
+    "bonuses": [
+      {
+        "id": "armor",
+        "val": 2
+      }
+    ]
+  }
+]

@@ -2,8 +2,8 @@ extends Control
 var weaponselectscene = preload("res://MechWeaponSelectBox.tscn")
 var weaponpickscene = preload("res://WeaponPickList.tscn")
 var mountselectionbox = preload("res://MountSelectionBox.tscn")
-var mech_info_label:Label
-var active_mechsheet
+@onready var mech_info_label:= $MechInfoLabel as Label
+var active_mechsheet:PlayerMechSheet
 var mechframe:Frame
 var strategy_runner
 var weapon_selector
@@ -16,9 +16,7 @@ var weapon_change_primed:bool = false
 var primed_slot:int
 var primed_mount:int
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	mech_info_label = get_node("MechInfoLabel")
 	strategy_runner = get_parent().strategy_runner
 	weapon_selector = weaponselectscene.instantiate()
 	weapon_picker = weaponpickscene.instantiate()

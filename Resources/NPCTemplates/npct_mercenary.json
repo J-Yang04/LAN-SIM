@@ -1,0 +1,157 @@
+[
+  {
+    "id": "npct_mercenary",
+    "template": true,
+    "name": "Mercenary",
+    "description": "Mercenaries offer their services to the highest bidder. They may have an attachment to a faith or flag, but when it comes to doing business, they’re loyal only to the highest bidder."
+  },
+  {
+    "id": "npcf_opportunist_mercenary",
+    "name": "Opportunist",
+    "origin": "npct_mercenary",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Mercenary gains +1 Accuracy on attacks when their target is Engaged by an allied character.",
+    "active_effects": [
+      {
+        "name": "Opportunist",
+        "detail": "You gain +1 Accuracy on attacks when your target is Engaged by an allied character."
+      }
+    ]
+  },
+  {
+    "id": "npcf_bounty_hunter_mercenary",
+    "name": "Bounty Hunter",
+    "origin": "npct_mercenary",
+    "type": "Trait",
+    "effect": "Before combat begins, the GM chooses a PC: they have a bounty on their head. Any Mercenaries in the combat gain +1 Accuracy on all attacks, checks, and saves against that character – pilot and mech.",
+    "active_effects": [
+      {
+        "name": "Bounty Hunter",
+        "detail": "You gain +1 Accuracy on all attacks, checks, and saves against the chosen character – pilot and mech.",
+        "add_special": [
+          {
+            "attribute": "Bounty Target",
+            "detail": "You are the target of a bounty. Mercenaries gain +1 Accuracy on all attacks, checks, and saves against you – pilot and mech."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_efficient_killer_mercenary",
+    "name": "Efficient Killer",
+    "origin": "npct_mercenary",
+    "type": "Trait",
+    "effect": "The Mercenary gains +1 Accuracy and AP on attacks against characters with 2 Structure or less.",
+    "active_effects": [
+      {
+        "name": "Efficient Killer",
+        "detail": "You gain +1 Accuracy and AP on attacks against characters with 2 Structure or less."
+      }
+    ]
+  },
+  {
+    "id": "npcf_favors_owed_mercenary",
+    "name": "Favors Owed",
+    "origin": "npct_mercenary",
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Bombardment",
+        "activation": "Quick",
+        "detail": "Call in a favor: an orbital or artillery bombardment, targeting a Blast 2 area within line of sight and range 30. Characters within the affected area must succeed on an Agility save or take {6/8/12} Explosive damage and be knocked Prone. On a success, they take half damage and aren’t knocked Prone.",
+        "damage": {
+          "type": "Explosive",
+          "val": [6, 8, 12],
+          "save": "agility",
+          "save_half": true,
+          "aoe": "Blast 2"
+        },
+        "add_status": [
+          {
+            "id": "prone",
+            "aoe": "Blast 2"
+          }
+        ],
+        "range": [
+          {
+            "type": "Range",
+            "val": 30
+          },
+          {
+            "type": "Blast",
+            "val": 2
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_limited",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_scout_drone_mercenary",
+    "name": "Scout Drone",
+    "origin": "npct_mercenary",
+    "type": "System",
+    "deployables": [
+      {
+        "name": "Scout Drone",
+        "activation": "Quick",
+        "redeploy": "Protocol",
+        "size": 0.5,
+        "hp": 10,
+        "evasion": 10,
+        "edef": 10,
+        "type": "Drone",
+        "detail": "Deploy the drone to a free space within Sensors. The drone creates a Burst 2 perimeter, within which characters cannot become Invisible or Hide and lose those conditions if they have them. The Mercenary also gains +1 Accuracy when attacking characters within the affected area. The drone can be deployed to a new location as a protocol."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_limited",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_last_word_mercenary",
+    "name": "Last Word",
+    "origin": "npct_mercenary",
+    "type": "Reaction",
+    "actions": [
+      {
+        "name": "Last Word",
+        "activation": "Reaction",
+        "trigger": "You are reduced to less than half your total HP.",
+        "detail": "Characters in Burst 1 must pass an Agility save or take 2 kinetic damage and become Jammed until the end of their next turn. You then move spaces equal to Speed in any direction. This movement ignores engagement and doesn’t provoke reactions.",
+        "damage": {
+          "type": "Kinetic",
+          "val": 2,
+          "save": "agility",
+          "aoe": "Burst 1"
+        },
+        "add_status": [
+          {
+            "id": "jammed",
+            "duration": "next_turn_end_target",
+            "aoe": "Burst 1"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_limited",
+        "val": 1
+      },
+      {
+        "id": "tg_npc_system"
+      }
+    ]
+  }
+]

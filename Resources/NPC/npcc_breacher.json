@@ -1,0 +1,240 @@
+[
+  {
+    "id": "npcc_breacher",
+    "name": "Breacher",
+    "role": "striker",
+    "info": {
+      "flavor": "Notoriously effective in boarding operations, the Campbell Orbital Dynamics C-O MkIII is often seen in the arsenals of suborbital planetary defense forces and their pirate counterparts. Officially, the CO designation is an abbreviation of “CombatOrbital”, but unofficially, the CO3 goes by a different name: the “Can Opener”, inspired by the callsign of Valeria Rojas-Sarnik, one of the most storied CO3 pilots.",
+      "tactics": "Breachers can deal out significant Burst damage, but they aren’t especially accurate. To boost their capabilities, use Lock On or pair them with support NPCs. The Breach Ram makes short work of cover; however, it lacks speed and range, and risks provoking reactions.",
+      "terse": "Short-range burst striker that can deal high damage, but is slow and inaccurate."
+    },
+    "stats": {
+      "armor": 1,
+      "hp": [18, 20, 22],
+      "evade": [9, 11, 13],
+      "edef": 7,
+      "heatcap": [7, 7, 8],
+      "speed": [3, 4, 5],
+      "sensor": 5,
+      "save": [10, 12, 14],
+      "hull": [2, 3, 4],
+      "agility": [0, 1, 2],
+      "systems": -1,
+      "engineering": [1, 2, 3],
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_dual_shotguns_breacher",
+    "name": "Dual Shotguns",
+    "origin": "npcc_breacher",
+    "base": true,
+    "type": "Weapon",
+    "attacks": 2,
+    "weapon_type": "Main CQB",
+    "attack_bonus": [1, 2, 3],
+    "accuracy": -2,
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [6, 8, 10]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 3
+      },
+      {
+        "type": "Threat",
+        "val": 3
+      }
+    ]
+  },
+  {
+    "id": "npcf_breach_ram_breacher",
+    "name": "Breach Ram",
+    "origin": "npcc_breacher",
+    "base": true,
+    "type": "System",
+    "actions": [
+      {
+        "name": "Breach Ram",
+        "activation": "Quick",
+        "detail": "Move up to 6 spaces in a straight line, ignoring engagement and passing through – but not stopping in – spaces occupied by other characters. Obstructions and objects in the path take {10/20/30} AP kinetic damage. You pass through any obstructions destroyed this way and continue moving until you have moved 6 spaces or fail to destroy an obstruction. Any characters in your path must succeed on an Agility save or be pushed out of the way as directly as possible and knocked Prone.",
+        "damage": [
+          {
+            "type": "Kinetic",
+            "val": [10, 20, 30],
+            "ap": true,
+            "aoe": true
+          }
+        ],
+        "add_status": [
+          {
+            "id": "prone",
+            "save": "agility",
+            "aoe": true
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      }
+    ]
+  },
+  {
+    "id": "npcf_break_armor_breacher",
+    "name": "Break Armor",
+    "origin": "npcc_breacher",
+    "base": true,
+    "type": "Trait",
+    "effect": "Characters that are successfully attacked more than once in a turn by the Breacher’s Dual Shotguns become Shredded for the rest of the scene.",
+    "mod": "npcf_dual_shotguns_breacher",
+    "active_effects": [
+      {
+        "name": "Break Armor",
+        "condition": "A character is successfully attacked more than once in a turn by your Dual Shotguns",
+        "detail": "That character becomes Shredded for the rest of the scene.",
+        "add_status": [
+          {
+            "id": "shredded"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_painmaker_breacher",
+    "name": "Painmaker",
+    "origin": "npcc_breacher",
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Painmaker",
+        "activation": "Full",
+        "detail": "Choose a character within range 3. Their next turn is delayed until after their target’s. At the start of your turn, if the target is still within range 3, you may attack them four times with Dual Shotguns – instead of twice – as a free action.",
+        "range": [
+          {
+            "type": "Range",
+            "val": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_superior_ram_breacher",
+    "name": "Superior Ram",
+    "origin": "npcc_breacher",
+    "type": "Trait",
+    "effect": "When using Breach Ram the Breacher moves 4 more spaces, and targets have +1 Difficulty on the Agility save.",
+    "mod": "npcf_breach_ram_breacher"
+  },
+  {
+    "id": "npcf_follower_count_breacher",
+    "name": "Follower Count",
+    "origin": "npcc_breacher",
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Follower Count",
+        "activation": "Quick Tech",
+        "detail": "Make a tech attack against a character within Sensors. On a success, you gain +{1/2/3} Accuracy on all attacks against your target, and may Boost once per turn as a free action so long as it moves you directly towards their target. This lasts until either character is destroyed and cannot be changed to a new target.",
+        "attack": "tech",
+        "add_special": [
+          {
+            "attribute": "Follower Count Target",
+            "detail": "The Breacher gains +{1/2/3} Accuracy on all attacks against you, and may Boost once per turn as a free action so long as it moves them directly towards you."
+          }
+        ]
+      }
+    ],
+    "attack_bonus": [1, 2, 3],
+    "accuracy": 1,
+    "tags": [
+      {
+        "id": "tg_npc_system"
+      }
+    ]
+  },
+  {
+    "id": "npcf_thermal_charge_breacher",
+    "name": "Thermal Charge",
+    "origin": "npcc_breacher",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Thermal Charge",
+        "activation": "Quick",
+        "range": [
+          {
+            "type": "Range",
+            "val": 5
+          },
+          {
+            "type": "Blast",
+            "val": 2
+          }
+        ],
+        "damage": [
+          {
+            "type": "Explosive",
+            "val": [2, 4, 6],
+            "save": "agility",
+            "save_half": true
+          },
+          {
+            "type": "Kinetic",
+            "val": [10, 20, 30],
+            "ap": true,
+            "aoe": true
+          }
+        ],
+        "detail": "Throw a grenade to a space within range 5. Characters in the ensuing Blast 2 explosion take {2/4/6} Burn if they fail an Agility save, half on a success. Objects, terrain, and Deployables take {10/20/30} AP kinetic damage."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_limited",
+        "val": 1
+      },
+      {
+        "id": "tg_grenade"
+      }
+    ]
+  },
+  {
+    "id": "npcf_flechette_shot_breacher",
+    "name": "Flechette Shot",
+    "origin": "npcc_breacher",
+    "type": "Weapon",
+    "effect": "Attacks with this weapon take the form of a Cone 3 shrapnel attack starting from the edge of the targeted space, attacking all characters within both the targeted space and the affected area. The Cone cannot change directions.",
+    "weapon_type": "Auxiliary CQB",
+    "attack_bonus": 0,
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [2, 3, 4]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 3
+      },
+      {
+        "type": "Cone",
+        "val": 3
+      },
+      {
+        "type": "Threat",
+        "val": 3
+      }
+    ]
+  }
+]

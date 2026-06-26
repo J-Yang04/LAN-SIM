@@ -22,6 +22,8 @@ signal start_move(PID:int)
 ## When a mech ends a move. Helps with Overwatch.
 signal end_move(PID:int)
 
+
+
 ## When a player mech starts a new movement.
 signal player_mech_start_move(PID:int)
 ## When a player mech steps into a tile.
@@ -46,22 +48,35 @@ signal pawn_killed(PID:int)
 signal pawn_moved(PID:int)
 
 var in_combat:bool = false
+
 ## When the player is choosing which mech to activate.
 var in_select_active_mech:bool = false:
 	set(value):
 		in_select_active_mech = value
 		if value == true:
 			select_mech.emit()
+
 ## When a mech is active and taking its turn. The value indicates the PID of the active mech. If no active mech, -1.
 var in_active_mech:int = -1:
 	set(value):
 		in_active_mech = value
 		if value != -1:
 			in_select_active_mech = false
+			ui_state = "normal"
 			start_turn.emit(value)
+
+## The active player pawn, that is the one currently taking an action of some kind.
+var Active_Player_Pawn:PlayerMechPawn
 
 ## The PID of the focused mech. When this changes, emits focus_mech.
 var focused_mech_index:int = 0:
 	set(value):
 		focused_mech_index = value
 		focus_mech.emit(value)
+
+## The current UI state.
+## "normal" if no menus are open. "target select" if picking a target.
+var ui_state:String = ""
+
+## The weapon currently being used for target selection.
+var Targeting_Weapon:MechWeapon

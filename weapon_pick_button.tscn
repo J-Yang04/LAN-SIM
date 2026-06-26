@@ -31,9 +31,11 @@ texture = ExtResource("1_7viyr")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="WeaponPickButton" type="Button" parent="." unique_id=305170990]
+[node name="WeaponBoxButton" type="Button" parent="." unique_id=305170990]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 flat = true
+
+[connection signal="pressed" from="WeaponBoxButton" to="." method="_on_weapon_box_button_pressed"]

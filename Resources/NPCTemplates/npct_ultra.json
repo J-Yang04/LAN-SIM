@@ -1,0 +1,606 @@
+[
+  {
+    "id": "npct_ultra",
+    "template": true,
+    "name": "Ultra",
+    "description": "Ultras are the most dangerous individual foes a lancer might face on the battlefield – the champions, favored soldiers, chosen ones, and other mighty warriors of a fighting force. An Ultra might command a small retinue or lead an army from the front, but they are no grand strategists. Their primary tasks are always direct engagement with the enemy, holding or breaking lines, and ensuring through heroic efforts that their side wins the day.<br>",
+    "tactics": "Ultras are powerful enemies capable of taking on multiple mechs at once, along the lines of “boss” characters in video games. Like Elites, they have extra Structure, meaning they roll on the structure damage table and are much more resilient than most NPCs. Because they’re so much more powerful than regular NPCs (and keeping track of them is much more complex), it’s recommended you only use one Ultra in any given combat encounter.",
+    "prohibitTemplates": ["npct_grunt", "npct_elite"],
+    "optionalClassMin": 1,
+    "optionalClassMax": 2,
+    "optionalMin": 1,
+    "optionalMax": 3
+  },
+  {
+    "id": "npcf_shock_and_awe_ultra",
+    "name": "Shock And Awe",
+    "origin": "npct_ultra",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Ultra takes two separate turns each round. They regain spent reactions each time they take a turn.<br>If the Ultra is facing five or more hostile characters when combat begins, the Ultra takes a third turn each round.",
+    "bonuses": [
+      {
+        "id": "activations",
+        "val": 1
+      },
+      {
+        "id": "activations_pct",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_deadly_ultra",
+    "name": "Deadly",
+    "origin": "npct_ultra",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Ultra deals +1d6 damage on critical hits.",
+    "active_effects": [
+      {
+        "name": "Deadly",
+        "detail": "You deal +1d6 damage on critical hits."
+      }
+    ]
+  },
+  {
+    "id": "npcf_juggernaut_ultra",
+    "name": "Juggernaut",
+    "origin": "npct_ultra",
+    "base": true,
+    "type": "Trait",
+    "effect": "At the start of the Ultra’s turn, they clear one condition. At the end of their turn, they repair one destroyed weapon or system.",
+    "active_effects": [
+      {
+        "name": "Juggernaut",
+        "detail": "At the start of your turn, clear one condition. At the end of your turn, repair one destroyed weapon or system."
+      }
+    ]
+  },
+  {
+    "id": "npcf_reinforced_ultra",
+    "name": "Reinforced",
+    "origin": "npct_ultra",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Ultra gains +3 Structure and +3 Stress.",
+    "bonuses": [
+      {
+        "id": "structure",
+        "val": 3
+      },
+      {
+        "id": "stress",
+        "val": 3
+      }
+    ]
+  },
+  {
+    "id": "npcf_legendary_ultra",
+    "name": "Legendary",
+    "origin": "npct_ultra",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Ultra rolls all structure damage and overheating checks twice and chooses either result.",
+    "active_effects": [
+      {
+        "name": "Legendary",
+        "detail": "Roll all structure damage and overheating checks twice and choose either result."
+      }
+    ]
+  },
+  {
+    "id": "npcf_resilient_ultra",
+    "name": "Resilient",
+    "origin": "npct_ultra",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Ultra gains +5 HP.",
+    "bonuses": [
+      {
+        "id": "hp",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_reflex_ultra",
+    "name": "Reflex",
+    "origin": "npct_ultra",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Ultra can Overwatch unlimited times per round.",
+    "active_effects": [
+      {
+        "name": "Reflex",
+        "detail": "You can Overwatch unlimited times per round."
+      }
+    ]
+  },
+  {
+    "id": "npcf_hover_propulsion_ultra",
+    "name": "Hover Propulsion",
+    "origin": "npct_ultra",
+    "type": "System",
+    "effect": "The Ultra can hover when they move or Boost.",
+    "active_effects": [
+      {
+        "name": "Hover Propulsion",
+        "detail": "You can hover when you move or Boost."
+      }
+    ]
+  },
+  {
+    "id": "npcf_repulsion_field_ultra",
+    "name": "Repulsion Field",
+    "origin": "npct_ultra",
+    "type": "System",
+    "effect": "When hostile characters start their turn adjacent to the Ultra or become adjacent to the Ultra for the first time on their turn, they take {2/4/6} Energy damage + 2 heat and must succeed on a Systems save or become Impaired until the end of their next turn.",
+    "active_effects": [
+      {
+        "name": "Repulsion Field",
+        "detail": "When hostile characters start their turn adjacent to you or become adjacent to you for the first time on their turn, they take {2/4/6} Energy damage + 2 heat and must succeed on a Systems save or become Impaired until the end of their next turn.",
+        "damage": [
+          {
+            "type": "Energy",
+            "val": [2, 4, 6],
+            "aoe": true
+          },
+          {
+            "type": "Heat",
+            "val": 2,
+            "aoe": true
+          }
+        ],
+        "add_status": [
+          {
+            "id": "impaired",
+            "duration": "end_next_turn_target"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_siege_shield_ultra",
+    "name": "Siege Shield",
+    "origin": "npct_ultra",
+    "type": "System",
+    "effect": "The Ultra gains Resistance to all damage from attacks that originate beyond range 3.",
+    "active_effects": [
+      {
+        "name": "Siege Shield",
+        "detail": "Gain Resistance to all damage from attacks that originate beyond range 3."
+      }
+    ]
+  },
+  {
+    "id": "npcf_slivershielding_ultra",
+    "name": "Slivershielding",
+    "origin": "npct_ultra",
+    "type": "System",
+    "effect": "This system replaces Resilient. The Ultra becomes permanently Invisible.",
+    "mod": "npcf_resilient_ultra",
+    "bonuses": [{ "id": "hp", "val": -5 }],
+    "add_status": [
+      {
+        "id": "invisible",
+        "target": "self"
+      }
+    ]
+  },
+  {
+    "id": "npcf_short_cycle_lance_ultra",
+    "name": "Short-Cycle Lance",
+    "origin": "npct_ultra",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Short-Cycle Lance",
+        "activation": "Full",
+        "detail": "Draw a line 30 path: characters within the affected area must succeed on an Agility save or take 1 structure damage. On a success, they are reduced to 1 HP. Objects smaller than Size 5 are completely annihilated.",
+        "range": [
+          {
+            "type": "Line",
+            "val": 30
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_ordnance"
+      },
+      {
+        "id": "tg_recharge",
+        "val": 6
+      }
+    ]
+  },
+  {
+    "id": "npcf_volley_module_ultra",
+    "name": "Volley Module",
+    "origin": "npct_ultra",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Prepare Volley Module",
+        "activation": "Full",
+        "detail": "Adopt a stable stance and prepares one of your weapons. Select a weapon and gain the \"Fire Volley\" Protocol for use on your next turn."
+      },
+      {
+        "name": "Fire Volley",
+        "activation": "Protocol",
+        "detail": "You may use the prepared weapon from \"Prepare Volley Module\" to attack any number of characters, as long as they are within Range, and aren’t in cover or Prone. All characters are aware of this attack and can choose to drop Prone as a free action on their turn to avoid being targeted.<br>You can attack unlimited times with the prepared weapon as part of this effect, even if the weapon has the Loading tag."
+      }
+    ]
+  },
+  {
+    "id": "npcf_wolfhound_missile_ultra",
+    "name": "Wolfhound Missile",
+    "origin": "npct_ultra",
+    "type": "System",
+    "deployables": [
+      {
+        "name": "Wolfhound Missile",
+        "activation": "Quick",
+        "size": 0.5,
+        "hp": [10, 15, 20],
+        "evasion": 10,
+        "edef": 10,
+        "type": "Drone",
+        "detail": "Choose a character within line of sight and range 30, then deploy the wolfhound missile to an adjacent space. At the start of each of the Ultra’s subsequent turns, the missile flies 3 spaces towards the target, or 6 spaces if the target has Lock On. The missile moves as directly as possible, but maneuvers around cover and obstructions as long as there is space to do so. When the missile collides with a character or reaches the target, it detonates with a Blast 1 explosion. Characters within the affected area must make an Agility save. On fail, they take {14/20/28} Energy damage; on a success, they take half damage.<br>The Ultra can only deploy one wolfhound missile at a time, and this system can only recharge once the missile has detonated.",
+        "damage": [
+          {
+            "type": "Energy",
+            "val": [14, 20, 28],
+            "aoe": "Blast 1",
+            "save": "agility",
+            "save_half": true
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      }
+    ]
+  },
+  {
+    "id": "npcf_argus_armor_ultra",
+    "name": "Argus Armor",
+    "origin": "npct_ultra",
+    "type": "Trait",
+    "effect": "The Ultra has 6 Armor. Each time they roll a structure damage or overheating check, they lose 2 Armor, to a minimum of 0.",
+    "active_effects": [
+      {
+        "name": "Argus Armor",
+        "detail": "Each time you roll a structure damage or overheating check, you lose 2 Armor, to a minimum of 0.",
+        "bonuses": [
+          {
+            "id": "armor",
+            "val": 6,
+            "override": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_devastator_ultra",
+    "name": "Devastator",
+    "origin": "npct_ultra",
+    "type": "Trait",
+    "effect": "Once per round, when the Ultra makes a successful attack, all characters within line of sight take {2/4/6} kinetic, Explosive, or Energy damage.",
+    "active_effects": [
+      {
+        "name": "Devastator",
+        "detail": "Once per round, when you make a successful attack, all characters within line of sight take {2/4/6} Kinetic, Explosive, or Energy damage.",
+        "damage": [
+          {
+            "type": "variable",
+            "val": [2, 4, 6],
+            "aoe": true
+          }
+        ],
+        "frequency": "1/round"
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_round",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_evasive_ultra",
+    "name": "Evasive",
+    "origin": "npct_ultra",
+    "type": "Trait",
+    "effect": "The Ultra gains +4 Evasion (to a maximum of 20) and –1 Structure.",
+    "bonuses": [
+      {
+        "id": "evasion",
+        "val": 4
+      },
+      {
+        "id": "structure",
+        "val": -1
+      }
+    ]
+  },
+  {
+    "id": "npcf_extra_deadly_ultra",
+    "name": "Extra Deadly",
+    "origin": "npct_ultra",
+    "type": "Trait",
+    "effect": "The first critical hit the Ultra performs each turn deals {+0/+2d6/+3d6} damage.",
+    "active_effects": [
+      {
+        "name": "Extra Deadly",
+        "condition": "The first critical hit you perform each turn",
+        "detail": "Deal {+0/+2d6/+3d6} damage.",
+        "frequency": "1/turn"
+      }
+    ]
+  },
+  {
+    "id": "npcf_fortress_ultra",
+    "name": "Fortress",
+    "origin": "npct_ultra",
+    "type": "Trait",
+    "effect": "The Ultra gains +3 Accuracy on Systems saves, and tech attacks against them take +3 difficulty.",
+    "bonuses": [
+      {
+        "id": "systems",
+        "accuracy": 3
+      }
+    ],
+    "active_effects": [
+      {
+        "name": "Fortress",
+        "detail": "Tech attacks against you take +3 difficulty."
+      }
+    ]
+  },
+  {
+    "id": "npcf_lead_the_charge_ultra",
+    "name": "Lead The Charge",
+    "origin": "npct_ultra",
+    "type": "Reaction",
+    "actions": [
+      {
+        "name": "Lead The Charge",
+        "activation": "Reaction",
+        "frequency": "unlimited",
+        "trigger": "A hostile character in line of sight moves.",
+        "detail": "Boost. This reaction can be used any number of times a round."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_unlimited"
+      },
+      {
+        "id": "tg_npc_trait"
+      }
+    ]
+  },
+  {
+    "id": "npcf_legion_ultra",
+    "name": "Legion",
+    "origin": "npct_ultra",
+    "type": "Trait",
+    "effect": "The Ultra gains +4 E-Defense (to a maximum of 20) and +1 Accuracy on all tech attacks.",
+    "bonuses": [
+      {
+        "id": "edef",
+        "val": 4
+      },
+      {
+        "id": "tech_attack",
+        "accuracy": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_limitless_ultra",
+    "name": "Limitless",
+    "origin": "npct_ultra",
+    "type": "Trait",
+    "effect": "The Ultra can Overcharge. Instead of the standard cost, they always gain 1d6 heat.",
+    "active_effects": [
+      {
+        "name": "Limitless",
+        "detail": "You can Overcharge. Instead of the standard cost, always gain 1d6 heat."
+      }
+    ]
+  },
+  {
+    "id": "npcf_sight_ultra",
+    "name": "Sight",
+    "origin": "npct_ultra",
+    "type": "Trait",
+    "effect": "The Ultra ignores Invisible, and hostile characters within Sensors can’t Hide.",
+    "active_effects": [
+      {
+        "name": "Sight",
+        "detail": "You ignore Invisible, and hostile characters within Sensors can’t Hide."
+      }
+    ]
+  },
+  {
+    "id": "npcf_superior_construction_ultra",
+    "name": "Superior Construction",
+    "origin": "npct_ultra",
+    "type": "Trait",
+    "effect": "This trait replaces Resilient. The Ultra gains Resistance to one damage type – Kinetic damage, Energy damage, or Explosive damage. They can’t gain permanent Resistance to more than two damage types, whether from this or any other system.",
+    "mod": "npcf_resilient_ultra",
+    "bonuses": [{ "id": "hp", "val": -5 }]
+  },
+  {
+    "id": "npcf_superior_frame_ultra",
+    "name": "Superior Frame",
+    "origin": "npct_ultra",
+    "type": "Trait",
+    "effect": "The Ultra gains Immunity to Slowed, Shredded, and Immobilized.",
+    "add_resist": [
+      {
+        "immunity": "slowed"
+      },
+      {
+        "immunity": "shredded"
+      },
+      {
+        "immunity": "immobilized"
+      }
+    ]
+  },
+  {
+    "id": "npcf_superior_reactor_ultra",
+    "name": "Superior Reactor",
+    "origin": "npct_ultra",
+    "type": "Trait",
+    "effect": "The Ultra gains Immunity to Stunned and Exposed.",
+    "add_resist": [
+      {
+        "immunity": "stunned"
+      },
+      {
+        "immunity": "exposed"
+      }
+    ]
+  },
+  {
+    "id": "npcf_superior_targeting_ultra",
+    "name": "Superior Targeting",
+    "origin": "npct_ultra",
+    "type": "Trait",
+    "effect": "The Ultra ignores cover when making ranged attacks.",
+    "active_effects": [
+      {
+        "name": "Superior Targeting",
+        "detail": "Ignore cover when making ranged attacks."
+      }
+    ]
+  },
+  {
+    "id": "npcf_supreme_maintenance_ultra",
+    "name": "Supreme Maintenance",
+    "origin": "npct_ultra",
+    "type": "Trait",
+    "effect": "The Ultra gains Immunity to Jammed; additionally, the Ultra can reload one Loading weapon as a free action on their turn and can repair a destroyed weapon or system as a quick action.",
+    "add_resist": [
+      {
+        "immunity": "jammed"
+      }
+    ],
+    "actions": [
+      {
+        "name": "Supreme Maintenance (Loading)",
+        "activation": "Free",
+        "frequency": "1/turn",
+        "detail": "Reload one Loading weapon"
+      },
+      {
+        "name": "Supreme Maintenance (Repair)",
+        "activation": "Quick",
+        "detail": "Repair a destroyed weapon or system"
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_quick_action"
+      },
+      {
+        "id": "tg_free_action"
+      }
+    ]
+  },
+  {
+    "id": "npcf_supreme_melee_ultra",
+    "name": "Supreme Melee",
+    "origin": "npct_ultra",
+    "type": "Trait",
+    "effect": "The Ultra gains +1 Accuracy on all melee attacks; additionally, once on their turn, the Ultra can Grapple, Ram, or make a melee attack as a free action.",
+    "actions": [
+      {
+        "name": "Supreme Melee",
+        "activation": "Free",
+        "frequency": "1/turn",
+        "detail": "Grapple, Ram, or make a melee attack as a free action."
+      }
+    ],
+    "bonuses": [
+      {
+        "id": "melee",
+        "accuracy": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_unstoppable_ultra",
+    "name": "Unstoppable",
+    "origin": "npct_ultra",
+    "type": "Trait",
+    "effect": "The Ultra gains Immunity to all involuntary movement, including Knockback and Prone.",
+    "active_effects": [
+      {
+        "name": "Unstoppable",
+        "detail": "Gain Immunity to all involuntary movement, including Knockback and Prone."
+      }
+    ]
+  },
+  {
+    "id": "npcf_hellfire_projector_ultra",
+    "name": "Hellfire Projector",
+    "origin": "npct_ultra",
+    "type": "Weapon",
+    "attacks": 2,
+    "effect": "This weapon can make two attacks at a time, but the area of the two attacks can’t overlap.",
+    "weapon_type": "Heavy CQB",
+    "attack_bonus": [2, 4, 6],
+    "damage": [
+      {
+        "type": "Energy",
+        "val": 3
+      },
+      {
+        "type": "Burn",
+        "val": [4, 5, 6]
+      }
+    ],
+    "range": [
+      {
+        "type": "Cone",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_ravager_turret_ultra",
+    "name": "Ravager Turret",
+    "origin": "npct_ultra",
+    "type": "Weapon",
+    "effect": "This weapon simultaneously attacks every hostile character within line of sight and Range.",
+    "weapon_type": "Heavy Cannon",
+    "attack_bonus": [1, 2, 3],
+    "accuracy": 1,
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [4, 6, 8],
+        "aoe": true
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 10
+      }
+    ]
+  }
+]

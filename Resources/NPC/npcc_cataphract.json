@@ -1,0 +1,259 @@
+[
+  {
+    "id": "npcc_cataphract",
+    "name": "Cataphract",
+    "role": "striker",
+    "info": {
+      "flavor": "Cataphract squadrons are made up of rapid-strike mechs that emphasize mobility, shock, and tenacity; it follows, then, that Cataphract archetypes are feared across the galaxy for their ability to overwhelm defenses in moments. There are few things more terrifying (or inspiring) than a squadron of Cataphracts punching through a static battle line, heavy cannons and point-defense weapons wiping out previously immovable defenders. The flagship Cataphract-class chassis is the Sine Die Systems END-44, an angular beast of a mech outfitted with SDS’s fearsome Ram Cannon. The enduring popularity of the chassis can be attributed to the success of Catherine “C-80” Need, who made their name piloting an END-44 to victory in the defense of Carina-Proximal.",
+      "tactics": "Cataphracts are mobile strikers. Trample allows them to move through enemies and get them to the rear lines, where they can use Impale to force vulnerable targets into disadvantageous positions. Position Cataphracts so that they are closer to individual hostile characters, as Point-Defense Shield doesn’t work if several enemies are an equal distance away. Note that Cataphracts still provoke reactions when they move, so use their abilities carefully.",
+      "terse": "Mobile striker that can move through enemies and force them into disadvantageous positions."
+    },
+    "stats": {
+      "armor": 0,
+      "hp": [15, 17, 20],
+      "evade": [10, 11, 12],
+      "edef": 8,
+      "heatcap": [6, 7, 8],
+      "speed": 8,
+      "sensor": 5,
+      "save": [12, 14, 16],
+      "hull": [1, 2, 4],
+      "agility": [1, 3, 4],
+      "systems": 0,
+      "engineering": 0,
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_ram_cannon_cataphract",
+    "name": "Ram Cannon",
+    "origin": "npcc_cataphract",
+    "base": true,
+    "type": "Weapon",
+    "attacks": [1, 2, 2],
+    "effect": "This lance can be used as either a ranged or melee weapon, but not both in the same turn.",
+    "weapon_type": "Heavy Melee/Heavy Cannon",
+    "attack_bonus": 0,
+    "accuracy": [1, 2, 3],
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": 5
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 5
+      },
+      {
+        "type": "Threat",
+        "val": 2
+      }
+    ]
+  },
+  {
+    "id": "npcf_trample_cataphract",
+    "name": "Trample",
+    "origin": "npcc_cataphract",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Cataphract ignores engagement and can pass through – but not stop in – spaces occupied by other characters, once per turn, dealing {2/3/4} kinetic damage to those characters.",
+    "active_effects": [
+      {
+        "name": "Trample",
+        "detail": "Once per turn, ignore engagement and pass through – but not stop in – spaces occupied by other characters, dealing {2/3/4} Kinetic damage to those characters.",
+        "frequency": "1/turn",
+        "damage": [
+          {
+            "type": "Kinetic",
+            "val": [2, 3, 4],
+            "aoe": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_impale_cataphract",
+    "name": "Impale",
+    "origin": "npcc_cataphract",
+    "base": true,
+    "type": "System",
+    "actions": [
+      {
+        "name": "Impale",
+        "activation": "Full",
+        "detail": "Move up to 8 spaces in a straight line. Pick a character that you passed through or ended adjacent to; they make a Hull save at +1 Difficulty. On a failure, they are grappled by you and pulled with you to the end of your movement.",
+        "save": {
+          "type": "hull",
+          "accuracy": -1
+        }
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      }
+    ]
+  },
+  {
+    "id": "npcf_point_defense_shield_cataphract",
+    "name": "Point-Defense Shield",
+    "origin": "npcc_cataphract",
+    "base": true,
+    "type": "System",
+    "effect": "The Cataphract has Resistance to all damage from the closest hostile character. If multiple characters are equally close, this effect does not apply.",
+    "active_effects": [
+      {
+        "name": "Point-Defense Shield",
+        "detail": "You have Resistance to all damage from the closest hostile character. If multiple characters are equally close, this effect does not apply."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_shield"
+      }
+    ]
+  },
+  {
+    "id": "npcf_electrified_lasso_cataphract",
+    "name": "Electrified Lasso",
+    "origin": "npcc_cataphract",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Lasso",
+        "activation": "Quick",
+        "frequency": "1/round",
+        "detail": "A character in line of sight and range 5 must make a Hull save. On a failure, they are pulled as close as possible to you; if they become adjacent, you automatically grapple them.",
+        "range": [
+          {
+            "type": "Range",
+            "val": 5
+          }
+        ],
+        "save": "hull"
+      }
+    ]
+  },
+  {
+    "id": "npcf_lance_shot_cataphract",
+    "name": "Lance Shot",
+    "origin": "npcc_cataphract",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Lance Shot",
+        "activation": "Full",
+        "detail": "You fire an electrified lance in a Line 5 path. All characters within a Line 5 must succeed on an Engineering save or become Jammed until the end of their next turn.",
+        "range": [
+          {
+            "type": "Line",
+            "val": 5
+          }
+        ],
+        "add_status": [
+          {
+            "id": "jammed",
+            "save": "engineering",
+            "aoe": true
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_electrified_bola_cataphract",
+    "name": "Electrified Bola",
+    "origin": "npcc_cataphract",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Electrified Bola",
+        "activation": "Quick",
+        "detail": "A flying character in Range 10 must make an Agility save. On a failure, they land immediately and become Immobilized until the end of their next turn. This counts as falling but without damage.",
+        "range": [
+          {
+            "type": "Range",
+            "val": 10
+          }
+        ],
+        "add_status": [
+          {
+            "id": "immobilized",
+            "save": "agility"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_capacitor_discharge_cataphract",
+    "name": "Capacitor Discharge",
+    "origin": "npcc_cataphract",
+    "type": "Trait",
+    "effect": "As long as the Cataphract isn’t Slowed or Immobilized, they gain Resistance to Energy damage and heat. At the end of the Cataphract’s turn, all characters adjacent to them take {2/3/4} Heat.",
+    "active_effects": [
+      {
+        "name": "Capacitor Resistance",
+        "condition": "You are not Slowed or Immobilized",
+        "detail": "You have Resistance to Energy damage and heat.",
+        "add_resist": [
+          {
+            "resistance": "energy",
+            "target": "self"
+          },
+          {
+            "resistance": "heat",
+            "target": "self"
+          }
+        ]
+      },
+      {
+        "name": "Capacitor Discharge",
+        "detail": "As long as you aren't Slowed or Immobilized, you gain Resistance to Energy damage and heat. At the end of your turn, all characters adjacent to you take {2/3/4} Heat.",
+        "damage": [
+          {
+            "type": "Heat",
+            "val": [2, 3, 4],
+            "aoe": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_charge_cataphract",
+    "name": "Charge",
+    "origin": "npcc_cataphract",
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Charge",
+        "activation": "Quick",
+        "detail": "Move {SPEED} spaces in a straight line, ignoring reactions and engagement, then attack a target within Range with the Ram Cannon."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  }
+]

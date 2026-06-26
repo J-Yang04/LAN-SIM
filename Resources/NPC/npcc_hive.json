@@ -1,0 +1,238 @@
+[
+  {
+    "id": "npcc_hive",
+    "name": "Hive",
+    "role": "controller",
+    "info": {
+      "flavor": "In theory, drones and drone swarms developed after the Deimos Event are not too different from their older cousins: they establish a local omninetwork; fabricate and deploy a century or half-century of drones; and then coordinate them to achieve their objectives. Still, the complex handler–trainer relationships that allow pilots to segue between direct control and autonomous operation cause psychological trauma after a month of continuous drone operation. It is recommended that they cycle their paired hive nexus every two weeks.",
+      "tactics": "Hives use Razor Swarm to control the battlefield, granting soft cover to their allies and denying areas to their enemies. Deploy swarms and use Drone Barrage to lock down enemies, or move them into the range of swarms and allies.",
+      "terse": "Drone-focused controller that can lock down enemies and provide soft cover."
+    },
+    "stats": {
+      "armor": [0, 1, 1],
+      "hp": 20,
+      "evade": [8, 8, 10],
+      "edef": [10, 13, 16],
+      "heatcap": 8,
+      "speed": 5,
+      "sensor": 10,
+      "save": [12, 14, 17],
+      "hull": [-1, -1, 1],
+      "agility": 0,
+      "systems": [2, 4, 5],
+      "engineering": 1,
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_hunter_killer_nexus_hive",
+    "name": "Hunter-Killer Nexus",
+    "origin": "npcc_hive",
+    "base": true,
+    "type": "Weapon",
+    "attacks": [1, 2, 3],
+    "tags": [
+      {
+        "id": "tg_smart"
+      },
+      {
+        "id": "tg_seeking"
+      }
+    ],
+    "weapon_type": "Main Nexus",
+    "attack_bonus": [2, 4, 6],
+    "damage": [
+      {
+        "type": "Burn",
+        "val": 3
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 8
+      }
+    ]
+  },
+  {
+    "id": "npcf_drone_barrage_hive",
+    "name": "Drone Barrage",
+    "origin": "npcc_hive",
+    "base": true,
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Drone Barrage",
+        "activation": "Quick Tech",
+        "detail": "Make a tech attack against a character within Sensors. On a success, the target chooses one: they become Immobilized and Impaired until the end of their next turn, or they immediately move up to 5 spaces in a direction chosen by you. This movement ignores engagement and does not provoke reactions.",
+        "attack": "tech",
+        "add_status": [
+          {
+            "id": "immobilized",
+            "duration": "next_turn_end_target"
+          },
+          {
+            "id": "impaired",
+            "duration": "next_turn_end_target"
+          }
+        ]
+      }
+    ],
+    "attack_bonus": [2, 4, 6],
+    "tags": [
+      {
+        "id": "tg_npc_system"
+      }
+    ]
+  },
+  {
+    "id": "npcf_razor_swarms_hive",
+    "name": "Razor Swarms",
+    "origin": "npcc_hive",
+    "base": true,
+    "type": "System",
+    "deployables": [
+      {
+        "name": "Razor Swarm",
+        "activation": "Quick",
+        "size": 3,
+        "size_special": "blast 1",
+        "type": "Drone",
+        "detail": "Deploy a Blast 1 razor swarm in a free area within Sensors. Allied characters gain soft cover as long as they are at least partially within the affected area. Hostile characters start their turn at least partially within the area or move into it for the first time in a round take {2/4/6} Burn. The Hive can deploy any number of razor swarms, each of which persists for the rest of the scene or until the Hive is destroyed.",
+        "damage": [
+          {
+            "type": "Burn",
+            "val": [2, 4, 6],
+            "aoe": true
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 4
+      }
+    ]
+  },
+  {
+    "id": "npcf_electro_nanite_cloud_hive",
+    "name": "Electro-Nanite Cloud",
+    "origin": "npcc_hive",
+    "type": "System",
+    "effect": "At the start of their turn, hostile characters within range 3 take 2 Burn; additionally, until they move beyond range 3, they make all System checks and saves, and all tech attacks, at +{1/2/3} difficulty.",
+    "active_effects": [
+      {
+        "name": "Electro-Nanite Cloud",
+        "detail": "At the start of their turn, hostile characters within range 3 take 2 Burn; additionally, until they move beyond range 3, they make all System checks and saves, and all tech attacks, at +{1/2/3} difficulty.",
+        "damage": [
+          {
+            "type": "Burn",
+            "val": 2,
+            "aoe": true
+          }
+        ],
+        "range": [
+          {
+            "type": "Range",
+            "val": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_motile_swarm_hive",
+    "name": "Motile Swarm",
+    "origin": "npcc_hive",
+    "type": "Trait",
+    "effect": "At the start of the Hive’s turn, they may move all razor swarms up to 2 spaces in any direction, including into spaces occupied by other characters.",
+    "mod": "npcf_razor_swarms_hive",
+    "active_effects": [
+      {
+        "name": "Motile Swarm",
+        "detail": "At the start of your turn, they may move all razor swarms up to 2 spaces in any direction, including into spaces occupied by other characters."
+      }
+    ]
+  },
+  {
+    "id": "npcf_driving_swarm_hive",
+    "name": "Driving Swarm",
+    "origin": "npcc_hive",
+    "type": "Trait",
+    "effect": "Whenever characters take Burn from a razor swarm, they must succeed on a Systems save or immediately move 4 spaces in a direction chosen by the Hive after taking damage. This movement ignores engagement and does not provoke reactions.",
+    "mod": "npcf_razor_swarms_hive",
+    "active_effects": [
+      {
+        "name": "Driving Swarm",
+        "condition": "Whenever a character takes Burn from a razor swarm",
+        "detail": "The character must succeed on a Systems save or immediately move 4 spaces in a direction chosen by you after taking damage. This movement ignores engagement and does not provoke reactions.",
+        "save": "systems"
+      }
+    ]
+  },
+  {
+    "id": "npcf_grind_maniple_hive",
+    "name": "Grind Maniple",
+    "origin": "npcc_hive",
+    "type": "Tech",
+    "effect": "The Hive releases a swarm of tiny, hard to hit drones that make a tech attack against a hostile character within Sensors and line of sight. On hit, the drones clamp on, causing them to take 2 Burn each time they take any action or reaction until the end of their next turn.",
+    "actions": [
+      {
+        "name": "Grind Maniple",
+        "activation": "Quick Tech",
+        "detail": "Make a tech attack against a hostile character within Sensors and line of sight. On hit, they take 2 Burn each time they take any action or reaction until the end of their next turn.",
+        "attack": "tech",
+        "add_special": [
+          {
+            "attribute": "Grind Maniple Target",
+            "detail": "You take 2 Burn each time you take any action or reaction until the end of your next turn."
+          }
+        ]
+      }
+    ],
+    "attack_bonus": [2, 4, 6],
+    "accuracy": 1,
+    "tags": [
+      {
+        "id": "tg_npc_system"
+      }
+    ]
+  },
+  {
+    "id": "npcf_seeker_cloud_hive",
+    "name": "Seeker Cloud",
+    "origin": "npcc_hive",
+    "type": "Weapon",
+    "effect": "Characters damaged by this weapon gain Lock On.",
+    "tags": [
+      {
+        "id": "tg_smart"
+      }
+    ],
+    "weapon_type": "Main Nexus",
+    "attack_bonus": [1, 2, 3],
+    "accuracy": 1,
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [3, 4, 5]
+      }
+    ],
+    "range": [
+      {
+        "type": "Cone",
+        "val": 5
+      }
+    ],
+    "on_hit": {
+      "detail": "Characters damaged by this weapon gain Lock On.",
+      "add_status": [
+        {
+          "id": "lockon"
+        }
+      ]
+    }
+  }
+]

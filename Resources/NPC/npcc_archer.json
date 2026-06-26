@@ -1,0 +1,231 @@
+[
+  {
+	"id": "npcc_archer",
+	"name": "Archer",
+	"role": "controller",
+	"info": {
+	  "flavor": "The basis of the Archer archetype, Ursa Major’s Gatekeeper Key-II, was popularized by Ichabod Carden’s heroic actions in the Battle of Terramoto. Archer-archetype mechs sacrifice armor for powerful targeting and superpositional maneuvering systems, making them especially popular with pilots who prefer to have control over the precise destination of each shot.",
+	  "tactics": "Archers excel at inflicting “choice punishment” on their enemies – they make characters choose between taking certain actions or letting the Archer attack them. Use Archers to lock down mobile or hard-hitting PCs or to cover for more vulnerable allies. Keep in mind that Archers are most effective when they can get fairly close to their targets, but they aren’t especially durable.",
+	  "terse": "Mobile controller that can lock down enemies."
+	},
+	"stats": {
+	  "armor": [0, 0, 1],
+	  "hp": [16, 20, 20],
+	  "evade": [8, 10, 12],
+	  "edef": [8, 10, 12],
+	  "heatcap": [8, 8, 8],
+	  "speed": [5, 5, 6],
+	  "sensor": [15, 15, 15],
+	  "save": [11, 13, 16],
+	  "hull": [-1, -1, -1],
+	  "agility": [2, 3, 4],
+	  "systems": [2, 3, 4],
+	  "engineering": -1,
+	  "size": 1,
+	  "activations": 1
+	}
+  },
+  {
+	"id": "npcf_light_machine_gun_archer",
+	"name": "Light Machine Gun",
+	"origin": "npcc_archer",
+	"base": true,
+	"type": "Weapon",
+	"tags": [
+	  {
+		"id": "tg_reliable",
+		"val": "{3/4/5}"
+	  }
+	],
+	"weapon_type": "Main Cannon",
+	"attack_bonus": [2, 4, 6],
+	"damage": [
+	  {
+		"type": "Kinetic",
+		"val": [5, 7, 10]
+	  }
+	],
+	"range": [
+	  {
+		"type": "Range",
+		"val": 10
+	  }
+	]
+  },
+  {
+	"id": "npcf_suppress_archer",
+	"name": "Suppress",
+	"origin": "npcc_archer",
+	"base": true,
+	"type": "Trait",
+	"effect": "The Archer chooses a target within line of sight and Range 10: they become Impaired and the Archer gains the Moving Target reaction.<br>This effect lasts until the Archer uses Moving Target; the target damages the Archer or leaves the Archer’s line of sight; the Archer is Stunned, Jammed, or destroyed; the Archer chooses a new target for this action; or, the Archer ends it as a free action.",
+	"actions": [
+	  {
+		"name": "Moving Target",
+		"activation": "Reaction",
+		"frequency": "1/round",
+		"trigger": "Your Suppress target starts to move.",
+		"effect": "Interrupt with a single weapon’s attack."
+	  }
+	]
+  },
+  {
+	"id": "npcf_superior_sentinel_archer",
+	"name": "Superior Sentinel",
+	"origin": "npcc_archer",
+	"base": true,
+	"type": "Trait",
+	"effect": "The Archer gains +1 Accuracy on all attacks made as reactions (e.g., Overwatch).",
+	"active_effects": [
+	  {
+		"name": "Superior Sentinel",
+		"detail": "You gain +1 Accuracy on all attacks made as reactions (e.g., Overwatch)."
+	  }
+	]
+  },
+  {
+	"id": "npcf_blinding_shells_archer",
+	"name": "Blinding Shells",
+	"origin": "npcc_archer",
+	"type": "Trait",
+	"effect": "Once per round, after the Archer makes a successful attack, they force their target to make an Engineering save. On a failure, the target only has line of sight to adjacent spaces until their next turn ends.",
+	"active_effects": [
+	  {
+		"name": "Blinding Shells",
+		"detail": "Once per round, after you make a successful attack, you force your target to make an Engineering save. On a failure, the target only has line of sight to adjacent spaces until their next turn ends.",
+		"add_special": [
+		  {
+			"attribute": "Blinded",
+			"detail": "You only have line of sight to adjacent spaces until your next turn ends.",
+			"duration": "next_turn_end_target",
+			"save": "engineering"
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"id": "npcf_impending_threat_archer",
+	"name": "Impending Threat",
+	"origin": "npcc_archer",
+	"type": "Reaction",
+	"actions": [
+	  {
+		"name": "Impending Threat",
+		"activation": "Reaction",
+		"frequency": "1/round",
+		"trigger": "A hostile character in line of sight and Range 10 from you moves or takes action.",
+		"effect": "The character must choose: lose the triggering action/movement, or continue but let you immediately attack them with a single weapon.",
+		"range": [
+		  {
+			"type": "Range",
+			"val": 10
+		  }
+		]
+	  }
+	],
+	"tags": [
+	  {
+		"id": "tg_npc_trait"
+	  }
+	]
+  },
+  {
+	"id": "npcf_covering_fire_archer",
+	"name": "Covering Fire",
+	"origin": "npcc_archer",
+	"type": "Trait",
+	"actions": [
+	  {
+		"name": "Covering Fire",
+		"activation": "Quick",
+		"frequency": "1/round",
+		"effect": "The Archer chooses a Blast 3 area within line of sight and Range 10 and gains the Got Your Back reaction.",
+		"range": [
+		  {
+			"type": "Range",
+			"val": 10
+		  },
+		  {
+			"type": "Blast",
+			"val": 3
+		  }
+		]
+	  },
+	  {
+		"name": "Got Your Back",
+		"activation": "Reaction",
+		"trigger": "A character in the Covering Fire area makes an attack.",
+		"effect": "You may attack that character."
+	  }
+	],
+	"tags": [
+	  {
+		"id": "tg_recharge",
+		"val": 4
+	  }
+	]
+  },
+  {
+	"id": "npcf_rapid_response_archer",
+	"name": "Rapid Response",
+	"origin": "npcc_archer",
+	"type": "Reaction",
+	"actions": [
+	  {
+		"name": "Rapid Response",
+		"activation": "Reaction",
+		"frequency": "1/round",
+		"trigger": "An enemy character in line of sight moves.",
+		"effect": "You may Boost."
+	  }
+	]
+  },
+  {
+	"id": "npcf_hail_of_fire_archer",
+	"name": "Hail Of Fire",
+	"origin": "npcc_archer",
+	"type": "Trait",
+	"actions": [
+	  {
+		"name": "Hail Of Fire",
+		"activation": "Quick",
+		"effect": "Choose an enemy character within Range 10: they become Immobilized and Impaired until the end of their next turn, until you are Stunned or Jammed, or until the target allows you to attack them with a single weapon as a reaction.",
+		"add_status": [
+		  {
+			"id": "immobilized",
+			"duration": "next_turn_end_target"
+		  },
+		  {
+			"id": "impaired",
+			"duration": "next_turn_end_target"
+		  }
+		]
+	  }
+	],
+	"tags": [
+	  {
+		"id": "tg_recharge",
+		"val": 4
+	  },
+	  {
+		"id": "tg_npc_reaction"
+	  }
+	]
+  },
+  {
+	"id": "npcf_moving_target_archer",
+	"name": "Moving Target (DEPRECATED)",
+	"origin": "npcc_archer",
+	"type": "Trait",
+	"deprecated": true,
+	"effect": "This ability is now collected in the Suppress trait. This feature can be safely removed from your NPCs."
+  },
+  {
+	"id": "npcf_got_your_back_archer",
+	"name": "Got Your Back (DEPRECATED)",
+	"type": "Trait",
+	"deprecated": true,
+	"effect": "This ability is now collected in the Covering Fire trait. This feature can be safely removed from your NPCs."
+  }
+]

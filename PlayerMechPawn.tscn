@@ -2,12 +2,14 @@
 
 [ext_resource type="Script" uid="uid://clqs1koqouikn" path="res://Scripts/player_mech_pawn.gd" id="1_nyqgs"]
 [ext_resource type="Texture2D" uid="uid://b2gxy3q45loag" path="res://Assets/Generic_Mech_Image.png" id="2_nyqgs"]
-[ext_resource type="Script" uid="uid://bd0s17osrbyng" path="res://Scripts/mech_pawn_ui.gd" id="3_3hlmk"]
+[ext_resource type="Script" uid="uid://dc628mg6sgs8u" path="res://Scripts/player_pawn_ui.gd" id="3_ncmj6"]
+[ext_resource type="Shape2D" uid="uid://c82gislcr5uhh" path="res://Assets/collision_hex_.tres" id="4_ncmj6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3hlmk"]
 
 [node name="PlayerMech" type="AnimatableBody2D" unique_id=544114216]
 z_index = 1
+collision_layer = 2
 script = ExtResource("1_nyqgs")
 
 [node name="MechSprite" type="Sprite2D" parent="." unique_id=1856268231]
@@ -19,7 +21,7 @@ offset_left = 32.0
 offset_top = -64.0
 offset_right = 152.0
 offset_bottom = -52.0
-script = ExtResource("3_3hlmk")
+script = ExtResource("3_ncmj6")
 
 [node name="HPContainer" type="FlowContainer" parent="FloatingMechUI" unique_id=2121554561]
 custom_minimum_size = Vector2(120, 0)
@@ -50,3 +52,8 @@ grow_vertical = 0
 text = "MECH NAME"
 label_settings = SubResource("LabelSettings_3hlmk")
 horizontal_alignment = 1
+
+[node name="CollisionHex" type="CollisionShape2D" parent="." unique_id=800533713]
+shape = ExtResource("4_ncmj6")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

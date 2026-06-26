@@ -27,5 +27,5 @@ class RPG extends LauncherWeapons:
 		source = "GMS"
 		license = "GMS 0"
 		license_level = 0
-		capacity = 3
+		capacity = 2
 		description = "A muzzle-loaded explosive rocket launcher. Creates large explosions but slow to load. Part of the GMS Type-III line."

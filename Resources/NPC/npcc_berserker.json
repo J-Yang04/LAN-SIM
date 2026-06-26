@@ -1,0 +1,228 @@
+[
+  {
+    "id": "npcc_berserker",
+    "name": "Berserker",
+    "role": "striker",
+    "info": {
+      "flavor": "Berserker mechs are built to take advantage of advanced heat-cycling systems that allow them to shunt heat - as it is generated - into pure offensive force, increasing their weapon output by orders of magnitude. The archetype, best-known for its use by Gen’Dal Merlos’s Knights of Imminent Destruction, is preferred by pure combat-focus organizations, PMCs, and deniable-asset corps in established states.",
+      "tactics": "Berserkers are excellent melee duelists that are very scary up close. Their potential is greatest when they are as close to enemy forces as possible. Due to their terrible Heat Cap and E-Defense, Berserkers are vulnerable to tech attacks. Savvy opponents will use Aggression to their own advantage, turning Berserkers against their allies, so it’s best to keep them away from friendly forces.",
+      "terse": "Powerful melee striker that can deal high damage to grouped enemies, but is vulnerable to tech attacks."
+    },
+    "stats": {
+      "armor": 1,
+      "hp": [12, 16, 20],
+      "evade": [8, 9, 10],
+      "edef": 6,
+      "heatcap": 6,
+      "speed": 5,
+      "sensor": 5,
+      "save": [10, 12, 14],
+      "hull": [3, 4, 6],
+      "agility": [2, 4, 4],
+      "systems": -2,
+      "engineering": [-1, -1, 0],
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_chain_axe_berserker",
+    "name": "Chain Axe",
+    "origin": "npcc_berserker",
+    "base": true,
+    "type": "Weapon",
+    "on_crit": {
+      "detail": "Target becomes Shredded until the end of their next turn.",
+      "add_status": [
+        {
+          "id": "shredded",
+          "duration": "next_turn_end_target"
+        }
+      ]
+    },
+    "weapon_type": "Heavy Melee",
+    "attack_bonus": [1, 2, 3],
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [7, 9, 11]
+      }
+    ],
+    "range": [
+      {
+        "type": "Threat",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_stampede_defense_berserker",
+    "name": "Stampede Defense",
+    "origin": "npcc_berserker",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Berserker has Resistance to all damage unless they are Impaired, Stunned, Immobilized, Shredded, Slowed or Exposed.",
+    "active_effects": [
+      {
+        "name": "Stampede Defense",
+        "detail": "You have Resistance to all damage unless they are Impaired, Stunned, Immobilized, Shredded, Slowed or Exposed."
+      }
+    ],
+    "add_resist": [
+      {
+        "resistance": "all"
+      }
+    ]
+  },
+  {
+    "id": "npcf_aggression_berserker",
+    "name": "Aggression",
+    "origin": "npcc_berserker",
+    "base": true,
+    "type": "Trait",
+    "effect": "After taking damage for the first time each round, the Berserker must immediately attack a random adjacent character – hostile or allied – with the Chain Axe.",
+    "active_effects": [
+      {
+        "name": "Aggression",
+        "detail": "After taking damage for the first time each round, you must immediately attack a random adjacent character – hostile or allied – with the Chain Axe."
+      }
+    ]
+  },
+  {
+    "id": "npcf_avalanche_charge_berserker",
+    "name": "Avalanche Charge",
+    "origin": "npcc_berserker",
+    "base": true,
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Avalanche Charge",
+        "activation": "Quick",
+        "detail": "You move spaces equal to your Speed in a straight line, ignoring reactions and engagement, then attack a random adjacent character – hostile or allied — with the Chain Axe."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_juggernaut_berserker",
+    "name": "Juggernaut",
+    "origin": "npcc_berserker",
+    "type": "Trait",
+    "effect": "When the Berserker uses Avalanche Charge, all characters adjacent to the path they follow or adjacent to their final position – hostile and allied – must succeed on a Hull save or be knocked Prone.",
+    "mod": "npcf_avalanche_charge_berserker",
+    "add_status": [
+      {
+        "id": "prone",
+        "save": "hull",
+        "aoe": true
+      }
+    ]
+  },
+  {
+    "id": "npcf_harpoon_cannon_berserker",
+    "name": "Harpoon Cannon",
+    "origin": "npcc_berserker",
+    "type": "Weapon",
+    "weapon_type": "Main CQB",
+    "attack_bonus": [2, 4, 6],
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [2, 4, 6]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 5
+      },
+      {
+        "type": "Threat",
+        "val": 3
+      }
+    ],
+    "on_hit": "Targets of smaller or equal Size to the Berserker are pulled adjacent to them in a straight line, or as close as possible. If they’re larger, the Berserker is pulled adjacent to them instead. If the target ends their movement adjacent, the Berserker Grapples them."
+  },
+  {
+    "id": "npcf_nail_gun_berserker",
+    "name": "Nail Gun",
+    "origin": "npcc_berserker",
+    "type": "Weapon",
+    "weapon_type": "Main CQB",
+    "attack_bonus": [1, 2, 3],
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [5, 7, 9]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 5
+      },
+      {
+        "type": "Threat",
+        "val": 3
+      }
+    ],
+    "on_hit": {
+      "detail": "Target rolls an Agility save. On a failure, they are Immobilized until the end of their next turn.",
+      "add_status": [
+        {
+          "id": "immobilized",
+          "save": "agility",
+          "duration": "next_turn_end_target"
+        }
+      ]
+    }
+  },
+  {
+    "id": "npcf_retribution_berserker",
+    "name": "Retribution",
+    "origin": "npcc_berserker",
+    "type": "Trait",
+    "effect": "Whenever the Berserker takes damage, their next attack deals +{2/3/4} bonus damage. This bonus stacks up to +8. Bonuses are lost when the Berserker attacks, or at the end of their next turn.",
+    "active_effects": [
+      {
+        "name": "Retribution",
+        "detail": "Whenever you take damage, your next attack deals +{2/3/4} bonus damage. This bonus stacks up to +8. Bonuses are lost when you attack, or at the end of your next turn."
+      }
+    ]
+  },
+  {
+    "id": "npcf_superhot_berserker",
+    "name": "Superhot",
+    "origin": "npcc_berserker",
+    "type": "Reaction",
+    "actions": [
+      {
+        "name": "Superhot",
+        "activation": "Reaction",
+        "frequency": "1/round",
+        "trigger": "You take damage from a melee attack.",
+        "detail": "You gain Resistance to the attack’s damage and the attacker must succeed on an Engineering save or take {2/4/6} Burn.",
+        "damage": [
+          {
+            "type": "Burn",
+            "val": [2, 4, 6],
+            "save": "engineering"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_shield"
+      },
+      {
+        "id": "tg_npc_system"
+      }
+    ]
+  }
+]

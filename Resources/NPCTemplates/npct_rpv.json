@@ -1,0 +1,50 @@
+[
+  {
+    "id": "npct_rpv",
+    "template": true,
+    "name": "RPV",
+    "description": "Remote-pilot vehicles – RPVs – are any mechs piloted by NHPs, offsite pilots, or comp/con units. They trade e-war vulnerability for individual unit strength, and can operate outside the restrictions imposed on systems piloted by organic, in-vehicle units."
+  },
+  {
+    "id": "npcf_bonus_hp_rpv",
+    "name": "Bonus HP",
+    "origin": "npct_rpv",
+    "base": true,
+    "type": "Trait",
+    "effect": "The RPV gains +5 HP – it can ignore damage that would blow through the cockpit and kill a human.",
+    "bonuses": [
+      {
+        "id": "hp",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_no_pilot_rpv",
+    "name": "No Pilot",
+    "origin": "npct_rpv",
+    "base": true,
+    "type": "Trait",
+    "effect": "The RPV has Immunity to any systems or actions that affect a pilot directly; however, it is also permanently Impaired, unable to make complex decisions or moral judgments.",
+    "active_effects": [
+      {
+        "name": "No Pilot",
+        "detail": "You have Immunity to any systems or actions that affect a pilot directly; however, you are also permanently Impaired, unable to make complex decisions or moral judgments."
+      }
+    ]
+  },
+  {
+    "id": "npcf_vulnerable_to_tech_rpv",
+    "name": "Vulnerable To Tech",
+    "origin": "npct_rpv",
+    "base": true,
+    "type": "Trait",
+    "effect": "Hostile tech actions against the RPV gain +1 Accuracy.",
+    "active_effects": [
+      {
+        "name": "Vulnerable To Tech",
+        "detail": "Hostile tech actions against you gain +1 Accuracy."
+      }
+    ]
+  }
+]

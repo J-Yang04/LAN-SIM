@@ -1,0 +1,343 @@
+[
+	{
+		"id": "npcc_monstrosity",
+		"name": "Monstrosity",
+		"role": "biological",
+		"info": {
+			"flavor": "Monstrosities are especially large or horrifying natural predators. Although they are usually wild, some monstrosities can be domesticated and trained for combat: such creatures are in high demand along the furthest reaches of the galaxy.",
+			"tactics": "",
+			"terse": "Monstrosities are especially large or horrifying natural predators"
+		},
+		"optionalClassMin": 1.0,
+		"optionalClassMax": 1.0,
+		"stats": {
+			"armor": 1.0,
+			"hp": [
+				14.0,
+				16.0,
+				18.0
+			],
+			"evade": [
+				10.0,
+				12.0,
+				15.0
+			],
+			"edef": 10.0,
+			"heatcap": 0.0,
+			"speed": [
+				6.0,
+				7.0,
+				8.0
+			],
+			"sensor": 10.0,
+			"save": [
+				10.0,
+				12.0,
+				15.0
+			],
+			"hull": [
+				3.0,
+				4.0,
+				6.0
+			],
+			"agility": [
+				2.0,
+				3.0,
+				4.0
+			],
+			"systems": -2.0,
+			"engineering": -2.0,
+			"size": 2.0,
+			"activations": 1.0
+		}
+	},
+	{
+		"id": "npcf_unique_physiology_monstrosity",
+		"name": "Unique Physiology",
+		"origin": "npcc_monstrosity",
+		"base": true,
+		"type": "Trait",
+		"effect": "If the Monstrosity has Structure (because it is an Elite or Ultra, for example), it rolls on the <b>Monstrosity Structure Damage Table</b> table when it takes structure damage."
+	},
+	{
+		"id": "npcf_claws_monstrosity",
+		"name": "Claws",
+		"origin": "npcc_monstrosity",
+		"type": "Weapon",
+		"base": true,
+		"weapon_type": "",
+		"attack_bonus": [
+			2.0,
+			4.0,
+			6.0
+		],
+		"accuracy": 1.0,
+		"damage": [
+			{
+				"type": "Kinetic",
+				"val": [
+					6.0,
+					8.0,
+					12.0
+				]
+			}
+		],
+		"range": [
+			{
+				"type": "Threat",
+				"val": 1.0
+			}
+		]
+	},
+	{
+		"id": "npcf_acid_spittle_monstrosity",
+		"name": "Acid Spittle",
+		"origin": "npcc_monstrosity",
+		"type": "Weapon",
+		"weapon_type": "Main Cannon",
+		"attack_bonus": [
+			1.0,
+			2.0,
+			3.0
+		],
+		"damage": [
+			{
+				"type": "Energy",
+				"val": [
+					3.0,
+					4.0,
+					5.0
+				]
+			}
+		],
+		"range": [
+			{
+				"type": "Range",
+				"val": 10.0
+			}
+		],
+		"on_hit": {
+			"detail": "Target is Shredded until the end of its next turn.",
+			"add_status": [
+				{
+					"id": "shredded",
+					"duration": "next_turn_end_target"
+				}
+			]
+		}
+	},
+	{
+		"id": "npcf_adhesive_secretions_monstrosity",
+		"name": "Adhesive Secretions",
+		"origin": "npcc_monstrosity",
+		"type": "Trait",
+		"effect": "The first character damaged by the Monstrosity each turn must succeed on an Engineering save or become Slowed. This effect lasts until the target regains any HP, or for the rest of the scene.",
+		"active_effects": [
+			{
+				"name": "Adhesive Secretions",
+				"detail": "The first character damaged by the Monstrosity each turn must succeed on an Engineering save or become Slowed. This effect lasts until the target regains any HP, or for the rest of the scene.",
+				"add_status": [
+					{
+						"id": "slow"
+					}
+				]
+			}
+		]
+	},
+	{
+		"id": "npcf_burrower_monstrosity",
+		"name": "Burrower",
+		"origin": "npcc_monstrosity",
+		"type": "Trait",
+		"actions": [
+			{
+				"name": "Burrow",
+				"activation": "Quick",
+				"detail": "Burrow into the ground, as long as the surface is sufficiently malleable. While burrowed, the Monstrosity counts as Invisible, and can freely move through spaces occupied by characters and other obstructions; however, it can only move, Boost, or emerge into a free space (via the \"Emerge\" quick action). "
+			},
+			{
+				"name": "Emerge",
+				"activation": "Quick",
+				"detail": "Cannot be used unless Burrowed. While Burrowed, emerge into a free space. All characters adjacent must succeed on a Hull save or be knocked Prone.",
+				"add_status": [
+					{
+						"id": "prone",
+						"aoe": true,
+						"save": "hull"
+					}
+				]
+			}
+		]
+	},
+	{
+		"id": "npcf_corrosive_bite_monstrosity",
+		"name": "Corrosive Bite",
+		"origin": "npcc_monstrosity",
+		"type": "Trait",
+		"actions": [
+			{
+				"name": "Corrosive Bite",
+				"activation": "Full",
+				"detail": "A character adjacent to you must succeed on a Hull save or take {4/5/6} Burn. Succeed or fail, they become Shredded until they regain any HP.",
+				"damage": [
+					{
+						"type": "Burn",
+						"val": [
+							4.0,
+							5.0,
+							6.0
+						],
+						"save": "hull"
+					}
+				],
+				"add_status": [
+					{
+						"id": "shredded"
+					}
+				]
+			}
+		],
+		"tags": [
+			{
+				"id": "tg_recharge",
+				"val": 5.0
+			}
+		]
+	},
+	{
+		"id": "npcf_grasping_claws_monstrosity",
+		"name": "Grasping Claws",
+		"origin": "npcc_monstrosity",
+		"type": "Trait",
+		"effect": "The Monstrosity gains +1 Accuracy to Grapple, +1 Accuracy when attacking targets Grappled by it, and gains the ability to Boost and take reactions while grappling.",
+		"active_effects": [
+			{
+				"name": "Grasping Claws",
+				"detail": "You gain +1 Accuracy to Grapple, +1 Accuracy when attacking targets Grappled by you, and gain the ability to Boost and take reactions while grappling."
+			}
+		]
+	},
+	{
+		"id": "npcf_natural_camouflage_monstrosity",
+		"name": "Natural Camouflage",
+		"origin": "npcc_monstrosity",
+		"type": "Trait",
+		"effect": "The Monstrosity is Invisible while adjacent to any terrain or cover, and treats soft cover as hard cover.",
+		"active_effects": [
+			{
+				"name": "Natural Camouflage",
+				"detail": "You are Invisible while adjacent to any terrain or cover, and treats soft cover as hard cover."
+			}
+		]
+	},
+	{
+		"id": "npcf_rampage_monstrosity",
+		"name": "Rampage",
+		"origin": "npcc_monstrosity",
+		"type": "Trait",
+		"actions": [
+			{
+				"name": "Rampage",
+				"activation": "Quick",
+				"detail": "Move {SPEED} in a straight line, ignoring reactions and engagement and moving freely through spaces occupied by other characters. Characters passed through or adjacent to must succeed on an Agility save or take {4/6/8} kinetic damage.",
+				"damage": [
+					{
+						"type": "Kinetic",
+						"val": [
+							4.0,
+							6.0,
+							8.0
+						],
+						"save": "agility",
+						"aoe": true
+					}
+				]
+			}
+		],
+		"tags": [
+			{
+				"id": "tg_recharge",
+				"val": 5.0
+			}
+		]
+	},
+	{
+		"id": "npcf_regenerator_monstrosity",
+		"name": "Regenerator",
+		"origin": "npcc_monstrosity",
+		"type": "Trait",
+		"effect": "At the end of its turn, the Monstrosity regains 1/4 of its total HP. It doesn’t regain any HP if it has taken Energy damage during the same round.",
+		"active_effects": [
+			{
+				"name": "Regenerator",
+				"detail": "At the end of your turn, you regain 1/4 of your total HP. You don't regain any HP if you have taken Energy damage during the same round."
+			}
+		]
+	},
+	{
+		"id": "npcf_spined_monstrosity",
+		"name": "Spined",
+		"origin": "npcc_monstrosity",
+		"type": "Trait",
+		"effect": "After the Monstrosity takes damage from a melee weapon, it automatically deals {1/2/3} AP kinetic damage to the attacker.",
+		"active_effects": [
+			{
+				"name": "Spined",
+				"condition": "After you take damage from a melee weapon",
+				"detail": "Automatically deal {1/2/3} AP kinetic damage to the attacker.",
+				"damage": [
+					{
+						"type": "Kinetic",
+						"val": [
+							1.0,
+							2.0,
+							3.0
+						],
+						"ap": true
+					}
+				]
+			}
+		]
+	},
+	{
+		"id": "npcf_swift_monstrosity",
+		"name": "Swift",
+		"origin": "npcc_monstrosity",
+		"type": "Trait",
+		"effect": "Once per round, the Monstrosity can Boost during its turn as a free action.",
+		"actions": [
+			{
+				"name": "Swift",
+				"activation": "Free",
+				"frequency": "1/round",
+				"detail": "Boost during your turn as a free action."
+			}
+		]
+	},
+	{
+		"id": "npcf_tempered_hide_monstrosity",
+		"name": "Tempered Hide",
+		"origin": "npcc_monstrosity",
+		"type": "Trait",
+		"effect": "The Monstrosity gains Resistance to any two of the following damage types: kinetic damage, Energy damage, and Explosive damage. If it is reduced to half of its total HP or less, it loses this Resistance. If it has any Structure, it regains Resistance when its HP returns to full.",
+		"active_effects": [
+			{
+				"name": "Tempered Hide",
+				"detail": "Gain Resistance to any two of the following damage types: kinetic damage, Energy damage, and Explosive damage. If you are reduced to half of your total HP or less, you lose this Resistance. If you have any Structure, you regain Resistance when your HP returns to full."
+			}
+		]
+	},
+	{
+		"id": "npcf_winged_monstrosity",
+		"name": "Winged",
+		"origin": "npcc_monstrosity",
+		"type": "Trait",
+		"effect": "The Monstrosity may fly whenever it moves, and doesn’t need to land at the end of movements.",
+		"active_effects": [
+			{
+				"name": "Winged",
+				"detail": "You may fly whenever you move, and don’t need to land at the end of movements."
+			}
+		]
+	}
+]

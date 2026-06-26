@@ -1,0 +1,43 @@
+[
+  {
+    "id": "npct_elite",
+    "template": true,
+    "name": "Elite",
+    "description": "Elite enemies are tougher and more powerful than most – just a step down from Ultras. They might be especially tough or experienced pilots, special forces, or foes using a higher level of technology or better quality gear than the rank and file. Elites can act several times each round and get additional Structure, which effectively doubles their HP and allows them to make structure damage checks like PCs.",
+    "prohibitTemplates": ["npct_ultra", "npct_grunt"],
+    "optionalClassMin": 1,
+    "optionalClassMax": 1
+  },
+  {
+    "id": "npcf_reinforced_elite",
+    "name": "Reinforced",
+    "origin": "npct_elite",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Elite gains +1 Structure and +1 Stress.",
+    "bonuses": [
+      {
+        "id": "structure",
+        "val": 1
+      },
+      {
+        "id": "stress",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_ready_and_waiting_elite",
+    "name": "Ready And Waiting",
+    "origin": "npct_elite",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Elite takes two separate turns each round.",
+    "bonuses": [
+      {
+        "id": "activations",
+        "val": 1
+      }
+    ]
+  }
+]

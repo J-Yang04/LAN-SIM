@@ -1,6 +1,6 @@
 class_name PlayerMechPawn extends PlayerMechSheet
 
-signal pawn_moved
+#signal pawn_moved
 
 ## A pawn can be highlighted and in-focus. XCOM style. Typically this happens before the player has picked a mech to take their turn.
 @onready var is_focus:bool = false:
@@ -35,9 +35,11 @@ var directions:Array
 var glidespeed = 8
 ## Indicates this pawn's PID in the combat runner. Should not change once initialized.
 var pid:int
-## This pawn's on-screen UI.
-var pawn_ui
-## This pawn's name label.
+
+@onready var pawn_ui:= $FloatingMechUI as VBoxContainer
+@onready var name_label:= $NameLabel as Label
+@onready var combat_runner:= get_parent() as CombatRunner
+var combat_map
 
 ## The number of quick actions this mech has taken. Full actions are simply 2 quick actions.
 var quick_actions_taken:int = 0:
@@ -51,18 +53,8 @@ var last_action_taken:String:
 			if action.name == value:
 				action.exhausted = true
 
-## Children of the node
-var name_label
-var combat_runner
-var combat_map
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pawn_ui = get_node("FloatingMechUI")
-	name_label = get_node("NameLabel")
-	combat_runner = get_parent()
 	combat_map = combat_runner.get_child(1)
-	add_to_group("Combat_Group")
 	Global.focus_mech.connect(_on_focus_mech)
 	Global.end_turn.connect(_on_end_turn)
 	combat_map.astar.set_point_disabled(combat_map.local_to_index(position))
@@ -131,11 +123,12 @@ func take_damage(Dmg:int) -> void:
 	hp -= Dmg
 	if hp < 1:
 		Global.pawn_structured.emit()
-		take_structure(1)
+		lose_structure(1)
+		hp += equipped_frame.health_max
 	pawn_ui.refresh_ui()
 
-func take_structure(Dmg:int) -> void:
-	pass
+func lose_structure(Dmg:int) -> void:
+	structure -= Dmg
 
 ## Returns all the mounts on this mech with a weapon installed.
 func get_filled_mounts() -> Array[Mount]:
@@ -166,6 +159,10 @@ func _on_focus_mech(PID:int) -> void:
 		is_focus = false
 		get_child(0).modulate = Color(1,1,1)
 
-func _on_end_turn() -> void:
-	for action in actions:
-		action.exhausted = false
+func _on_end_turn(PID:int) -> void:
+	if PID == pid:
+		for action in actions:
+			action.exhausted = false
+
+func _on_mouse_entered() -> void:
+	pass # Replace with function body.

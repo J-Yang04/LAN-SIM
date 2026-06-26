@@ -1,0 +1,139 @@
+[
+  {
+    "id": "npct_exotic",
+    "template": true,
+    "name": "Exotic",
+    "description": "Even in a galaxy of wonders, Exotics are strange and dangerous enemies. Some feature unique technologies not yet available to the wider galaxy or wield archaic weapon styles updated to the modern day, while others carry equipment or adopt tactics that are totally alien to Union doctrine.",
+    "optionalMin": 0,
+    "optionalMax": 2
+  },
+  {
+    "id": "npcf_xenotech_exotic",
+    "name": "Xenotech",
+    "origin": "npct_exotic",
+    "base": true,
+    "type": "Trait",
+    "effect": "Scan doesn’t reveal any information about Exotic Systems.",
+    "active_effects": [
+      {
+        "name": "Xenotech",
+        "detail": "Scan doesn’t reveal any information about your Systems."
+      }
+    ]
+  },
+  {
+    "id": "npcf_hardened_target_exotic",
+    "name": "Hardened Target",
+    "origin": "npct_exotic",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Exotic gains +1 Accuracy on Systems saves, and tech attacks against them receive +1 Difficulty.",
+    "active_effects": [
+      {
+        "name": "Hardened Target",
+        "detail": "Tech attacks against you receive +1 Difficulty."
+      }
+    ],
+    "bonuses": [
+      {
+        "id": "systems",
+        "accuracy": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_living_chassis_exotic",
+    "name": "Living Chassis",
+    "origin": "npct_exotic",
+    "type": "Trait",
+    "effect": "This trait can only be chosen if the Exotic is a Mech. The Exotic gains the Biological Tag."
+  },
+  {
+    "id": "npcf_blinkspace_carver_exotic",
+    "name": "Blinkspace Carver",
+    "origin": "npct_exotic",
+    "type": "System",
+    "effect": "The Exotic teleports when they move.",
+    "active_effects": [
+      {
+        "name": "Blinkspace Carver",
+        "detail": "When you move, you may teleport to a space within your movement range instead of moving normally."
+      }
+    ]
+  },
+  {
+    "id": "npcf_realspace_extrusion_exotic",
+    "name": "Realspace Extrusion",
+    "origin": "npct_exotic",
+    "type": "Trait",
+    "effect": "This Exotic is actually an extrusion of a higher-concept entity from non-physical space, and only partially corporeal. The Exotic gains Resistance to all damage; however, they only deal half damage and other characters can freely pass through and end turns in spaces they occupy as though they aren’t there.",
+    "add_resist": [
+      {
+        "resistance": "all",
+        "target": "self"
+      }
+    ]
+  },
+  {
+    "id": "npcf_living_weaponry_exotic",
+    "name": "Living Weaponry",
+    "origin": "npct_exotic",
+    "type": "Trait",
+    "effect": "The Exotic gains Immunity to Jammed. Additionally, their weapons have biotechnical and semi-organic components that spontaneously generate ammunition. When the Exotic reloads Loading weapons, they also regain 1d6 HP.",
+    "add_resist": [
+      {
+        "immunity": "jammed",
+        "target": "self"
+      }
+    ],
+    "add_other": [
+      {
+        "type": "hp",
+        "val": "1d6",
+        "target": "self"
+      }
+    ]
+  },
+  {
+    "id": "npcf_paracausal_weapon_exotic",
+    "name": "Paracausal Weapon",
+    "origin": "npct_exotic",
+    "type": "Trait",
+    "effect": "Choose one of the Exotic’s weapons. Damage from that weapon can’t be reduced in any way – by Armor, Resistance, or otherwise.",
+    "active_effects": [
+      {
+        "name": "Paracausal Weapon",
+        "detail": "Damage from one of your weapons can’t be reduced in any way – by Armor, Resistance, or otherwise."
+      }
+    ]
+  },
+  {
+    "id": "npcf_chronotorus_exotic",
+    "name": "Chronotorus",
+    "origin": "npct_exotic",
+    "type": "Reaction",
+    "actions": [
+      {
+        "name": "Chronotorus",
+        "activation": "Reaction",
+        "frequency": "1/round",
+        "trigger": "You or another character within line of sight rolls a d20.",
+        "detail": "Either reroll 1d20 or force another character in line of sight to reroll 1d20 as a reaction. The new result must be kept."
+      }
+    ]
+  },
+  {
+    "id": "npcf_regenerator_exotic",
+    "name": "Regenerator",
+    "origin": "npct_exotic",
+    "type": "Trait",
+    "effect": "At the end of the Exotic’s turn, they regain 1/4 of their total HP. They don’t regain any HP if they have taken Energy damage during the same round.",
+    "active_effects": [
+      {
+        "name": "Regenerator",
+        "condition": "At the end of your turn, if you have not taken Energy damage this round.",
+        "detail": "Regain 1/4 of your total HP."
+      }
+    ]
+  }
+]

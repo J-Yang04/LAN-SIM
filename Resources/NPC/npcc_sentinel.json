@@ -1,0 +1,246 @@
+[
+  {
+    "id": "npcc_sentinel",
+    "name": "Sentinel",
+    "role": "defender",
+    "info": {
+      "flavor": "Sentinel archetypes are typically employed as guards and escorts, often in the retinues of commanders or posted in defense of artillery. These mechs and their pilots employ advanced suites of technology to ensure their wards stay alive and operational, even if that costs their own chassis – or lives. Unlike the heavier Bastion archetypes, Sentinels are quick and light: they practice active defense, preemptively striking with suites of advanced technical, systemic, and direct weaponry to protect their charges.",
+      "tactics": "Sentinels are fast defenders that focus on protecting their allies with Overwatch. They are fairly short-range attackers, relying on positioning to get the most from their kit, and aren’t as resilient as other defenders.",
+      "terse": "Fast, short-range defender that can protect allies with Overwatch."
+    },
+    "stats": {
+      "armor": 1,
+      "hp": [16, 20, 24],
+      "evade": [8, 11, 13],
+      "edef": [8, 11, 13],
+      "heatcap": 8,
+      "speed": [5, 5, 6],
+      "sensor": 10,
+      "save": [10, 12, 14],
+      "hull": [2, 3, 4],
+      "agility": [1, 2, 3],
+      "systems": [1, 2, 3],
+      "engineering": [1, 2, 3],
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_combat_shotgun_sentinel",
+    "name": "Combat Shotgun",
+    "origin": "npcc_sentinel",
+    "base": true,
+    "type": "Weapon",
+    "weapon_type": "Main CQB",
+    "attack_bonus": [1, 2, 3],
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [6, 8, 10]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 5
+      },
+      {
+        "type": "Threat",
+        "val": 3
+      }
+    ]
+  },
+  {
+    "id": "npcf_retractable_sword_sentinel",
+    "name": "Retractable Sword",
+    "origin": "npcc_sentinel",
+    "base": true,
+    "type": "Weapon",
+    "weapon_type": "Main Melee",
+    "attack_bonus": [2, 4, 6],
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [4, 6, 8]
+      }
+    ],
+    "range": [
+      {
+        "type": "Threat",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_eye_of_midnight_sentinel",
+    "name": "Eye Of Midnight",
+    "origin": "npcc_sentinel",
+    "base": true,
+    "type": "System",
+    "actions": [
+      {
+        "name": "Activate Eye Of Midnight",
+        "activation": "Quick",
+        "detail": "You become Slowed but can take Overwatch 1/turn, instead of 1/round. Once activated, this effect lasts until it is deactivated as a quick action.",
+        "add_status": [
+          {
+            "id": "slow",
+            "target": "self"
+          }
+        ],
+        "add_special": [
+          {
+            "attribute": "Eye of Midnight",
+            "detail": "You can take Overwatch 1/turn, instead of 1/round."
+          }
+        ]
+      },
+      {
+        "name": "Deactivate Eye Of Midnight",
+        "activation": "Quick",
+        "detail": "Deactivate Eye of Midnight.",
+        "remove_special": ["Eye of Midnight"]
+      }
+    ]
+  },
+  {
+    "id": "npcf_guardian_sentinel",
+    "name": "Guardian",
+    "origin": "npcc_sentinel",
+    "base": true,
+    "type": "Trait",
+    "effect": "Allied characters can use the Sentinel for hard cover.",
+    "active_effects": [
+      {
+        "name": "Guardian",
+        "detail": "Allied characters can use you for hard cover."
+      }
+    ]
+  },
+  {
+    "id": "npcf_punisher_ammunition_sentinel",
+    "name": "Punisher Ammunition",
+    "origin": "npcc_sentinel",
+    "type": "Trait",
+    "effect": "Characters damaged by the Sentinel’s Overwatch attacks also become Slowed until the end of their next turn.",
+    "active_effects": [
+      {
+        "name": "Punisher Ammunition",
+        "detail": "Characters damaged by the your Overwatch attacks also become Slowed until the end of their next turn.",
+        "add_status": [
+          {
+            "id": "slow",
+            "duration": "next_turn_end_target"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_wrath_lock_sentinel",
+    "name": "Wrath-Lock",
+    "origin": "npcc_sentinel",
+    "type": "System",
+    "effect": "The Sentinel arms this system. Once armed, the Sentinel attacks twice the next time they attack with their Combat Shotgun, instead of one.",
+    "actions": [
+      {
+        "name": "Arm Wrath-Lock",
+        "activation": "Full",
+        "detail": "The next time an attack action is made with the Combat Shotgun, it attacks twice instead of once.",
+        "active_effects": [
+          {
+            "name": "Wrath-Lock",
+            "detail": "The next time an attack action is made with the Combat Shotgun, it attacks twice instead of once."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_impaler_sentinel",
+    "name": "Impaler",
+    "origin": "npcc_sentinel",
+    "type": "System",
+    "effect": "Once per round, when the Sentinel hits with Overwatch, their target must pass a Hull save or become Immobilized and Jammed until the end of their next turn.",
+    "add_status": [
+      {
+        "id": "immobilized",
+        "duration": "next_turn_end_target"
+      },
+      {
+        "id": "jammed",
+        "duration": "next_turn_end_target"
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_round",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_rapid_response_sentinel",
+    "name": "Rapid Response",
+    "origin": "npcc_sentinel",
+    "type": "Reaction",
+    "actions": [
+      {
+        "name": "Rapid Response",
+        "activation": "Reaction",
+        "frequency": "1/round",
+        "trigger": "An enemy character in line of sight moves.",
+        "detail": "After the movement you may Boost."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_npc_trait"
+      }
+    ]
+  },
+  {
+    "id": "npcf_bodyguard_sentinel",
+    "name": "Bodyguard",
+    "origin": "npcc_sentinel",
+    "type": "Reaction",
+    "actions": [
+      {
+        "name": "Mark Ward",
+        "activation": "Protocol",
+        "detail": "Choose an allied character within range 5 as their ward and gain the Reflexive Blow reaction.",
+        "target": "ally",
+        "range": [
+          {
+            "type": "Range",
+            "val": 5
+          }
+        ],
+        "add_special": [
+          {
+            "attribute": "Sentinel's Ward"
+          }
+        ]
+      },
+      {
+        "name": "Reflexive Blow",
+        "activation": "Reaction",
+        "trigger": "Someone attacks the your Ward.",
+        "detail": "You first attacks the inciting character with Overwatch."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_npc_trait"
+      }
+    ]
+  },
+  {
+    "id": "npcf_reflexive_blow_sentinel",
+    "name": "Reflexive Blow (DEPRECATED)",
+    "origin": "npcc_sentinel",
+    "type": "Reaction",
+    "deprecated": true,
+    "effect": "This ability is now collected in the Bodyguard trait. This feature can be safely removed from your NPCs."
+  }
+]

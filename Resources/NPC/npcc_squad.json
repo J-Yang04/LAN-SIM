@@ -1,0 +1,219 @@
+[
+  {
+    "id": "npcc_squad",
+    "name": "Squad",
+    "role": "biological",
+    "info": {
+      "flavor": "Although individual pilots and other non-mechanized soldiers might not present much of a threat to most mechs, a squad of infantry with the right gear and training can be dangerous in their own right.<br>Squads are exactly what they sound like: small groups of five to ten armed and armored soldiers represented as one character on the battlefield.",
+      "tactics": "",
+      "terse": "Small groups of five to ten armed and armored soldiers, represented as one character on the battlefield."
+    },
+    "prohibitTemplates": ["npct_grunt", "npct_veteran", "npct_ultra"],
+    "stats": {
+      "armor": 0,
+      "hp": [10, 15, 20],
+      "evade": 8,
+      "edef": 8,
+      "heatcap": 0,
+      "speed": 4,
+      "sensor": 5,
+      "save": [10, 12, 14],
+      "hull": [2, 4, 6],
+      "agility": [2, 4, 6],
+      "systems": [2, 4, 6],
+      "engineering": [2, 4, 6],
+      "size": 4,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_soldiers_squad",
+    "name": "Soldiers",
+    "origin": "npcc_squad",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Squad acts as one character, but it represents a group of soldiers acting together. When the Squad takes a certain amount of damage, it results in the narrative death of one or more of those soldiers. Eventually, this reduces the number of attacks the Squad can make each turn, as listed in the relevant weapon profiles. By default, the Squad is made up of 10 members, each with 1 HP."
+  },
+  {
+    "id": "npcf_rank_and_file_squad",
+    "name": "Rank And File",
+    "origin": "npcc_squad",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Squad can’t take the Grunt, Veteran, or Ultra templates, and can never gain Structure."
+  },
+  {
+    "id": "npcf_strength_in_numbers_squad",
+    "name": "Strength In Numbers",
+    "origin": "npcc_squad",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Squad has Resistance to all damage from attacks that aren’t line, Cone, Burst or Blast, and is Immune to Grapple, Ram, Knockback, and Stunned.",
+    "add_resist": [
+      {
+        "resistance": "energy"
+      },
+      {
+        "resistance": "kinetic"
+      },
+      {
+        "resistance": "explosive"
+      },
+      {
+        "resistance": "burn"
+      },
+      {
+        "immunity": "grapple"
+      },
+      {
+        "immunity": "ram"
+      },
+      {
+        "immunity": "knockback"
+      },
+      {
+        "immunity": "stunned"
+      }
+    ]
+  },
+  {
+    "id": "npcf_spread_out_squad",
+    "name": "Spread Out",
+    "origin": "npcc_squad",
+    "base": true,
+    "type": "Trait",
+    "effect": "Instead of tracking the position of individual soldiers, the Squad’s members are assumed to move freely within the space it occupies. Other characters can freely move through and end their turn in spaces occupied by the Squad, and as long as the Squad occupies at least 2 free spaces it can end its turn overlapping obstructions, cover, or other characters. As its size doesn’t reflect its mass, the Squad cannot Grapple or Ram."
+  },
+  {
+    "id": "npcf_undersize_squad",
+    "name": "Undersize",
+    "origin": "npcc_squad",
+    "base": true,
+    "type": "Trait",
+    "effect": "Individual soldiers can easily duck behind cover, but the sheer force of mech-scale weapons limits how effectively they can be shielded. The squad always has soft cover, even in the open, but can’t benefit from hard cover.",
+    "add_other": [
+      {
+        "type": "cover",
+        "val": "soft"
+      }
+    ]
+  },
+  {
+    "id": "npcf_primary_weapon_squad",
+    "name": "Primary Weapon",
+    "origin": "npcc_squad",
+    "type": "Weapon",
+    "base": true,
+    "attacks": 2,
+    "effect": "This weapon can make two attacks at a time; if the Squad loses more than half its HP, it can only make one attack at a time.",
+    "weapon_type": "Main Rifle",
+    "attack_bonus": [2, 4, 6],
+    "damage": [
+      {
+        "type": "variable",
+        "val": [2, 3, 4]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_anti_armor_weapon_squad",
+    "name": "Anti-Armor Weapon",
+    "origin": "npcc_squad",
+    "base": true,
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_ap"
+      }
+    ],
+    "weapon_type": "Heavy Cannon",
+    "attack_bonus": [1, 2, 3],
+    "damage": [
+      {
+        "type": "variable",
+        "val": [5, 6, 7]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 10
+      }
+    ]
+  },
+  {
+    "id": "npcf_armored_squad",
+    "name": "Armored",
+    "origin": "npcc_squad",
+    "type": "Trait",
+    "effect": "The Squad gains +1 Armor.",
+    "bonuses": [
+      {
+        "id": "armor",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_ambushers_squad",
+    "name": "Ambushers",
+    "origin": "npcc_squad",
+    "type": "Trait",
+    "effect": "The Squad gains +2 Accuracy on all attacks, saves, and checks during the first round of combat.",
+    "active_effects": [
+      {
+        "name": "Ambushers",
+        "detail": "The Squad gains +2 Accuracy on all attacks, saves, and checks during the first round of combat.",
+        "duration": "next_round_start"
+      }
+    ]
+  },
+  {
+    "id": "npcf_duck_and_cover_squad",
+    "name": "Duck And Cover",
+    "origin": "npcc_squad",
+    "type": "Reaction",
+    "effect": "When the Squad is hit by an attack, they gain Resistance to the damage but becomes Immobilized until the end of their next turn.",
+    "actions": [
+      {
+        "name": "Duck And Cover",
+        "activation": "Reaction",
+        "trigger": "The Squad is hit by an attack.",
+        "detail": "Gain Resistance to the damage but becomes Immobilized until the end of their next turn.",
+        "add_status": [
+          {
+            "id": "immobilized",
+            "duration": "next_turn_end_self"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_rapid_insertion_squad",
+    "name": "Rapid Insertion",
+    "origin": "npcc_squad",
+    "type": "Trait",
+    "effect": "The Squad may fly whenever it moves or Boosts.",
+    "active_effects": [
+      {
+        "name": "Rapid Insertion",
+        "detail": "The Squad may fly whenever it moves or Boosts."
+      }
+    ]
+  },
+  {
+    "id": "npcf_disciplined_squad",
+    "name": "Disciplined",
+    "origin": "npcc_squad",
+    "type": "Trait",
+    "effect": "Losing HP doesn’t affect the number of attacks the Squad can make each turn.",
+    "mod": "npcf_primary_weapon_squad"
+  }
+]

@@ -1,0 +1,246 @@
+[
+  {
+	"id": "npcc_aegis",
+	"name": "Aegis",
+	"role": "support",
+	"info": {
+	  "flavor": "Aegis-archetype mechs are built to hold ground, support their allies, and suppress enemies. First used to great effect during the Comorrand Action by a Karrakin pilot, Lady Gloria of House MacLennan, Aegis’s are known for their powerful defensive measures. Their pilots can expertly make a bulwark out of the smallest barricade with anything from conventional tools to cutting-edge technologies.",
+	  "tactics": "Aegises are tough and defensive support units. They are most effective when positioned so that their Defense Net can cover as many allies as possible since they can be difficult to redeploy. Regenerative Shielding also protects the Aegis from mobility-reducing effects.",
+	  "terse": "Tough and defensive support unit adept at holding ground."
+	},
+	"stats": {
+	  "armor": [2, 2, 3],
+	  "hp": [14, 18, 18],
+	  "evade": [7, 8, 8],
+	  "edef": [10, 12, 14],
+	  "heatcap": [10, 10, 10],
+	  "speed": [3, 3, 3],
+	  "sensor": [8, 10, 10],
+	  "save": [10, 11, 12],
+	  "hull": [0, 0, 0],
+	  "agility": [-2, -1, -1],
+	  "systems": [2, 3, 4],
+	  "engineering": [2, 3, 5],
+	  "size": 1,
+	  "activations": 1
+	}
+  },
+  {
+	"id": "npcf_light_laser_aegis",
+	"name": "Light Laser",
+	"origin": "npcc_aegis",
+	"base": true,
+	"type": "Weapon",
+	"weapon_type": "Main Cannon",
+	"attack_bonus": [1, 2, 3],
+	"damage": [
+	  {
+		"type": "Energy",
+		"val": [3, 3, 3]
+	  },
+	  {
+		"type": "Burn",
+		"val": [2, 4, 6]
+	  }
+	],
+	"range": [
+	  {
+		"type": "Range",
+		"val": 8
+	  }
+	]
+  },
+  {
+	"id": "npcf_defense_net_aegis",
+	"name": "Defense Net",
+	"origin": "npcc_aegis",
+	"base": true,
+	"type": "System",
+	"actions": [
+	  {
+		"name": "Activate Defense Net",
+		"activation": "Full",
+		"detail": "Spread a powerful, shimmering repulsion shield over a Burst 3 area. While active, you are Immobilized, but all ranged, melee, and tech attacks against characters or objects within the affected area that originate outside the area receive +2 Difficulty and cannot result in critical hits. Characters within the affected area may attack characters within and outside of the area normally.<br>Allied characters within the affected area also gain Immunity to Impaired and Slowed, and remove these conditions when they enter the area if they already have them.<br>This effect lasts until you end it as a protocol, or until you are Stunned, Jammed, or destroyed. Involuntary movement causes the shield to move with the Aegis",
+		"add_status": [
+		  {
+			"id": "immobilized",
+			"target": "self"
+		  }
+		],
+		"add_resist": [
+		  {
+			"immunity": "impaired",
+			"target": "allies",
+			"aoe": "burst 3"
+		  },
+		  {
+			"immunity": "slowed",
+			"target": "allies",
+			"aoe": "burst 3"
+		  }
+		],
+		"active_effects": [
+		  {
+			"name": "Defense Net",
+			"detail": "All ranged, melee, and tech attacks against characters or objects within the Defense Net area that originate outside the area receive +2 Difficulty and cannot result in critical hits. Characters within the affected area may attack characters within and outside of the area normally. Allied characters within the affected area also gain Immunity to Impaired and Slowed, and remove these conditions when they enter the area if they already have them."
+		  }
+		]
+	  },
+	  {
+		"name": "Deactivate Defense Net",
+		"activation": "Protocol",
+		"detail": "End the Defense Net effect."
+	  }
+	],
+	"tags": [
+	  {
+		"id": "tg_recharge",
+		"val": 4
+	  },
+	  {
+		"id": "tg_shield"
+	  }
+	]
+  },
+  {
+	"id": "npcf_regenerative_shielding_aegis",
+	"name": "Regenerative Shielding",
+	"origin": "npcc_aegis",
+	"base": true,
+	"type": "Trait",
+	"effect": "The Aegis has Immunity to Impaired and Slowed and can’t be critically hit.",
+	"add_resist": [
+	  {
+		"immunity": "impaired",
+		"target": "self"
+	  },
+	  {
+		"immunity": "slowed",
+		"target": "self"
+	  }
+	],
+	"active_effects": [
+	  {
+		"name": "Regenerative Shielding",
+		"detail": "You have Immunity to Impaired and Slowed and can’t be critically hit."
+	  }
+	]
+  },
+  {
+	"id": "npcf_adaptive_shielding_aegis",
+	"name": "Adaptive Shielding",
+	"origin": "npcc_aegis",
+	"type": "Trait",
+	"effect": "The first time each round an ally affected by Defense Net takes damage, all allies within the Net gain Resistance to the damage type taken. This lasts until the end of the Aegis’ next turn.",
+	"mod": "npcf_defense_net_aegis",
+	"active_effects": [
+	  {
+		"name": "Adaptive Shielding",
+		"detail": "The first time each round an ally affected by Defense Net takes damage, all allies within the Net gain Resistance to the damage type taken. This lasts until the end of your next turn.",
+		"duration": "next_turn_end_self"
+	  }
+	]
+  },
+  {
+	"id": "npcf_guardian_aegis",
+	"name": "Guardian",
+	"origin": "npcc_aegis",
+	"type": "Trait",
+	"effect": "Allied characters can use the Aegis for hard cover.",
+	"active_effects": [
+	  {
+		"name": "Guardian",
+		"detail": "Allied characters can use you for hard cover."
+	  }
+	]
+  },
+  {
+	"id": "npcf_ring_of_fire_aegis",
+	"name": "Ring Of Fire",
+	"mod": "npcf_defense_net_aegis",
+	"origin": "npcc_aegis",
+	"type": "Trait",
+	"effect": "Any hostile characters that start their turn inside the area affected by the Defense Net or that enter it for the first time in a round take 2 heat and become Shredded until they leave the area.",
+	"active_effects": [
+	  {
+		"name": "Ring of Fire",
+		"detail": "Any hostile characters that start their turn inside the area affected by the Defense Net or that enter it for the first time in a round take 2 heat and become Shredded until they leave the area.",
+		"damage": [
+		  {
+			"type": "Heat",
+			"val": 2,
+			"aoe": true
+		  }
+		],
+		"add_status": [
+		  {
+			"id": "shredded",
+			"target": "enemies",
+			"aoe": true
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"id": "npcf_hardlight_cover_system_aegis",
+	"name": "Hardlight Cover System",
+	"origin": "npcc_aegis",
+	"type": "System",
+	"deployables": [
+	  {
+		"name": "Hardlight Wall",
+		"activation": "Quick",
+		"size_special": "Line 3",
+		"type": "Deployable",
+		"detail": "Deploy a Line 3 hardlight wall. The wall is immune to damage and effects and grants hard cover. Characters that receive this cover gain Resistance to damage from Line, Blast, Burst, and Cone attacks.",
+		"add_resist": [
+		  {
+			"resistance": "aoe",
+			"target": "ally"
+		  },
+		  {
+			"immunity": "all",
+			"target": "self"
+		  }
+		]
+	  }
+	],
+	"tags": [
+	  {
+		"id": "tg_deployable"
+	  },
+	  {
+		"id": "tg_recharge",
+		"val": 5
+	  },
+	  {
+		"id": "tg_shield"
+	  }
+	]
+  },
+  {
+	"id": "npcf_ha_blackwall_system_aegis",
+	"name": "Ha Blackwall System",
+	"origin": "npcc_aegis",
+	"type": "System",
+	"actions": [
+	  {
+		"name": "Generate Blackwall",
+		"activation": "Full",
+		"detail": "Generate a pitch-black wall of blinkspace 5 spaces high covering a Line 10 area starting within Range 5. All spaces must be free. The wall blocks line of sight, effects or attacks and provides hard cover. Characters that start their turn in the wall or who enter it on their turn roll 1d6. <br>On a 4+ they are removed from play until the end of their next turn, when they reappear in a free space of their choice in Range 10 of the wall. If there are no free spaces, they return when a space becomes free. <br>The wall lasts until you end it as a quick action, or you are destroyed. <br>When it ends, characters remaining in blinkspace reappear."
+	  },
+	  {
+		"name": "Dismiss Blackwall",
+		"activation": "Quick",
+		"detail": "End the Blackwall effect."
+	  }
+	],
+	"tags": [
+	  {
+		"id": "tg_limited",
+		"val": 1
+	  }
+	]
+  }
+]

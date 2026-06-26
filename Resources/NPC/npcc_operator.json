@@ -1,0 +1,225 @@
+[
+  {
+    "id": "npcc_operator",
+    "name": "Operator",
+    "role": "artillery",
+    "info": {
+      "flavor": "Operators are known-unknowns, rarely encountered on the front lines, but this should not be mistaken for fragility. Operators are dangerous and deadly in every way. Like their mechs, Operators’ bodies are loaded with the most advanced tech available. When they die in combat, it’s not unknown for their bodies – and their mechs — to self-immolate, rendering any technology and data into ash.",
+      "tactics": "Operators are elite and extremely mobile artillery mechs. They aren’t particularly hardy, but can use Trace Drive to teleport around the battlefield and put themselves in advantageous positions: on top of obstructions or terrain, or in cover – anywhere they can snipe at enemies with their highly accurate Raptor Plasma Rifles.",
+      "terse": "Accurate and highly mobile artillery mech that can teleport around the battlefield."
+    },
+    "stats": {
+      "armor": 0,
+      "hp": [10, 12, 15],
+      "evade": [10, 12, 14],
+      "edef": [10, 12, 14],
+      "heatcap": 8,
+      "speed": 5,
+      "sensor": 10,
+      "save": [10, 12, 14],
+      "hull": [2, 3, 4],
+      "agility": [2, 3, 4],
+      "systems": [2, 3, 4],
+      "engineering": [2, 3, 4],
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_raptor_plasma_rifle_operator",
+    "name": "Raptor Plasma Rifle",
+    "origin": "npcc_operator",
+    "base": true,
+    "type": "Weapon",
+    "attacks": [1, 2, 3],
+    "weapon_type": "Heavy Rifle",
+    "attack_bonus": [2, 4, 6],
+    "accuracy": 2,
+    "damage": [
+      {
+        "type": "Energy",
+        "val": 7
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 20
+      }
+    ]
+  },
+  {
+    "id": "npcf_trace_drive_operator",
+    "name": "Trace Drive",
+    "origin": "npcc_operator",
+    "base": true,
+    "type": "System",
+    "effect": "The Operator teleports when they make their standard move.",
+    "active_effects": [
+      {
+        "name": "Trace Drive",
+        "detail": "You teleport when you make your standard move."
+      }
+    ]
+  },
+  {
+    "id": "npcf_step_operator",
+    "name": "Step",
+    "origin": "npcc_operator",
+    "base": true,
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Step",
+        "activation": "Quick",
+        "detail": "Teleport to a free space within line of sight and range 50."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_self_erasure_operator",
+    "name": "Self-Erasure",
+    "origin": "npcc_operator",
+    "base": true,
+    "type": "Trait",
+    "effect": "When the Operator’s mech is destroyed, it immediately self-immolates in a wave of superheated plasma. All characters adjacent to the Operator when this takes place must succeed on an Agility save or take {4/6/8} Energy damage. On a success, they take half damage. This mech is then removed from the battlefield – it is utterly annihilated.",
+    "active_effects": [
+      {
+        "name": "Self-Erasure",
+        "detail": "When your mech is destroyed, you immediately self-immolates in a wave of superheated plasma. All characters adjacent to you when this takes place must succeed on an Agility save or take {4/6/8} Energy damage. On a success, they take half damage. This mech is then removed from the battlefield – it is utterly annihilated.",
+        "damage": [
+          {
+            "type": "Energy",
+            "val": [4, 6, 8],
+            "save": "agility",
+            "save_half": true,
+            "aoe": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_fade_generator_operator",
+    "name": "Fade Generator",
+    "origin": "npcc_operator",
+    "type": "System",
+    "effect": "At the end of the Operator’s turn, they become Invisible until the start of their next turn. This immediately ceases if they take damage or make a reaction.",
+    "active_effects": [
+      {
+        "name": "Fade Generator",
+        "detail": "At the end of your turn, you become Invisible until the start of your next turn. This immediately ceases if you take damage or make a reaction.",
+        "add_status": [
+          {
+            "id": "invisible",
+            "duration": "next_turn_start_self",
+            "target": "self"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_telefrag_operator",
+    "name": "Telefrag",
+    "origin": "npcc_operator",
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Telefrag",
+        "activation": "Full",
+        "detail": "Teleport into a space occupied by another character within line of sight and range 15. The target must succeed on an Agility save or take {4/8/12} AP Energy damage and become Jammed until the end of their next turn. On a successful save, they take half damage and aren’t Jammed. Succeed or fail, you take 1d6 AP Energy damage and are placed into a free space next to the target.",
+        "damage": [
+          {
+            "type": "Energy",
+            "val": [4, 8, 12],
+            "save": "agility",
+            "save_half": true,
+            "ap": true
+          },
+          {
+            "type": "Energy",
+            "val": "1d6",
+            "target": "self",
+            "ap": true
+          }
+        ],
+        "add_status": [
+          {
+            "id": "jammed",
+            "duration": "next_turn_end_target"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_fortress_operator",
+    "name": "Fortress",
+    "origin": "npcc_operator",
+    "type": "Trait",
+    "effect": "The Operator gains +3 Accuracy on Systems saves, and tech attacks against them receive +3 difficulty.",
+    "active_effects": [
+      {
+        "name": "Fortress",
+        "detail": "You gain +3 Accuracy on Systems saves, and tech attacks against you  receive +3 difficulty."
+      }
+    ],
+    "bonuses": [
+      {
+        "id": "systems",
+        "accuracy": 3
+      }
+    ]
+  },
+  {
+    "id": "npcf_skirmisher_operator",
+    "name": "Skirmisher",
+    "origin": "npcc_operator",
+    "type": "Trait",
+    "effect": "Once per turn, at any point during the Operator’s turn, they may Boost as a free action.",
+    "actions": [
+      {
+        "name": "Skirmisher",
+        "activation": "Free",
+        "frequency": "1/round",
+        "detail": "Boost during your turn as a free action."
+      }
+    ]
+  },
+  {
+    "id": "npcf_nova_missiles_operator",
+    "name": "Nova Missiles",
+    "origin": "npcc_operator",
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_seeking"
+      }
+    ],
+    "weapon_type": "Auxiliary Launcher",
+    "attack_bonus": [1, 2, 3],
+    "damage": [
+      {
+        "type": "Energy",
+        "val": [4, 6, 8]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 15
+      },
+      {
+        "type": "Blast",
+        "val": 1
+      }
+    ]
+  }
+]

@@ -1,0 +1,133 @@
+[
+  {
+    "id": "npct_spacer",
+    "template": true,
+    "name": "Spacer",
+    "description": "Spacers are those born and bred in the hard vacuum of the endless void. They are adept at maneuvering in and around the difficult, low-g environments found only in space and low orbit – blink and space stations, asteroid fields, and the emptiness between ships in military and commercial fleets."
+  },
+  {
+    "id": "npcf_maneuverable_spacer",
+    "name": "Maneuverable",
+    "origin": "npct_spacer",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Spacer moves normally in zero-g environments."
+  },
+  {
+    "id": "npcf_concussion_gun_spacer",
+    "name": "Concussion Gun",
+    "origin": "npct_spacer",
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_knockback",
+        "val": 3
+      }
+    ],
+    "weapon_type": "Main Rifle",
+    "attack_bonus": [1, 2, 3],
+
+    "range": [
+      {
+        "type": "Cone",
+        "val": 3
+      }
+    ]
+  },
+  {
+    "id": "npcf_gravity_rifle_spacer",
+    "name": "Gravity Rifle",
+    "origin": "npct_spacer",
+    "type": "Weapon",
+    "weapon_type": "Main Rifle",
+    "attack_bonus": [1, 2, 3],
+    "accuracy": 1,
+
+    "range": [
+      {
+        "type": "Range",
+        "val": 10
+      }
+    ],
+    "on_hit": {
+      "detail": "Targets must pass a Hull save or be pulled in a straight line towards you, up to 10 spaces or until they hit an obstruction. If they collide with an obstruction, they are additionally knocked Prone.",
+      "save": "hull",
+      "add_status": [
+        {
+          "id": "prone"
+        }
+      ]
+    }
+  },
+  {
+    "id": "npcf_sealant_trap_spacer",
+    "name": "Sealant Trap",
+    "origin": "npct_spacer",
+    "type": "System",
+    "deployables": [
+      {
+        "name": "Sealant Trap",
+        "activation": "Quick",
+        "type": "Mine",
+        "range": [
+          {
+            "type": "Burst",
+            "val": 1
+          }
+        ],
+        "hp": 10,
+        "evasion": 5,
+        "detail": "When a hostile character moves adjacent to the mine, characters within a Burst 1 area are covered with a spray of thick, fast-drying sealant and become Immobilized. They remain stuck until the sealant takes sufficient damage to break; it counts as having {5/10/15} HP and Evasion 5.",
+        "add_status": [
+          {
+            "id": "immobilized"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_limited",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_thumper_grenades_spacer",
+    "name": "Thumper Grenades",
+    "origin": "npct_spacer",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Thumper Grenades",
+        "activation": "Quick",
+        "range": [
+          {
+            "type": "Range",
+            "val": 5
+          },
+          {
+            "type": "Blast",
+            "val": 1
+          }
+        ],
+        "detail": "Characters in the affected area must pass an Agility check or be knocked 3 spaces back, directly away from the center of the explosion. If this causes them to collide with an obstruction, they are also knocked Prone.",
+        "save": "agility",
+        "add_status": [
+          {
+            "id": "prone"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_grenade"
+      },
+      {
+        "id": "tg_limited",
+        "val": 1
+      }
+    ]
+  }
+]

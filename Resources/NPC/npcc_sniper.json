@@ -1,0 +1,244 @@
+[
+  {
+    "id": "npcc_sniper",
+    "name": "Sniper",
+    "role": "artillery",
+    "info": {
+      "flavor": "The reason some pilots haven’t seen a Sniper on the battlefield is that those pilots are dead. These mechs are built for stability, targeting, and extremely long-range  kinetic damage weapons at the cost of mobility, and they tend to operate in small, self-sufficient teams far removed from direct combat. Sniper pilots are a proud breed, emphasizing economy and elegance over destructive power.",
+      "tactics": "Rightly feared, Snipers are devastating when it comes to dealing focused damage. Using Sniper’s Mark, they can deal direct structure damage, making short work of almost any character. Opponents can avoid this with clever use of cover, or by dropping Prone. Snipers’ main downside is that they need to be fairly stationary to do their best work, as their rifle requires a full action to fire.",
+      "terse": "Long-range artillery mech that can deal direct structure damage."
+    },
+    "stats": {
+      "armor": 0,
+      "hp": [10, 12, 14],
+      "evade": [10, 13, 16],
+      "edef": [8, 9, 10],
+      "heatcap": 6,
+      "speed": 4,
+      "sensor": 15,
+      "save": [11, 13, 15],
+      "hull": -2,
+      "agility": [1, 2, 3],
+      "systems": [1, 3, 4],
+      "engineering": [1, 1, 2],
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_anti_materiel_rifle_sniper",
+    "name": "Anti-Materiel Rifle",
+    "origin": "npcc_sniper",
+    "base": true,
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_ap"
+      },
+      {
+        "id": "tg_ordnance"
+      },
+      {
+        "id": "tg_loading"
+      }
+    ],
+    "weapon_type": "Superheavy Rifle",
+    "attack_bonus": [2, 4, 6],
+    "accuracy": 2,
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [10, 15, 20]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 25
+      }
+    ]
+  },
+  {
+    "id": "npcf_snipers_mark_sniper",
+    "name": "Sniper’s Mark",
+    "origin": "npcc_sniper",
+    "base": true,
+    "type": "System",
+    "actions": [
+      {
+        "name": "Mark Target",
+        "activation": "Full",
+        "detail": "A character within line of sight and range 25 gains the Sniper’s Mark. Against targets with the Sniper’s Mark, the Anti-Materiel Rifle deals 1 structure damage instead of its usual damage.<br>Characters know when they have the Sniper’s Mark. They ignore it and take damage normally if they are in cover or Prone. On their turn, characters with the Sniper’s Mark may drop Prone as a free action.<br>The Sniper can only mark one character at a time but can transfer the Sniper’s Mark to another character as a full action.",
+        "range": [
+          {
+            "type": "Range",
+            "val": 25
+          }
+        ],
+        "add_special": [
+          {
+            "attribute": "Sniper’s Mark",
+            "detail": "While you have the Sniper’s Mark, attacks made against you with the Anti-Materiel Rifle deal 1 structure damage instead of their usual damage. You ignore the Sniper’s Mark and take damage normally if you are in cover or Prone. On your turn, you may drop Prone as a free action."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_climber_sniper",
+    "name": "Climber",
+    "origin": "npcc_sniper",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Sniper can climb and remain stationary on any surface without penalty, including overhanging and vertical surfaces.",
+    "active_effects": [
+      {
+        "name": "Climber",
+        "detail": "You can climb and remain stationary on any surface without penalty, including overhanging and vertical surfaces."
+      }
+    ]
+  },
+  {
+    "id": "npcf_selective_loader_sniper",
+    "name": "Selective Loader",
+    "origin": "npcc_sniper",
+    "type": "System",
+    "effect": "The Sniper can choose a special ammunition type before attacking with the Anti-Materiel Rifle. Attacks made with this ammunition function as usual, with an additional effect on a successful attack.<br>The Sniper may choose from the following:<ul><li>Electromagnetic: Targets must must pass an Systems save or become Jammed until the end of their next turn.</li><li>Flare: Targets lose Hide or Invisible and cannot gain those statuses until the end of their next turn.</li><li>Impact: Targets must pass an Hull save or be knocked Prone.</li><li>Molten: Targets must pass an Engineering save or become Shredded until the end of their next turn.</li></ul>",
+    "mod": "npcf_anti_materiel_rifle_sniper",
+    "active_effects": [
+      {
+        "name": "Electromagnetic Rounds",
+        "detail": "Targets hit by the Anti-Materiel Rifle with Electromagnetic Rounds must pass a Systems save or become Jammed until the end of their next turn.",
+        "add_status": [
+          {
+            "id": "jammed",
+            "duration": "next_turn_end_target",
+            "save": "systems"
+          }
+        ]
+      },
+      {
+        "name": "Flare Rounds",
+        "detail": "Targets hit by the Anti-Materiel Rifle with Flare Rounds lose Hide or Invisible and cannot gain those statuses until the end of their next turn."
+      },
+      {
+        "name": "Impact Rounds",
+        "detail": "Targets hit by the Anti-Materiel Rifle with Impact Rounds must pass a Hull save or be knocked Prone.",
+        "add_status": [
+          {
+            "id": "prone",
+            "duration": "next_turn_end_target",
+            "save": "hull"
+          }
+        ]
+      },
+      {
+        "name": "Molten Rounds",
+        "detail": "Targets hit by the Anti-Materiel Rifle with Molten Rounds must pass an Engineering save or become Shredded until the end of their next turn.",
+        "add_status": [
+          {
+            "id": "shredded",
+            "duration": "next_turn_end_target",
+            "save": "engineering"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_defensive_grapple_sniper",
+    "name": "Defensive Grapple",
+    "origin": "npcc_sniper",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Defensive Grapple",
+        "activation": "Quick",
+        "detail": "Pull yourself to any point within range 5 with a grappling hook as though you are flying."
+      },
+      {
+        "name": "Relocation",
+        "activation": "Reaction",
+        "frequency": "1/round",
+        "trigger": "An enemy character in line of sight moves.",
+        "detail": "You use Defensive Grapple."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 4
+      }
+    ]
+  },
+  {
+    "id": "npcf_relocation_sniper",
+    "name": "Relocation (DEPRECATED)",
+    "origin": "npcc_sniper",
+    "type": "Reaction",
+    "deprecated": true,
+    "effect": "This ability is now collected in the Defensive Grapple trait. This feature can be safely removed from your NPCs."
+  },
+  {
+    "id": "npcf_shroud_charge_sniper",
+    "name": "Shroud Charge",
+    "origin": "npcc_sniper",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Shroud Charge",
+        "activation": "Quick",
+        "detail": "Set off a charge, creating a Burst 3 area of smoke, haze, or some other kind of concealing shroud. You gains soft cover within the affected area, and characters other than you cannot draw line of sight into or out of the area. Characters partially within the area have line of sight to characters within and outside the area.<br>This effect lasts until the end of your next turn, or until you use this system again.",
+        "active_effects": [
+          {
+            "name": "Shroud Zone",
+            "detail": "A Burst 3 area of smoke, haze, or some other kind of concealing shroud. You gain soft cover within the affected area, and characters other than you cannot draw line of sight into or out of the area. Characters partially within the area have line of sight to characters within and outside the area.<br>This effect lasts until the end of your next turn, or until you another Shroud Charge",
+            "duration": "end_next_turn_self"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_moving_target_sniper",
+    "name": "Moving Target",
+    "origin": "npcc_sniper",
+    "type": "Reaction",
+    "actions": [
+      {
+        "name": "Moving Target",
+        "activation": "Reaction",
+        "frequency": "1/round",
+        "trigger": "A character in line of sight and range 20 moves.",
+        "detail": "Interrupt the movement. The character must either give up the triggering action/movement, or be immediately attacked by you using the Anti-materiel Rifle. If the rifle isn’t loaded, you instead reload it."
+      }
+    ]
+  },
+  {
+    "id": "npcf_deadmetal_rounds_sniper",
+    "name": "Deadmetal Rounds",
+    "origin": "npcc_sniper",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Load Deadmetal Round",
+        "activation": "Quick",
+        "detail": "Load the Anti-Materiel Rifle with a special, over-penetrating round: the next attack they make with it becomes line 20.",
+        "active_effects": [
+          {
+            "name": "Deadmetal Round Loaded",
+            "detail": "The next attack made with the Anti-Materiel Rifle becomes Line 20."
+          }
+        ]
+      }
+    ],
+    "mod": "npcf_anti_materiel_rifle_sniper",
+    "effect": "If Deadmetal Rounds have been loaded, the next attack made with this weapon becomes Line 20."
+  }
+]

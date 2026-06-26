@@ -1,0 +1,210 @@
+[
+  {
+	"id": "npcc_assault",
+	"name": "Assault",
+	"role": "striker",
+	"info": {
+	  "flavor": "Assault mechs are the most common primary battle frames found throughout the galaxy. Fitted with a heavy rifle, a sidearm, and a suite of systems that enhance movement, targeting, and defensibility, they are straightforward, reliable, and hardy combatants. The pilots of Assault mechs are also the cheapest to train and outfit, but that doesn’t make them any less dangerous.",
+	  "tactics": "Assaults are straightforward, damage-dealing strikers. Put them somewhere their toughness and decent range can be used effectively, and Hunker Down against damage to maximize their survivability.",
+	  "terse": "Straightforward striker that can deal consistent damage."
+	},
+	"stats": {
+	  "armor": [1, 1, 1],
+	  "hp": [15, 18, 21],
+	  "evade": [8, 10, 12],
+	  "edef": [8, 9, 10],
+	  "heatcap": [8, 8, 8],
+	  "speed": [4, 4, 4],
+	  "sensor": [8, 8, 8],
+	  "save": [10, 12, 14],
+	  "hull": [1, 2, 3],
+	  "agility": [1, 2, 3],
+	  "systems": [1, 2, 3],
+	  "engineering": [1, 2, 3],
+	  "size": 1,
+	  "activations": 1
+	}
+  },
+  {
+	"id": "npcf_heavy_assault_rifle_assault",
+	"name": "Heavy Assault Rifle",
+	"origin": "npcc_assault",
+	"base": true,
+	"type": "Weapon",
+	"tags": [
+	  {
+		"id": "tg_reliable",
+		"val": "{2/3/4}"
+	  }
+	],
+	"weapon_type": "Main Rifle",
+	"attack_bonus": [1, 2, 3],
+	"damage": [
+	  {
+		"type": "Kinetic",
+		"val": [6, 8, 10]
+	  }
+	],
+	"range": [
+	  {
+		"type": "Range",
+		"val": 10
+	  }
+	]
+  },
+  {
+	"id": "npcf_combat_knife_assault",
+	"name": "Combat Knife",
+	"origin": "npcc_assault",
+	"base": true,
+	"type": "Weapon",
+	"weapon_type": "Auxiliary Melee",
+	"attack_bonus": [1, 2, 3],
+	"damage": [
+	  {
+		"type": "Kinetic",
+		"val": [4, 6, 7]
+	  }
+	],
+	"range": [
+	  {
+		"type": "Threat",
+		"val": 1
+	  }
+	]
+  },
+  {
+	"id": "npcf_hunker_down_assault",
+	"name": "Hunker Down",
+	"origin": "npcc_assault",
+	"base": true,
+	"type": "Reaction",
+	"actions": [
+	  {
+		"name": "Hunker Down",
+		"activation": "Reaction",
+		"frequency": "1/round",
+		"trigger": "An attack hits you, but damage hasn’t been rolled yet.",
+		"detail": "Gain Resistance to all damage from the attack."
+	  }
+	]
+  },
+  {
+	"id": "npcf_underslung_grenade_launcher_assault",
+	"name": "Underslung Grenade Launcher",
+	"origin": "npcc_assault",
+	"type": "Weapon",
+	"tags": [
+	  {
+		"id": "tg_loading"
+	  },
+	  {
+		"id": "tg_arcing"
+	  }
+	],
+	"weapon_type": "Auxiliary Launcher",
+	"attack_bonus": [1, 2, 3],
+	"damage": [
+	  {
+		"type": "Explosive",
+		"val": [4, 6, 8]
+	  }
+	],
+	"range": [
+	  {
+		"type": "Range",
+		"val": 8
+	  },
+	  {
+		"type": "Blast",
+		"val": 2
+	  }
+	]
+  },
+  {
+	"id": "npcf_micro_missile_barrage_assault",
+	"name": "Micro-Missile Barrage",
+	"origin": "npcc_assault",
+	"type": "Trait",
+	"actions": [
+	  {
+		"name": "Micro-Missile Barrage",
+		"activation": "Quick",
+		"detail": "Launch a Line 8 volley of micro-missiles. All characters within a Line 8 area must succeed on a Hull save or take {6/8/10} kinetic damage. On a successful save, they take half damage.",
+		"range": [
+		  {
+			"type": "Range",
+			"val": 8
+		  },
+		  {
+			"type": "Line",
+			"val": 8
+		  }
+		],
+		"damage": [
+		  {
+			"type": "Kinetic",
+			"val": [6, 8, 10],
+			"aoe": "line 8",
+			"save": "hull",
+			"save_half": true
+		  }
+		]
+	  }
+	],
+	"tags": [
+	  {
+		"id": "tg_recharge",
+		"val": 6
+	  }
+	]
+  },
+  {
+	"id": "npcf_high_impact_rounds_assault",
+	"name": "High Impact Rounds",
+	"origin": "npcc_assault",
+	"type": "System",
+	"effect": "These high-caliber rounds can only be used with the Heavy Assault Rifle. When firing with these rounds, the Assault’s attacks become AP and deal +4 kinetic damage, but the Heavy Assault Rifle must be reloaded before it is used again (as though it was Loading).",
+	"mod": "npcf_heavy_assault_rifle_assault",
+	"added_damage": [
+	  {
+		"type": "Kinetic",
+		"val": 4
+	  }
+	],
+	"added_tags": [
+	  {
+		"id": "tg_ap"
+	  },
+	  {
+		"id": "tg_loading"
+	  }
+	]
+  },
+  {
+	"id": "npcf_auto_targeting_assault",
+	"name": "Auto-Targeting",
+	"origin": "npcc_assault",
+	"type": "Trait",
+	"effect": "The Assault ignores cover when attacking, although they still require line of sight.",
+	"active_effects": [
+	  {
+		"name": "Auto-Targeting",
+		"detail": "You ignore cover when attacking, although you still require line of sight."
+	  }
+	]
+  },
+  {
+	"id": "npcf_rank_discipline_assault",
+	"name": "Rank Discipline",
+	"origin": "npcc_assault",
+	"type": "Trait",
+	"effect": "The Assault gains +1 Accuracy on all attacks, checks, and saves while adjacent to at least one allied character with the Mech tag.",
+	"active_effects": [
+	  {
+		"name": "Rank Discipline",
+		"detail": "You gain +1 Accuracy on all attacks, checks, and saves while adjacent to at least one allied character with the Mech tag."
+	  }
+	]
+  }
+]

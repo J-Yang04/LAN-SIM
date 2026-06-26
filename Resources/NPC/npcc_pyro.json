@@ -1,0 +1,237 @@
+[
+  {
+    "id": "npcc_pyro",
+    "name": "Pyro",
+    "role": "defender",
+    "info": {
+      "flavor": "First popularized in the wake of the Hercynian Crisis by the lancer Flama and their aptly named Devil Corps, Pyro frames are reviled across the galaxy as the embodiment of the pure destructive power held by militarized states and corpro-states. Their use is common within organizations for which the ends justify the means. Pyros are well-armored, and better insulated than most chassis of similar gross weight, designed to manage incredible internal heat while projecting volatile mixes of chemicals and flame toward their enemies. Pyros are often used in urban and jungle warfare, where they can be used to root out entrenched defenders.",
+      "tactics": "Pyros are slow, resilient mechs that are especially potent against characters already suffering from Burn. If players don’t keep their distance, Pyros can use Explosive Vent to dump an enormous amount of heat on right on them. Position Pyros so they can protect allies against incoming fire with Firebreak Shield. Note, however, that players can move around shields to reduce their effectiveness to zero, or they can deactivate them by hitting Pyros with Stunned or Knockback weapons.",
+      "terse": "Slow and resilient defender that can deal high damage to enemies via Burn."
+    },
+    "stats": {
+      "armor": [3, 3, 4],
+      "hp": [10, 13, 15],
+      "evade": 8,
+      "edef": 8,
+      "heatcap": [12, 12, 16],
+      "speed": 2,
+      "sensor": 8,
+      "save": [10, 12, 14],
+      "hull": [1, 2, 3],
+      "agility": [-1, 0, 0],
+      "systems": [-1, -1, 0],
+      "engineering": [3, 4, 5],
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_flamethrower_pyro",
+    "name": "Flamethrower",
+    "origin": "npcc_pyro",
+    "base": true,
+    "type": "Weapon",
+    "effect": "This weapon deals double Burn to characters that already have any Burn.",
+    "tags": [
+      {
+        "id": "tg_heat_self",
+        "val": 4
+      }
+    ],
+    "weapon_type": "Heavy CQB",
+    "attack_bonus": [1, 2, 3],
+    "damage": [
+      {
+        "type": "Burn",
+        "val": [3, 4, 5]
+      }
+    ],
+    "range": [
+      {
+        "type": "Cone",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_explosive_vent_pyro",
+    "name": "Explosive Vent",
+    "origin": "npcc_pyro",
+    "base": true,
+    "type": "System",
+    "effect": "The Pyro clears all heat. Characters in Burst 1 must pass an Agility save or take heat equal to half the amount the Pyro cleared and be knocked Prone.",
+    "actions": [
+      {
+        "name": "Explosive Vent",
+        "activation": "Full",
+        "detail": "Clear all heat. Characters in Burst 1 must pass an Agility save or take heat equal to half the amount cleared and be knocked Prone.",
+        "save": "agility",
+        "damage": {
+          "type": "Heat",
+          "val": 1,
+          "aoe": "Burst 1"
+        },
+        "add_status": [
+          {
+            "id": "prone",
+            "save": "agility"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_insulated_pyro",
+    "name": "Insulated",
+    "origin": "npcc_pyro",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Pyro has Immunity to Burn.",
+    "add_resist": [
+      {
+        "immunity": "burn",
+        "target": "self"
+      }
+    ]
+  },
+  {
+    "id": "npcf_firebreak_shield_pyro",
+    "name": "Firebreak Shield",
+    "origin": "npcc_pyro",
+    "base": true,
+    "type": "System",
+    "effect": "At the end of the Pyro’s turn, they create a Line 4 energy shield, 4 spaces high, in free spaces within line of sight and with at least 1 space adjacent to the Pyro. It doesn’t block line of sight but provides soft cover; when an attack is made against a character benefiting from the cover, it misses on a 4+ on 1d6. This lasts until the start of the Pyro’s next turn, or if the Pyro moves or is Stunned. It doesn’t stack with Invisible.",
+    "active_effects": [
+      {
+        "name": "Firebreak Shield",
+        "detail": "At the end of your turn, create a Line 4 energy shield, 4 spaces high, in free spaces within line of sight and with at least 1 space adjacent to you. It provides soft cover; when an attack is made against a character benefiting from the cover, it misses on a 4+ on 1d6. This lasts until the start of your next turn, or if you move or are Stunned. It doesn’t stack with Invisible."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_shield"
+      }
+    ]
+  },
+  {
+    "id": "npcf_unshielded_reactor_pyro",
+    "name": "Unshielded Reactor",
+    "origin": "npcc_pyro",
+    "type": "Trait",
+    "effect": "Characters that start their turn adjacent to the Pyro or become adjacent to the Pyro for the first time on their turn take {2/3/4} Heat.",
+    "active_effects": [
+      {
+        "name": "Unshielded Reactor",
+        "detail": "Characters that start their turn adjacent to you or become adjacent to you for the first time on their turn take {2/3/4} Heat.",
+        "damage": {
+          "type": "Heat",
+          "val": [2, 3, 4]
+        }
+      }
+    ]
+  },
+  {
+    "id": "npcf_siege_armor_pyro",
+    "name": "Siege Armor",
+    "origin": "npcc_pyro",
+    "type": "Trait",
+    "effect": "The Pyro has Resistance to all damage from attacks that originate beyond range 3.",
+    "active_effects": [
+      {
+        "name": "Siege Armor",
+        "detail": "You have Resistance to all damage from attacks that originate beyond range 3."
+      }
+    ]
+  },
+  {
+    "id": "npcf_napalm_bomb_pyro",
+    "name": "Napalm Bomb",
+    "origin": "npcc_pyro",
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_arcing"
+      },
+      {
+        "id": "tg_loading"
+      }
+    ],
+    "weapon_type": "Main Launcher",
+    "attack_bonus": [1, 2, 3],
+    "damage": [
+      {
+        "type": "Burn",
+        "val": [3, 4, 5]
+      },
+      {
+        "type": "Heat",
+        "val": [2, 4, 6]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 5
+      },
+      {
+        "type": "Blast",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_superhot_pyro",
+    "name": "Superhot",
+    "origin": "npcc_pyro",
+    "type": "Reaction",
+    "actions": [
+      {
+        "name": "Superhot",
+        "activation": "Reaction",
+        "frequency": "1/round",
+        "trigger": "You take damage from a melee attack.",
+        "detail": "You gain Resistance to all damage from the attack. The attacker must pass an Engineering save or take {2/4/6} Burn.",
+        "damage": {
+          "type": "Burn",
+          "val": [2, 4, 6],
+          "save": "engineering"
+        }
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_shield"
+      }
+    ]
+  },
+  {
+    "id": "npcf_explosive_jet_pyro",
+    "name": "Explosive Jet",
+    "origin": "npcc_pyro",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Superhot",
+        "activation": "Quick",
+        "trigger": "You take damage from a melee attack.",
+        "detail": "Enemies within Burst 2 must succeed on a Hull save or be knocked outside of the area and knocked Prone. You then flie 5 spaces in any direction, but must land after completing that move.",
+        "add_status": [
+          {
+            "id": "prone",
+            "save": "hull",
+            "aoe": "Burst 2"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      },
+      {
+        "id": "tg_npc_system"
+      }
+    ]
+  }
+]

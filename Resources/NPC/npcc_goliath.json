@@ -1,0 +1,235 @@
+[
+  {
+    "id": "npcc_goliath",
+    "name": "Goliath",
+    "role": "defender",
+    "info": {
+      "flavor": "Along the Sierra Madre Line – the eighth ring of territory out from Cradle – the Dangun frame is a familiar sight. Manufactured by Park Armored Systems and popularized by the Dagger Squadron mercenary company, the Dangun is popular for its toughness, kinetic damage-trade ability, and reliable all-theater performance. The Dangun is a mech to build strike forces around – a Goliath-class frame capable of mounting powerful magtech, with a design that’s tough to counter in kinetic damage combat.<br>With a number of small fleet contracts in its portfolio, Park Armored Systems is a manufacturer worth keeping an eye on; indeed, Harrison Armory has taken particular notice, and omninet rumors suggest a possible partnership in the near future.",
+      "tactics": "Goliaths are relatively mobile defenders that can bring enemies to them. With Crush Targeting, Goliaths force dangerous enemies to focus attacks on them; all it needs is line of sight, allowing Goliaths to target even fast or hard-to-hit characters. The prodigious size of Goliaths also lets them provide cover for their allies.",
+      "terse": "Mobile defender that can draw enemies to them."
+    },
+    "stats": {
+      "armor": 0,
+      "hp": [25, 30, 35],
+      "evade": 6,
+      "edef": 6,
+      "heatcap": [8, 10, 12],
+      "speed": 3,
+      "sensor": [10, 10, 15],
+      "save": [11, 13, 15],
+      "hull": [4, 6, 6],
+      "agility": -2,
+      "systems": 1,
+      "engineering": [0, 0, 2],
+      "size": 3,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_drum_shotgun_goliath",
+    "name": "Drum Shotgun",
+    "origin": "npcc_goliath",
+    "base": true,
+    "type": "Weapon",
+    "attacks": [1, 2, 3],
+    "weapon_type": "Heavy CQB",
+    "attack_bonus": [2, 4, 6],
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": 5
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 5
+      },
+      {
+        "type": "Threat",
+        "val": 3
+      }
+    ]
+  },
+  {
+    "id": "npcf_crush_targeting_goliath",
+    "name": "Crush Targeting",
+    "origin": "npcc_goliath",
+    "base": true,
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Crush Targeting",
+        "activation": "Quick Tech",
+        "detail": "A character within line of sight and Sensors gains +3 difficulty to attack against any character other than you until the start of your next turn",
+        "add_special": [
+          {
+            "attribute": "Crush Targeting Target",
+            "detail": "You gain +3 difficulty to attack against any character other than the Goliath until the start of the Goliath’s next turn"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 4
+      },
+      {
+        "id": "tg_npc_system"
+      }
+    ]
+  },
+  {
+    "id": "npcf_heavy_frame_goliath",
+    "name": "Heavy Frame",
+    "origin": "npcc_goliath",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Goliath can’t be pushed, pulled, knocked Prone, or knocked back by smaller characters.",
+    "active_effects": [
+      {
+        "name": "Heavy Frame",
+        "detail": "You can’t be pushed, pulled, knocked Prone, or knocked back by smaller characters."
+      }
+    ]
+  },
+  {
+    "id": "npcf_guardian_goliath",
+    "name": "Guardian",
+    "origin": "npcc_goliath",
+    "base": true,
+    "type": "Trait",
+    "effect": "Allied characters can use the Goliath for hard cover.",
+    "active_effects": [
+      {
+        "name": "Guardian",
+        "detail": "Allied characters can use you for hard cover."
+      }
+    ]
+  },
+  {
+    "id": "npcf_siege_armor_goliath",
+    "name": "Siege Armor",
+    "origin": "npcc_goliath",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Goliath has Resistance to all damage from attacks that originate beyond range 3.",
+    "active_effects": [
+      {
+        "name": "Siege Armor",
+        "detail": "You have Resistance to all damage from attacks that originate beyond range 3."
+      }
+    ]
+  },
+  {
+    "id": "npcf_power_knuckle_goliath",
+    "name": "Power Knuckle",
+    "origin": "npcc_goliath",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Power Knuckle",
+        "activation": "Quick",
+        "detail": "A character within range 2 must pass a Hull save or take {4/5/6} Kinetic damage, be pushed 5 spaces directly away from you, and are knocked Prone.",
+        "damage": [
+          {
+            "type": "Kinetic",
+            "val": [4, 5, 6],
+            "save": "hull"
+          }
+        ],
+        "add_status": [
+          {
+            "id": "prone"
+          }
+        ],
+        "save": "hull"
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_pin_goliath",
+    "name": "Pin",
+    "origin": "npcc_goliath",
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Pin",
+        "activation": "Quick",
+        "detail": "A character within range 2 becomes Immobilized and Impaired until they either damage you, you are Stunned or destroyed, or you target another character with this effect. You are Immobilized for the duration of this effect.",
+        "range": [
+          {
+            "type": "Range",
+            "val": 2
+          }
+        ],
+        "add_status": [
+          {
+            "id": "immobilized"
+          },
+          {
+            "id": "impaired"
+          },
+          {
+            "id": "immobilized",
+            "target": "self"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_crushing_embrace_goliath",
+    "name": "Crushing Embrace",
+    "origin": "npcc_goliath",
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Crushing Embrace",
+        "activation": "Quick",
+        "detail": "A character adjacent to you must succeed on an Agility save or automatically be grappled by you and become Jammed until they are no longer grappled. You can only grapple one character this way at a time.",
+        "add_status": [
+          {
+            "id": "jammed"
+          }
+        ],
+        "save": "agility"
+      }
+    ]
+  },
+  {
+    "id": "npcf_watchful_guardian_goliath",
+    "name": "Watchful Guardian",
+    "origin": "npcc_goliath",
+    "type": "Trait",
+    "effect": "Allied characters that benefit from the cover provided by the Goliath gain Resistance to all damage.",
+    "mod": "npcf_guardian_goliath",
+    "active_effects": [
+      {
+        "name": "Watchful Guardian",
+        "detail": "Allied characters that benefit from the cover provided by you gain Resistance to all damage."
+      }
+    ]
+  },
+  {
+    "id": "npcf_retribution_goliath",
+    "name": "Retribution",
+    "origin": "npcc_goliath",
+    "type": "Trait",
+    "effect": "Whenever the Goliath takes damage, their next attack deals +{2/3/4} bonus damage. This bonus stacks up to +8. Bonuses are lost when the Goliath attacks, or at the end of their next turn.",
+    "active_effects": [
+      {
+        "name": "Retribution",
+        "condition": "Whenever you take damage",
+        "detail": "Your next attack deals +{2/3/4} bonus damage. This bonus stacks up to +8. Bonuses are lost when you attack, or at the end of your next turn."
+      }
+    ]
+  }
+]

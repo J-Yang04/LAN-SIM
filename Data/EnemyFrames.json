@@ -1,0 +1,24 @@
+[
+    {
+        "id": "npc_assault",
+        "name": "Assault",
+        "role": "striker",
+        "flavor": "Assault mechs are the most common primary battle frames found throughout the galaxy. Fitted with a heavy rifle, a sidearm, and a suite of systems that enhance movement, targeting, and defensibility, they are straightforward, reliable, and hardy combatants. The pilots of Assault mechs are also the cheapest to train and outfit, but that doesn’t make them any less dangerous.",
+        "stats": {
+            "armor": 1,
+            "hp": [15, 18, 21],
+            "evade": [8, 10, 12],
+            "edef": [8, 9, 10],
+            "heatcap": 8,
+            "speed": 4,
+            "sensor": 8,
+            "save": [10, 12, 14],
+            "hull": [1, 2, 3],
+            "agility": [1, 2, 3],
+            "systems": [1, 2, 3],
+            "engineering": [1, 2, 3],
+            "size": 1,
+            "activations": 1
+        }
+    }
+]

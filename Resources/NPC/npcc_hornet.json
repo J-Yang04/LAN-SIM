@@ -1,0 +1,234 @@
+[
+  {
+    "id": "npcc_hornet",
+    "name": "Hornet",
+    "role": "controller",
+    "info": {
+      "flavor": "SatriaBarong’s Espada range of half-frame mechs has long been a popular choice in the chassis racing circuit; notably, Espadas are the mechs of choice for the vaunted SatriaBarong–ShimanoLUX chassis racing team. Recently, SatriaBarong – with the blessing of SSC – has moved to create a mil-spec, de-licensed variant of the Espada without the ShimanoLUX branding, giving rise to the Hornet archetype, a platform open for other companies to adapt and improve. The most notable of these competitors is Chandrasekhar & Herschel, the primary sponsor of the new Blueshift Grand Prix racing circuit.",
+      "tactics": "Hornets are small, fast controllers that are extremely hard to hit and incredibly annoying. They deal limited damage, but their ability to inflict mobility-reducing conditions is great for locking down enemy strikers. Fortunately for their enemies, Hornets have a low E-Defense that makes them vulnerable to smart weaponry and tech attacks.",
+      "terse": "Fast, evasive controller that can lock down enemies."
+    },
+    "stats": {
+      "armor": 0,
+      "hp": 8,
+      "evade": [16, 18, 20],
+      "edef": [6, 7, 8],
+      "heatcap": [5, 6, 7],
+      "speed": [6, 8, 10],
+      "sensor": [5, 5, 10],
+      "save": [12, 14, 16],
+      "hull": -2,
+      "agility": [2, 4, 6],
+      "systems": [2, 3, 4],
+      "engineering": 0,
+      "size": 0.5,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_stinger_pistol_hornet",
+    "name": "Stinger Pistol",
+    "origin": "npcc_hornet",
+    "base": true,
+    "type": "Weapon",
+    "weapon_type": "Auxiliary CQB",
+    "attack_bonus": [1, 2, 3],
+    "accuracy": 1,
+    "damage": [
+      {
+        "type": "Energy",
+        "val": [1, 2, 3]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 8
+      },
+      {
+        "type": "Threat",
+        "val": 3
+      }
+    ],
+    "on_hit": {
+      "detail": "Targets become Impaired until the end of their next turn.",
+      "add_status": [
+        {
+          "id": "impaired",
+          "duration": "next_turn_end_target"
+        }
+      ]
+    }
+  },
+  {
+    "id": "npcf_ssc_total_suite_hornet",
+    "name": "Ssc Total Suite",
+    "origin": "npcc_hornet",
+    "base": true,
+    "type": "System",
+    "effect": "The Hornet can hover whenever they move or Boost.",
+    "active_effects": [
+      {
+        "name": "Hover",
+        "detail": "You can hover whenever they move or Boost."
+      }
+    ]
+  },
+  {
+    "id": "npcf_weave_hornet",
+    "name": "Weave",
+    "origin": "npcc_hornet",
+    "base": true,
+    "type": "Trait",
+    "effect": "Each round, the first attack made against the Hornet as a reaction automatically fails.",
+    "active_effects": [
+      {
+        "name": "Weave",
+        "condition": "The first time in a round an attack is made against you as a reaction",
+        "detail": "The attack automatically fails.",
+        "frequency": "1/round"
+      }
+    ]
+  },
+  {
+    "id": "npcf_impale_systems_hornet",
+    "name": "Impale Systems",
+    "origin": "npcc_hornet",
+    "base": true,
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Impale Systems",
+        "activation": "Quick Tech",
+        "detail": "Make a tech attack against a character within Sensors. On a hit, they take {3/4/5} Heat and become Jammed until the end of their next turn.",
+        "attack": "tech",
+        "damage": [
+          {
+            "type": "Heat",
+            "val": [3, 4, 5]
+          }
+        ],
+        "add_status": [
+          {
+            "id": "jammed",
+            "duration": "next_turn_end_target"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      },
+      {
+        "id": "tg_npc_system"
+      }
+    ],
+    "attack_bonus": [2, 4, 6]
+  },
+  {
+    "id": "npcf_adapt_evade_disengage_hornet",
+    "name": "Adapt/Evade/Disengage",
+    "origin": "npcc_hornet",
+    "type": "Trait",
+    "effect": "The Hornet gains Immunity to Grapple and always ignores engagement.",
+    "active_effects": [
+      {
+        "name": "Adapt/Evade/Disengage",
+        "detail": "You gain Immunity to Grapple and always ignore engagement."
+      }
+    ]
+  },
+  {
+    "id": "npcf_umbral_interdiction_hornet",
+    "name": "Umbral Interdiction",
+    "origin": "npcc_hornet",
+    "type": "Reaction",
+    "actions": [
+      {
+        "name": "Umbral Interdiction",
+        "activation": "Reaction",
+        "frequency": "1/round",
+        "trigger": "A character within Sensors and line of sight attempts an attack.",
+        "detail": "The target must pass a Systems check or their attack automatically misses."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_npc_system"
+      }
+    ]
+  },
+  {
+    "id": "npcf_supersonic_hornet",
+    "name": "Supersonic",
+    "origin": "npcc_hornet",
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Supersonic",
+        "activation": "Full",
+        "detail": "You fly to a space in line of sight and range 50 so impossibly fast that it counts as teleportation."
+      }
+    ]
+  },
+  {
+    "id": "npcf_hex_missiles_hornet",
+    "name": "Hex Missiles",
+    "origin": "npcc_hornet",
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_smart"
+      }
+    ],
+    "weapon_type": "Auxiliary Launcher",
+    "attack_bonus": 0,
+    "accuracy": [1, 2, 3],
+    "damage": [
+      {
+        "type": "Heat",
+        "val": [3, 4, 5]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 10
+      },
+      {
+        "type": "Blast",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_lock_hold_javelins_hornet",
+    "name": "Lock/Hold Javelins",
+    "origin": "npcc_hornet",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Lock/Hold Javelins",
+        "activation": "Full",
+        "detail": "Fire a javelin at a character within range 5 and line of sight. The target must succeed on a Hull save or be impaled, at which point the javelin tethers itself and its victim to the ground (or another surface), rendering them Immobilized and Shredded. They, or any adjacent character, can attempt to remove the javelin with a successful Hull save as a full action; otherwise, this effect lasts for the rest of the scene or until you take this action again.",
+        "range": [
+          {
+            "type": "Range",
+            "val": 5
+          }
+        ],
+        "save": "hull",
+        "add_status": [
+          {
+            "id": "immobilized"
+          },
+          {
+            "id": "shredded"
+          }
+        ]
+      }
+    ]
+  }
+]

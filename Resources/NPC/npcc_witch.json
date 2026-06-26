@@ -1,0 +1,252 @@
+[
+  {
+    "id": "npcc_witch",
+    "name": "Witch",
+    "role": "controller",
+    "info": {
+      "flavor": "Witch-archetype chassis can always be found in the eye of a systemic storm, where they are adept at generating realspace and legionspace terrors to blanket battlefields. At any given time, they are likely to be operating in both the physical battlefield and the tempest of the omninet. To handle the chaotic swirl of inputs and outputs that results from this split perception, Witches often pair with personality-clone NHPs, splitting tasks along parallel tracks to increase combat efficacy.",
+      "tactics": "Witches are no-nonsense controllers that use Tear Down to inflict heat and Blind to shut down ranged attackers. Predatory Logic gives them a tool to use against characters with heavy weapons, which can also aid their allies. Targets generally have an opportunity to mitigate their heat somewhat, since Witches deal most of their heat on their next turn.",
+      "terse": "Controller that can inflict heat and Blind to shut down ranged attackers."
+    },
+    "stats": {
+      "armor": 0,
+      "hp": [12, 14, 14],
+      "evade": [10, 12, 14],
+      "edef": [13, 16, 20],
+      "heatcap": 8,
+      "speed": 6,
+      "sensor": [15, 15, 20],
+      "save": [12, 15, 18],
+      "hull": [-2, -1, -2],
+      "agility": [1, 2, 3],
+      "systems": [3, 5, 6],
+      "engineering": 0,
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_tear_down_witch",
+    "name": "Tear Down",
+    "origin": "npcc_witch",
+    "base": true,
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Tear Down",
+        "activation": "Quick Tech",
+        "detail": "Make a tech attack against a character within Sensors. On a success, the target takes {1/2/3} heat immediately and then a further 4 Heat at the start of the Witch’s next turn.",
+        "attack": "tech",
+        "damage": [
+          {
+            "type": "Heat",
+            "val": [1, 2, 3]
+          }
+        ],
+        "add_special": [
+          {
+            "attribute": "Delayed Heat (Tear Down)",
+            "detail": "At the start of the Witch’s next turn, take 4 Heat."
+          }
+        ]
+      }
+    ],
+    "attack_bonus": [2, 4, 6],
+    "accuracy": 1,
+    "tags": [
+      {
+        "id": "tg_npc_system"
+      }
+    ]
+  },
+  {
+    "id": "npcf_blind_witch",
+    "name": "Blind",
+    "origin": "npcc_witch",
+    "base": true,
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Blind",
+        "activation": "Quick Tech",
+        "detail": "Make a tech attack against a character within Sensors. On a success, the target only has line of sight to adjacent spaces until the end of their next turn.",
+        "add_special": [
+          {
+            "attribute": "Blinded",
+            "attack": "tech",
+            "detail": "You only have line of sight to adjacent spaces until the end of your next turn."
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 4
+      },
+      {
+        "id": "tg_npc_system"
+      }
+    ],
+    "attack_bonus": [1, 2, 3],
+    "accuracy": [1, 1, 1]
+  },
+  {
+    "id": "npcf_predatory_logic_witch",
+    "name": "Predatory Logic",
+    "origin": "npcc_witch",
+    "base": true,
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Predatory Logic",
+        "activation": "Quick Tech",
+        "attack": "tech",
+        "detail": "Make a tech attack against a character within Sensors. On a success, the target immediately and as a reaction uses a weapon chosen by the Witch to attack a character within Range chosen by you."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      },
+      {
+        "id": "tg_npc_system"
+      }
+    ],
+    "attack_bonus": [2, 4, 6]
+  },
+  {
+    "id": "npcf_blur_witch",
+    "name": "Blur",
+    "origin": "npcc_witch",
+    "base": true,
+    "type": "Trait",
+    "effect": "During the Witch’s turn, they are Invisible.",
+    "active_effects": [
+      {
+        "name": "Blur",
+        "detail": "During your turn, you are Invisible.",
+        "add_status": [
+          {
+            "id": "invisible",
+            "target": "self"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_spread_suffering_witch",
+    "name": "Spread Suffering",
+    "origin": "npcc_witch",
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Spread Suffering",
+        "activation": "Free",
+        "frequency": "1/round",
+        "detail": "After using a Quick Tech or Full Tech, repeat the option they chose as a free action targeting any character adjacent to the primary target."
+      }
+    ]
+  },
+  {
+    "id": "npcf_dark_cloud_witch",
+    "name": "Dark Cloud",
+    "origin": "npcc_witch",
+    "type": "Trait",
+    "effect": "The additional heat dealt by Tear Down on the Witch’s next turn increases to 7 heat if the target is in the Danger Zone.",
+    "mod": "npcf_tear_down_witch"
+  },
+  {
+    "id": "npcf_chain_witch",
+    "name": "Chain",
+    "origin": "npcc_witch",
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Chain",
+        "activation": "Quick Tech",
+        "detail": "Make a tech attack against a character within Sensors. On a hit, you chain their target’s systems to a space within range 3 of the target. If the target moves more than 3 spaces from that point (voluntarily or otherwise), they take {2/3/4} Heat and become Jammed until the end of their next turn, but the effect ends. Otherwise, they are chained until you are destroyed or Stunned, or for the rest of the scene.",
+        "add_special": [
+          {
+            "attribute": "Chained",
+            "attack": "tech",
+            "detail": "You are chained to a point within range 3 of you. If you move more than 3 spaces from that point, you take {2/3/4} Heat and become Jammed until the end of your next turn, but the effect ends. Otherwise, you are chained until the Witch is destroyed or Stunned, or for the rest of the scene."
+          }
+        ]
+      }
+    ],
+    "attack_bonus": [2, 4, 6],
+    "tags": [
+      {
+        "id": "tg_npc_system"
+      }
+    ]
+  },
+  {
+    "id": "npcf_petrify_witch",
+    "name": "Petrify",
+    "origin": "npcc_witch",
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Petrify",
+        "activation": "Full Tech",
+        "detail": "Make a tech attack against a character within Sensors. On a success, the target becomes Slowed. On their next turn, they also become Immobilized. On their following turn, they also become Stunned. All conditions end at the end of that turn.",
+        "attack": "tech",
+        "add_status": [
+          {
+            "id": "slow"
+          }
+        ],
+        "add_special": [
+          {
+            "attribute": "Petrifying Sequence",
+            "detail": "On your next turn, you become Immobilized. On your following turn, you become Stunned. All conditions end at the end of that turn."
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      },
+      {
+        "id": "tg_npc_system"
+      }
+    ],
+    "attack_bonus": [2, 4, 6]
+  },
+  {
+    "id": "npcf_pain_transference_witch",
+    "name": "Pain Transference",
+    "origin": "npcc_witch",
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Pain Transference",
+        "activation": "Quick Tech",
+        "detail": "Make a tech attack against a character within Sensors. On a success, any time the target gains heat until the end of your next turn, all of their allied characters within range 5 also gain the same amount of heat.",
+        "add_special": [
+          {
+            "attribute": "Pain Transference",
+            "attack": "tech",
+            "detail": "Any time you gain heat until the end of the Witch’s next turn, all of your allied characters within range 5 also gain the same amount of heat."
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      },
+      {
+        "id": "tg_npc_system"
+      }
+    ],
+    "attack_bonus": [2, 4, 6]
+  }
+]

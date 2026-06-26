@@ -1,0 +1,229 @@
+[
+  {
+    "id": "npcc_scout",
+    "name": "Scout",
+    "role": "support",
+    "info": {
+      "flavor": "The most devastating mechanized-warfare strategies call for the active, close, and aggressive application of orbital, atmospheric, and terrestrial fire-support. Enter Scout-class mechs and their pilots. Using advanced targeting systems, Scouts are equal parts tactical coordinator and artillery commander, working with allies to map the battlescape and accurately place direct-targeted and autonomous fire.",
+      "tactics": "Scouts are support mechs designed to increase the damage dealt by their allies. They deal no damage themselves, but Marker Rifle and Cloaking Field allow them to both keep allied characters alive and prevent enemies from hiding. They are especially adept at revealing Invisible characters but need to get close to their targets to take full advantage of this ability. Like most support mechs, Scouts aren’t especially resilient on their own.",
+      "terse": "Support mech that can increase the damage dealt by allies and reveal Invisible characters."
+    },
+    "stats": {
+      "armor": 0,
+      "hp": 8,
+      "evade": [12, 15, 18],
+      "edef": [10, 13, 16],
+      "heatcap": 6,
+      "speed": [6, 7, 8],
+      "sensor": 20,
+      "save": [11, 13, 15],
+      "hull": -2,
+      "agility": [2, 4, 5],
+      "systems": [3, 4, 5],
+      "engineering": [-1, -1, 0],
+      "size": 0.5,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_marker_rifle_scout",
+    "name": "Marker Rifle",
+    "origin": "npcc_scout",
+    "base": true,
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_smart"
+      }
+    ],
+    "weapon_type": "Main Rifle",
+    "attack_bonus": [2, 4, 6],
+    "accuracy": 2,
+
+    "range": [
+      {
+        "type": "Range",
+        "val": 15
+      }
+    ],
+    "on_hit": {
+      "detail": "Target receives Lock On. For as long as they have Lock On, they are also Shredded, and can’t Hide or become Invisible.",
+      "add_status": [
+        {
+          "id": "lockon"
+        },
+        {
+          "id": "shredded"
+        }
+      ],
+      "add_special": [
+        {
+          "attribute": "Marked (Scout Marker Rifle)",
+          "detail": "While you have Lock On from the Marker Rifle, you can’t Hide or become Invisible."
+        }
+      ]
+    }
+  },
+  {
+    "id": "npcf_sight_scout",
+    "name": "Sight",
+    "origin": "npcc_scout",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Scout ignores Hidden and Invisible – they know the precise location of all characters within Sensors.",
+    "active_effects": [
+      {
+        "name": "Sight",
+        "detail": "You ignore Hidden and Invisible – you know the precise location of all characters within Sensors."
+      }
+    ]
+  },
+  {
+    "id": "npcf_rebound_scan_scout",
+    "name": "Rebound Scan",
+    "origin": "npcc_scout",
+    "base": true,
+    "type": "System",
+    "actions": [
+      {
+        "name": "Rebound Scan",
+        "activation": "Full",
+        "detail": "All characters of your choice within range 5 must make a Systems save. On a failure, they immediately lose Hidden and Invisible, and can’t regain either status or benefit from any cover until the start of your next turn.",
+        "save": {
+          "type": "systems",
+          "aoe": "Within Range 5"
+        }
+      }
+    ]
+  },
+  {
+    "id": "npcf_cloaking_field_scout",
+    "name": "Cloaking Field",
+    "origin": "npcc_scout",
+    "base": true,
+    "type": "System",
+    "actions": [
+      {
+        "name": "Cloaking Field",
+        "activation": "Quick",
+        "detail": "Generate a Burst 3 cloaking field that lasts until the end of your next turn. You and allied characters within the affected area are Invisible, but you are Immobilized while it is active.",
+        "add_status": [
+          {
+            "id": "invisible",
+            "duration": "end_next_turn_self",
+            "aoe": "Burst 3"
+          },
+          {
+            "id": "invisible",
+            "duration": "end_next_turn_self",
+            "aoe": "self"
+          },
+          {
+            "id": "immobilized",
+            "duration": "end_next_turn_self",
+            "target": "self"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      }
+    ]
+  },
+  {
+    "id": "npcf_system_flayer_scout",
+    "name": "System Flayer",
+    "origin": "npcc_scout",
+    "type": "Trait",
+    "effect": "Characters that fail to save against Rebound Scan also receive Lock On and take {2/3/4} Heat.",
+    "mod": "npcf_rebound_scan_scout",
+    "damage": {
+      "type": "Heat",
+      "val": [2, 3, 4],
+      "aoe": true
+    },
+    "add_status": [
+      {
+        "id": "lockon",
+        "aoe": true
+      }
+    ]
+  },
+  {
+    "id": "npcf_spotter_scout",
+    "name": "Spotter",
+    "origin": "npcc_scout",
+    "type": "Trait",
+    "effect": "While adjacent to the Scout, allied characters gain +1 Accuracy on all attack rolls.",
+    "active_effects": [
+      {
+        "name": "Spotter",
+        "detail": "While adjacent to you, allied characters gain +1 Accuracy on all attack rolls."
+      }
+    ]
+  },
+  {
+    "id": "npcf_expose_weakness_scout",
+    "name": "Expose Weakness",
+    "origin": "npcc_scout",
+    "type": "Trait",
+    "effect": "Characters that are successfully attacked with the Marker Rifle take +{4/6/8} bonus damage the next time they are successfully hit with a ranged or melee attack. If it isn’t triggered, this effect lasts for the rest of the scene.",
+    "mod": "npcf_marker_rifle_scout",
+    "bonus_damage": "{4/6/8}"
+  },
+  {
+    "id": "npcf_dataveil_scout",
+    "name": "Dataveil",
+    "origin": "npcc_scout",
+    "type": "System",
+    "effect": "By default, the Scout is Invisible and can transfer this status to another character within line of sight as a quick action. When they do so, the Scout ceases to be Invisible, and only regains the status when they transfer it back as a quick action or transfer it to another character; otherwise, this effect lasts until the Scout is destroyed.",
+    "actions": [
+      {
+        "name": "Transfer Dataveil",
+        "activation": "Quick",
+        "detail": "Transfer your Dataveil to another character within line of sight, or a transferred Dataveil back to you. While a character has the Dataveil they are Invisible. This effect lasts until you are destroyed.",
+        "add_special": [
+          {
+            "attribute": "Dataveil",
+            "detail": "While you have the Dataveil, you are Invisible. This effect lasts until the Scout is destroyed."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_orbital_strike_scout",
+    "name": "Orbital Strike",
+    "origin": "npcc_scout",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Orbital Strike",
+        "activation": "Full",
+        "detail": "Choose a space on the ground, within line of sight and range 20; all characters know that it has been chosen. At the end of the next round, characters in a Burst 2 area must make Agility saves. On a fail, they take {12/16/20} Energy damage and are knocked Prone. On a pass, they take half damage and remain standing.",
+        "damage": {
+          "type": "Energy",
+          "val": [12, 16, 20],
+          "save": "agility",
+          "save_half": true,
+          "aoe": "Burst 2"
+        },
+        "add_status": [
+          {
+            "id": "prone",
+            "save": "agility"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  }
+]

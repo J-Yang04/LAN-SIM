@@ -1,0 +1,246 @@
+[
+  {
+    "id": "npcc_demolisher",
+    "name": "Demolisher",
+    "role": "defender",
+    "info": {
+      "flavor": "The lengthy siege of Jadigmora City saw the development of the first true Demolisher frames. Based on antique Berserker mechs, Demolishers swapped dramatic heat flows for more sustainable systems, improved hydraulic strength, and stabilizers for supermassive melee weapons. Demolisher pilots soon discovered a range of new applications for their concussion-wave ordnance. A lancer named Hayes Rothford and their NHP, Clarke, were the first pilot/co-pilot team to truly show the power of the platform, singlehandedly bringing down a siege frigate in low orbit.",
+      "tactics": "Demolishers are slow, resilient defenders that dish out plenty of damage and stuns when they get close to the enemy. Use their size and power in melee combat to force enemy characters to move away instead of fighting them, and Dig In to shrug off heavy hits.",
+      "terse": "Slow and resilient defender that can deal high damage and stuns."
+    },
+    "stats": {
+      "armor": 2,
+      "hp": [15, 20, 25],
+      "evade": 6,
+      "edef": 7,
+      "heatcap": 8,
+      "speed": [2, 2, 3],
+      "sensor": 10,
+      "save": [10, 13, 15],
+      "hull": [3, 4, 6],
+      "agility": -2,
+      "systems": -1,
+      "engineering": [2, 3, 4],
+      "size": 2,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_demolition_hammer_demolisher",
+    "name": "Demolition Hammer",
+    "origin": "npcc_demolisher",
+    "base": true,
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_ap"
+      }
+    ],
+    "weapon_type": "Superheavy Melee",
+    "attack_bonus": [1, 2, 3],
+    "accuracy": -1,
+    "damage": [
+      {
+        "type": "Explosive",
+        "val": [10, 14, 16]
+      }
+    ],
+    "range": [
+      {
+        "type": "Threat",
+        "val": 2
+      }
+    ],
+    "on_hit": {
+      "detail": "Targets must succeed on a Hull save or be Stunned until the end of their next turn.",
+      "add_status": [
+        {
+          "id": "stunned",
+          "duration": "next_turn_end_target",
+          "save": "hull"
+        }
+      ]
+    }
+  },
+  {
+    "id": "npcf_dig_in_demolisher",
+    "name": "Dig In",
+    "origin": "npcc_demolisher",
+    "base": true,
+    "type": "Reaction",
+    "actions": [
+      {
+        "name": "Dig In",
+        "activation": "Reaction",
+        "frequency": "1/round",
+        "trigger": "An attack hits you, but damage hasn’t been rolled yet.",
+        "detail": "Gain Resistance to all damage from the attack, but become Slowed until the end of your next turn.",
+        "add_status": [
+          {
+            "id": "slow",
+            "duration": "next_turn_end_self",
+            "target": "self"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_npc_trait"
+      }
+    ]
+  },
+  {
+    "id": "npcf_shock_armor_demolisher",
+    "name": "Shock Armor",
+    "origin": "npcc_demolisher",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Demolisher has Resistance to damage from melee weapons.",
+    "active_effects": [
+      {
+        "name": "Shock Armor",
+        "detail": "You have Resistance to damage from melee weapons.",
+        "add_special": [
+          {
+            "attribute": "Melee Resistance",
+            "detail": "The Demolisher has Resistance to damage from melee weapons."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_heavy_frame_demolisher",
+    "name": "Heavy Frame",
+    "origin": "npcc_demolisher",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Demolisher can’t be pushed, pulled, knocked Prone, or knocked back by smaller characters.",
+    "active_effects": [
+      {
+        "name": "Heavy Frame",
+        "detail": "You can’t be pushed, pulled, knocked Prone, or knocked back by smaller characters."
+      }
+    ]
+  },
+  {
+    "id": "npcf_broad_sweep_haft_demolisher",
+    "name": "Broad-Sweep Haft",
+    "origin": "npcc_demolisher",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Broad-Sweep",
+        "activation": "Full",
+        "detail": "You swing the Demolition Hammer in a Burst 2 arc instead of attacking normally. Roll melee attacks against any characters of your choice within the affected area. On hit, targets take {4/6/8} Explosive damage and become Impaired until the end of their next turn.",
+        "damage": [
+          {
+            "type": "Explosive",
+            "val": [4, 6, 8],
+            "aoe": "burst 2"
+          }
+        ],
+        "add_status": [
+          {
+            "id": "impaired",
+            "duration": "next_turn_end_target",
+            "aoe": "burst 2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_kinetic_compensation_demolisher",
+    "name": "Kinetic Compensation",
+    "origin": "npcc_demolisher",
+    "type": "Trait",
+    "effect": "Each time the Demolisher misses with the Demolition Hammer, they gain +1 Accuracy on all subsequent attacks until their next hit. This Accuracy can be gained multiple times, and stacks.",
+    "mod": "npcf_demolition_hammer_demolisher",
+    "active_effects": [
+      {
+        "name": "Kinetic Compensation",
+        "condition": "You miss with the Demolition Hammer",
+        "detail": "Each time you miss with the Demolition Hammer, gain +1 Accuracy on all subsequent attacks until your next hit. This Accuracy can be gained multiple times, and stacks."
+      }
+    ]
+  },
+  {
+    "id": "npcf_concussion_missiles_demolisher",
+    "name": "Concussion Missiles",
+    "origin": "npcc_demolisher",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Concussion Missiles",
+        "activation": "Quick",
+        "detail": "All characters of your choice in line of sight and range 5 must succeed on a Hull save or become Slowed and Impaired until the end of their next turn.",
+        "range": [
+          {
+            "type": "Range",
+            "val": 5
+          }
+        ],
+        "add_status": [
+          {
+            "id": "slow",
+            "duration": "next_turn_end_target",
+            "aoe": true
+          },
+          { "id": "impaired", "duration": "next_turn_end_target", "aoe": true }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_seismic_destroyer_demolisher",
+    "name": "Seismic Destroyer",
+    "origin": "npcc_demolisher",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Seismic Destroyer",
+        "activation": "Quick",
+        "detail": "Unless they can fly, all characters in a Cone 3 or Line 5 area must succeed on an Agility save or be Stunned until the end of their next turn.",
+        "add_status": [
+          {
+            "id": "stunned",
+            "duration": "next_turn_end_target",
+            "save": "agility",
+            "aoe": "cone 3 or line 5"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_sap_demolisher",
+    "name": "Sap",
+    "origin": "npcc_demolisher",
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Sap",
+        "activation": "Quick Tech",
+        "detail": "Choose an adjacent character: they must succeed on an Engineering save or be Stunned until the end of their next turn.",
+        "add_status": [
+          {
+            "id": "stunned",
+            "duration": "next_turn_end_target",
+            "save": "engineering"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      },
+      {
+        "id": "tg_npc_trait"
+      }
+    ]
+  }
+]

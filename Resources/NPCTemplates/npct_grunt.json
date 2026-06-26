@@ -1,0 +1,44 @@
+[
+  {
+    "id": "npct_grunt",
+    "template": true,
+    "name": "Grunt",
+    "description": "Grunts are a step above cannon fodder. They typically take to the field in mass-produced or stock mechs—trained for discipline rather than excellence. Grunts may not be threats on their own, but in a group, they become an overwhelming mass of bodies and projectiles that threatens even the most powerful enemies.",
+    "prohibitTemplates": ["npct_ultra", "npct_veteran", "npct_elite"]
+  },
+  {
+    "id": "npcf_chaff_grunt",
+    "name": "Chaff",
+    "origin": "npct_grunt",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Grunt has 1 HP and can’t gain more. Unlike other characters, they never take damage when they succeed on a save – regardless of the weapon or system used – but otherwise take damage normally.",
+    "bonuses": [
+      {
+        "id": "hp",
+        "val": 1,
+        "overwrite": true
+      }
+    ]
+  },
+  {
+    "id": "npcf_weak_grunt",
+    "name": "Weak",
+    "origin": "npct_grunt",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Grunt can never have more than 1 Structure and 1 Stress, and they are immediately destroyed when they take heat from any source other than their own systems and weapons.",
+    "bonuses": [
+      {
+        "id": "structure",
+        "val": 1,
+        "overwrite": true
+      },
+      {
+        "id": "stress",
+        "val": 1,
+        "overwrite": true
+      }
+    ]
+  }
+]

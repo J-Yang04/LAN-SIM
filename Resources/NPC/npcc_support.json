@@ -1,0 +1,197 @@
+[
+  {
+    "id": "npcc_support",
+    "name": "Support",
+    "role": "support",
+    "info": {
+      "flavor": "Support-archetype mechs keep their allies alive and operational with a broad library of immediate triage systems, from basic flash-weld plating through to shallow–medium structural reinforcement packs and whitewash nanite slurry. From the famed Laughter of a Solemn God, working the front lines of Boundary Garden’s battlefields, to the precision actions undertaken by the rogue-world hunters of ExtraSolar Acquisitions, Inc., the efficacy of Support-archetype mechs is unparalleled when mech teams need to stay alive longer than deployment.",
+      "tactics": "Supports are bulky mechs that can’t deal any damage but have access to powerful healing and condition-clearing effects. Despite their resilience, they have no way to defend themselves and need to get close to their allies in order to be effective. Savvy players will shoot and destroy their Restock Drones before they are activated, denying an opportunity for healing.",
+      "terse": "Resilient support mech that can heal allies and clear conditions."
+    },
+    "stats": {
+      "armor": 1,
+      "hp": [15, 18, 22],
+      "evade": [8, 10, 12],
+      "edef": [8, 10, 12],
+      "heatcap": 8,
+      "speed": 4,
+      "sensor": 10,
+      "save": [10, 12, 14],
+      "hull": 1,
+      "agility": [-2, -1, -1],
+      "systems": [0, 1, 2],
+      "engineering": [2, 4, 6],
+      "size": 2,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_sealant_gun_support",
+    "name": "Sealant Gun",
+    "origin": "npcc_support",
+    "base": true,
+    "type": "System",
+    "actions": [
+      {
+        "name": "Sealant Gun",
+        "activation": "Quick",
+        "detail": "Choose a character within line of sight and Range 5, allied or hostile:<ul><li>Allied: The target clears all Burn, but becomes Slowed until the end of their next turn.</li><li>Hostile: The target must succeed on an Agility save or become Slowed until the end of their next turn. Succeed or fail, a Burst 1 area around them becomes difficult terrain for the rest of the scene.</li></ul>",
+        "add_status": [
+          {
+            "id": "slow",
+            "duration": "next_turn_end_target",
+            "save": "agility"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_restock_drone_support",
+    "name": "Restock Drone",
+    "origin": "npcc_support",
+    "base": true,
+    "type": "System",
+    "deployables": [
+      {
+        "name": "Restock Drone",
+        "activation": "Quick",
+        "size": 0.5,
+        "hp": [5, 8, 10],
+        "evasion": [10, 12, 14],
+        "edef": [10, 12, 14],
+        "type": "Drone",
+        "detail": "This drone can be deployed hovering in a space within range 5. The next time an allied character moves through or next to the drone, it clamps on and discharges its reserves, letting them regain {5/10/15} HP.",
+        "add_other": [
+          {
+            "type": "hp",
+            "val": [5, 10, 15],
+            "target": "ally"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_nano_repair_cloud_support",
+    "name": "Nano-Repair Cloud",
+    "origin": "npcc_support",
+    "base": true,
+    "type": "Trait",
+    "effect": "While they are adjacent to the Support, allied characters roll twice on all saves and mech skill checks and choose the higher result.",
+    "active_effects": [
+      {
+        "name": "Nano-Repair Cloud",
+        "detail": "While adjacent to you, allied characters roll twice on all saves and mech skill checks and choose the higher result."
+      }
+    ]
+  },
+  {
+    "id": "npcf_remote_reboot_support",
+    "name": "Remote Reboot",
+    "origin": "npcc_support",
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Remote Reboot",
+        "activation": "Full",
+        "detail": "Clear any two of the following conditions currently affecting an allied character in range 5: Impaired, Jammed, Stunned, and Slowed."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      }
+    ]
+  },
+  {
+    "id": "npcf_empowered_cloud_support",
+    "name": "Empowered Cloud",
+    "origin": "npcc_support",
+    "type": "Trait",
+    "effect": "When they start their turn adjacent to the Support, allied characters may clear one condition.",
+    "active_effects": [
+      {
+        "name": "Empowered Cloud",
+        "detail": "When they start their turn adjacent to you, allied characters may clear one condition."
+      }
+    ]
+  },
+  {
+    "id": "npcf_remote_cloud_support",
+    "name": "Remote Cloud",
+    "origin": "npcc_support",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Remote Cloud",
+        "activation": "Full",
+        "detail": "You release a Blast 2 nanite cloud within range 5. Allied characters that start their turn in the area or move into it for the first time on their turn regain {2/4/6} HP. The cloud disperses at the start of your next turn.",
+        "add_other": [
+          {
+            "type": "hp",
+            "val": [2, 4, 6],
+            "target": "ally",
+            "aoe": "Blast 2"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      }
+    ]
+  },
+  {
+    "id": "npcf_defensive_pulse_support",
+    "name": "Defensive Pulse",
+    "origin": "npcc_support",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Defensive Pulse",
+        "activation": "Full",
+        "detail": "All allied characters within range 3 clear Jammed and Lock On."
+      }
+    ]
+  },
+  {
+    "id": "npcf_latch_drone_support",
+    "name": "Latch Drone",
+    "origin": "npcc_support",
+    "type": "System",
+    "deployables": [
+      {
+        "name": "Latch Drone",
+        "activation": "Full",
+        "size": 0.5,
+        "hp": [5, 10, 15],
+        "evasion": 10,
+        "edef": 10,
+        "type": "Drone",
+        "detail": "This self-deploying drone clamps onto a character within Range 3, occupying the same space and moving with them. While the drone is attached, the target regains {5/8/10} HP at the start of each of their turns and gains +1 Accuracy on all checks, saves, and attacks. Enemies can target the drone with attacks.",
+        "add_special": [
+          {
+            "attribute": "Latch Drone Attached",
+            "detail": "While the drone is attached, you regains {5/8/10} HP at the start of each of your turns and gain +1 Accuracy on all checks, saves, and attacks."
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      }
+    ]
+  }
+]

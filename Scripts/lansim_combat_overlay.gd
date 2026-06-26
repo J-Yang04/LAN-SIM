@@ -1,27 +1,19 @@
-extends Sprite2D
+class_name CombatUI extends Sprite2D
 
 const HOTBAR_DROPDOWN = preload("res://hotbar_dropdown.tscn")
 const HOTBAR_BUTTON = preload("res://HotbarButton.tscn")
 const MOUNT_SELECT_BOX = preload("res://attack_mount_select_box.tscn")
 
-var parent
-var turn_counter_label:Label
-var turn_status_label:Label
-var hotbar_left:HBoxContainer
-var hotbar_right:HBoxContainer
-var start_turn_button:Button
-var end_turn_button:Button
-var mount_select_container:HBoxContainer
+@onready var combat_runner:= get_parent() as CombatRunner
+@onready var turn_counter_label:= $TurnCounterLabel as Label
+@onready var turn_status_label:= $TurnStatusLabel as Label
+@onready var hotbar_left:= $HotbarContainer/HotbarLeft as HBoxContainer
+@onready var hotbar_right:= $HotbarContainer/HotbarRight as HBoxContainer
+@onready var start_turn_button:= $StartTurnButton as Button
+@onready var end_turn_button:= $EndTurnButton as Button
+@onready var mount_select_container:= $WeaponSelectBox/MountSelectContainer as HBoxContainer
 
 func _ready() -> void:
-	parent = get_parent()
-	turn_counter_label = get_child(1)
-	turn_status_label = get_child(2)
-	hotbar_left = get_child(3).get_child(0)
-	hotbar_right = get_child(3).get_child(1)
-	start_turn_button = get_child(4)
-	end_turn_button = get_child(5)
-	mount_select_container = get_child(6).get_child(1)
 	Global.start_round.connect(_on_start_round)
 	Global.select_mech.connect(_on_select_mech)
 	Global.focus_mech.connect(_on_focus_mech)
@@ -33,20 +25,20 @@ func _on_start_round(Round_No:int) -> void:
 
 func _on_select_mech() -> void:
 	turn_status_label.text = "TURN START - SELECT MECH"
-	start_turn_button.get_child(0).text = parent.player_mech_pawns[Global.focused_mech_index].get_mech_name() + "\n//ACTIVATE//"
+	start_turn_button.get_child(0).text = combat_runner.player_mech_pawns[Global.focused_mech_index].get_mech_name() + "\n//ACTIVATE//"
 	start_turn_button.visible = true
 	start_turn_button.disabled = false
 
 func _on_focus_mech(PID:int) -> void:
-	start_turn_button.get_child(0).text = parent.player_mech_pawns[PID].get_mech_name() + "\n//ACTIVATE//"
-	refresh_hotbar(parent.get_focused_mech().get_actions())
+	start_turn_button.get_child(0).text = combat_runner.player_mech_pawns[PID].get_mech_name() + "\n//ACTIVATE//"
+	refresh_hotbar(combat_runner.get_focused_mech().get_actions())
 
 func _on_start_turn(PID:int) -> void:
-	turn_status_label.text = "MECH ACTIVE: " + parent.player_mech_pawns[PID].get_mech_name()
+	turn_status_label.text = "MECH ACTIVE: " + combat_runner.player_mech_pawns[PID].get_mech_name()
 	start_turn_button.visible = false
 	start_turn_button.disabled = true
 	end_turn_button.visible = true
-	refresh_hotbar(parent.player_mech_pawns[PID].get_actions())
+	refresh_hotbar(combat_runner.player_mech_pawns[PID].get_actions())
 
 func _on_end_turn(_PID:int) -> void:
 	end_turn_button.visible = false
@@ -99,7 +91,16 @@ func show_weapon_select(Mounts:Array[Mount]):
 		var mount_box = MOUNT_SELECT_BOX.instantiate()
 		mount_select_container.add_child(mount_box)
 		mount_box.setup(mount)
-	get_child(6).visible = true
+		mount_box.weapon_box_select.connect(_on_weapon_select)
+	get_node("WeaponSelectBox").visible = true
+
+## Hides the weapon select box. Does not reset it.
+func hide_weapon_select() -> void:
+	get_node("WeaponSelectBox").visible = false
+
+func _on_weapon_select(Weapon:MechWeapon):
+	Global.ui_state = "target select"
+	combat_runner.init_target_select(Weapon)
 
 func _on_end_turn_button_pressed() -> void:
-	Global.end_turn.emit(parent.active_mech_index)
+	Global.end_turn.emit(combat_runner.active_mech_index)

@@ -1,0 +1,316 @@
+[
+  {
+    "id": "npct_veteran",
+    "template": true,
+    "name": "Veteran",
+    "description": "Veterans are hardened, experienced fighters that have survived several direct engagements. This isn’t their first rodeo, and their ability to withstand morale shocks is far higher than an untested greenhorn. Their value on the field is the experience they bring to a deployment and their steady presence along the line.<br>Use the Veteran template to make more memorable characters.",
+    "prohibitTemplates": ["npct_grunt"],
+    "optionalPerTier": 1
+  },
+  {
+    "id": "npcf_reinforced_veteran",
+    "name": "Reinforced",
+    "origin": "npct_veteran",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Veteran gains +1 Structure and +1 Stress.",
+    "bonuses": [
+      {
+        "id": "structure",
+        "val": 1
+      },
+      {
+        "id": "stress",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_veterancy_veteran",
+    "name": "Veterancy",
+    "origin": "npct_veteran",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Veteran gains +1 Accuracy on all checks and saves for one mech skill (chosen at creation): Hull, Agility, Systems, or Engineering.",
+    "active_effects": [
+      {
+        "name": "Veterancy",
+        "detail": "You gain +1 Accuracy on all checks and saves for one mech skill (chosen at creation): Hull, Agility, Systems, or Engineering."
+      }
+    ]
+  },
+  {
+    "id": "npcf_acrobat_veteran",
+    "name": "Acrobat",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "After the Veteran move or Boosts, they can fly 3 spaces. This flight ignores engagement and doesn’t provoke reactions.",
+    "active_effects": [
+      {
+        "name": "Acrobat",
+        "detail": "After you move or Boosts, you can fly 3 spaces. This flight ignores engagement and doesn’t provoke reactions."
+      }
+    ]
+  },
+  {
+    "id": "npcf_deadly_veteran",
+    "name": "Deadly",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "The Veteran deals +1d6 damage on critical hits.",
+    "active_effects": [
+      {
+        "name": "Deadly",
+        "detail": "You deal +1d6 damage on critical hits."
+      }
+    ]
+  },
+  {
+    "id": "npcf_feign_death_veteran",
+    "name": "Feign Death",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "The first time that the Veteran is destroyed each combat, they are actually feigning death – they appear to be destroyed, but have 1 HP. Characters adjacent to the Veteran can reveal this with a successful Systems check or pilot skill check; otherwise, the Veteran remains unnoticed until they move or take an action.",
+    "active_effects": [
+      {
+        "name": "Feign Death",
+        "detail": "The first time that you are destroyed each combat, they are actually feigning death – they appear to be destroyed, but have 1 HP. Characters adjacent to you can reveal this with a successful Systems check or pilot skill check; otherwise, you remain unnoticed until you move or take an action.",
+        "frequency": "1/encounter"
+      }
+    ]
+  },
+  {
+    "id": "npcf_hacker_veteran",
+    "name": "Hacker",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "The Veteran deals +2 heat on successful tech attacks.",
+    "active_effects": [
+      {
+        "name": "Hacker",
+        "detail": "You deal +2 heat on successful tech attacks.",
+        "damage": [
+          {
+            "type": "Heat",
+            "val": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_hardened_target_veteran",
+    "name": "Hardened Target",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "The Veteran gains +1 Accuracy on Systems saves, and tech attacks against them receive +1 Difficulty.",
+    "active_effects": [
+      {
+        "name": "Hardened Target",
+        "detail": "Tech attacks against you receive +1 Difficulty."
+      }
+    ],
+    "bonuses": [
+      {
+        "id": "systems",
+        "accuracy": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_headshot_veteran",
+    "name": "Headshot",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "1/round, on a critical hit, the Veteran’s target must pass a Hull save or only be able to draw line of sight to adjacent spaces until the end of their next turn.",
+    "active_effects": [
+      {
+        "name": "Headshot",
+        "detail": "On a critical hit, your target must pass a Hull save or only be able to draw line of sight to adjacent spaces until the end of their next turn.",
+        "frequency": "1/round",
+        "save": "hull",
+        "add_special": [
+          {
+            "attribute": "Headshot",
+            "detail": "Only able to draw line of sight to adjacent spaces until the end of your next turn.",
+            "duration": "end_next_turn_target"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_insulated_veteran",
+    "name": "Insulated",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "The Veteran gains Immunity to Burn.",
+    "add_resist": [
+      {
+        "immunity": "burn"
+      }
+    ]
+  },
+  {
+    "id": "npcf_legendary_veteran",
+    "name": "Legendary",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "The Veteran rolls all structure damage and overheating checks twice and chooses either result.",
+    "active_effects": [
+      {
+        "name": "Legendary",
+        "detail": "You roll all structure damage and overheating checks twice and choose either result."
+      }
+    ]
+  },
+  {
+    "id": "npcf_lesser_sight_veteran",
+    "name": "Lesser Sight",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "The Veteran ignores Invisible for characters within range 3, and hostile characters in range 3 can’t Hide successfully (though they remain Hidden if they were already).",
+    "active_effects": [
+      {
+        "name": "Lesser Sight",
+        "detail": "You ignore Invisible for characters within range 3, and hostile characters in range 3 can’t Hide successfully (though they remain Hidden if they were already)."
+      }
+    ]
+  },
+  {
+    "id": "npcf_lightning_reflexes_veteran",
+    "name": "Lightning Reflexes",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "Whenever the Veteran is attacked using any Heavy or Superheavy weapon, first roll 1d6. On 5+, the attack automatically misses.",
+    "active_effects": [
+      {
+        "name": "Lightning Reflexes",
+        "condition": "Whenever you are attacked by any Heavy or Superheavy weapon",
+        "detail": "First roll 1d6. On 5+, the attack automatically misses."
+      }
+    ]
+  },
+  {
+    "id": "npcf_limitless_veteran",
+    "name": "Limitless",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "The Veteran can Overcharge. Instead of the standard cost, they always gain 1d6 heat.",
+    "active_effects": [
+      {
+        "name": "Limitless",
+        "detail": "You can Overcharge. Instead of the standard cost, always gain 1d6 heat."
+      }
+    ]
+  },
+  {
+    "id": "npcf_nhp_co_pilot_veteran",
+    "name": "Nhp Co-Pilot",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "The Veteran gains the AI tag. Their mech or vehicle is autonomous and can even function without a pilot. The NHP can enter cascade, using the same rules as PC AIs.",
+    "tags": [
+      {
+        "id": "tg_ai"
+      }
+    ]
+  },
+  {
+    "id": "npcf_parting_gift_veteran",
+    "name": "Parting Gift",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "The Veteran can Self-Destruct.",
+    "actions": [
+      {
+        "name": "Self-Destruct",
+        "activation": "Quick",
+        "detail": "At the end of your next turn, or at the end of one of your turns within the following two rounds (your choice), your mech explodes as though it suffered a reactor meltdown. The explosion annihilates your mech, killing anyone inside and causing a Burst 2 explosion that deals 4d6 explosive damage. Characters caught in the explosion that succeed on an Agility save take half of this damage.",
+        "damage": [
+          {
+            "type": "Explosive",
+            "val": "4d6",
+            "aoe": "burst 2",
+            "save": "agility",
+            "save_half": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_rodeo_master_veteran",
+    "name": "Rodeo Master",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "The Veteran can Dismount. While on foot, the Veteran uses the Human class and can take all actions available to PC pilots, including Jockey."
+  },
+  {
+    "id": "npcf_self_repair_veteran",
+    "name": "Self Repair",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "1/scene, as a Full Action, the Veteran regains all HP and clears all conditions.",
+    "actions": [
+      {
+        "name": "Self Repair",
+        "activation": "Full",
+        "frequency": "1/scene",
+        "detail": "Regain all HP and clears all conditions."
+      }
+    ]
+  },
+  {
+    "id": "npcf_shock_armor_veteran",
+    "name": "Shock Armor",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "The Veteran gains Resistance to damage from Main weapons.",
+    "active_effects": [
+      {
+        "name": "Shock Armor",
+        "detail": "You have Resistance to damage from Main weapons."
+      }
+    ]
+  },
+  {
+    "id": "npcf_slippery_veteran",
+    "name": "Slippery",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "The Veteran’s standard move ignores engagement and doesn't provoke reactions.",
+    "active_effects": [
+      {
+        "name": "Slippery",
+        "detail": "Your standard move ignores engagement and doesn't provoke reactions."
+      }
+    ]
+  },
+  {
+    "id": "npcf_steel_jaw_veteran",
+    "name": "Steel Jaw",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "Auxiliary weapons can’t do more than 1 damage to the Veteran.",
+    "active_effects": [
+      {
+        "name": "Steel Jaw",
+        "detail": "Auxiliary weapons can’t do more than 1 damage to you."
+      }
+    ]
+  },
+  {
+    "id": "npcf_vipers_speed_veteran",
+    "name": "Viper’s Speed",
+    "origin": "npct_veteran",
+    "type": "Trait",
+    "effect": "The Veteran always takes the first turn, even acting before PCs. Whenever there is a question about who acts first – in both narrative play and mech combat – it is always the Veteran. If multiple characters have this trait, only one gets to use it each time.",
+    "active_effects": [
+      {
+        "name": "Viper’s Speed",
+        "detail": "You always takes the first turn, even acting before PCs. Whenever there is a question about who acts first – in both narrative play and mech combat – it is always you. If multiple characters have this trait, only one gets to use it each time."
+      }
+    ]
+  }
+]

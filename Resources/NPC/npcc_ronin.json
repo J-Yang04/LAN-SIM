@@ -1,0 +1,200 @@
+[
+  {
+    "id": "npcc_ronin",
+    "name": "Ronin",
+    "role": "striker",
+    "info": {
+      "flavor": "Ronin frames differ from those favored by Berserkers and Demolishers in that they aren’t retrofitted or improvised for creative tactical applications – they are purpose-built to excel in melee combat by boutique fabricators. Although they are seen as somewhat antique by many commentators, the rise of stasis- and mag-based defensive technologies has made Ronins more viable in modern combat.<br>Ronin are common among both martial cultures and performance-combat firms, where their superb melee abilities elevate them above the competition. They see less use in cultures that have a preference for ranged combat, but there is a certain prestige accorded to pilots who adopt ancient weapons and survive to do it again. The mythic lancer Susanoo elevated this archetype to legendary status when she endorsed the GRAMtech Strike-1 chassis, which she piloted alongside numerous Albatross wings during the Neo-Celestine Disappointment.",
+      "tactics": "Ronins are no-nonsense, high-damage melee strikers. Rebound makes it dangerous for enemies to attack Ronins with ranged weapons, but they tend to suffer against armored enemies and are heavily reliant on Accuracy.",
+      "terse": "Accuracy-dependent melee striker that can deal high damage."
+    },
+    "stats": {
+      "armor": 0,
+      "hp": [18, 20, 22],
+      "evade": [10, 13, 16],
+      "edef": 7,
+      "heatcap": 7,
+      "speed": [5, 5, 6],
+      "sensor": 10,
+      "save": [10, 13, 15],
+      "hull": [1, 2, 4],
+      "agility": [2, 4, 5],
+      "systems": -1,
+      "engineering": -1,
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_carbon_fiber_sword_ronin",
+    "name": "Carbon Fiber Sword",
+    "origin": "npcc_ronin",
+    "base": true,
+    "type": "Weapon",
+    "on_crit": "Deal +1d6 Kinetic damage.",
+    "attacks": [1, 2, 3],
+    "weapon_type": "Main Melee",
+    "attack_bonus": [2, 4, 6],
+    "accuracy": 1,
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": 6
+      }
+    ],
+    "range": [
+      {
+        "type": "Threat",
+        "val": 2
+      }
+    ]
+  },
+  {
+    "id": "npcf_rebound_ronin",
+    "name": "Rebound",
+    "origin": "npcc_ronin",
+    "base": true,
+    "type": "Reaction",
+    "actions": [
+      {
+        "name": "Rebound",
+        "activation": "Reaction",
+        "frequency": "1/round",
+        "trigger": "You take damage from a ranged attack.",
+        "detail": "Roll 1d6: on 4+, gain Resistance to damage from that attack, and the attacker must repeat the attack against themselves."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_shield"
+      },
+      {
+        "id": "tg_npc_system"
+      }
+    ]
+  },
+  {
+    "id": "npcf_charged_slash_ronin",
+    "name": "Charged Slash",
+    "origin": "npcc_ronin",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Charged Slash",
+        "activation": "Full",
+        "detail": "All characters adjacent to the You take {6/9/12} kinetic damage, half if they pass an Agility save.",
+        "damage": {
+          "type": "Kinetic",
+          "val": [6, 9, 12],
+          "save": "agility",
+          "save_half": true
+        }
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_chaff_launchers_ronin",
+    "name": "Chaff Launchers",
+    "origin": "npcc_ronin",
+    "type": "Trait",
+    "effect": "The Ronin gains soft cover until the start of their next turn whenever they Boost.",
+    "active_effects": [
+      {
+        "name": "Chaff Launchers",
+        "detail": "You gain soft cover until the start of your next turn whenever you Boost.",
+        "add_other": [
+          {
+            "type": "cover",
+            "val": "soft",
+            "duration": "start_next_turn_self"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_echo_edge_ronin",
+    "name": "Echo Edge",
+    "origin": "npcc_ronin",
+    "type": "Trait",
+    "effect": "Characters damaged by the Ronin gain a Ronin’s Mark. At the start of the Ronin’s turn, the Ronin can clear all Ronin’s Marks as a free action, automatically dealing 1d6 AP Kinetic damage to all characters that have a Ronin’s Mark cleared in this way.",
+    "active_effects": [
+      {
+        "name": "Echo Edge",
+        "detail": "Characters damaged by the you gain a Ronin’s Mark. At the start of the your turn, you can clear all Ronin’s Marks as a free action, automatically dealing 1d6 AP Kinetic damage to all characters that have a Ronin’s Mark cleared in this way.",
+        "add_special": [
+          {
+            "attribute": "Ronin's Mark",
+            "detail": "At the start of you’s turn, you can clear all Ronin’s Marks as a free action, automatically dealing 1d6 AP Kinetic damage to all characters that have a Ronin’s Mark cleared in this way.",
+            "aoe": true
+          }
+        ],
+        "damage": [
+          {
+            "type": "Kinetic",
+            "val": 6,
+            "ap": true,
+            "aoe": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_instinct_mode_ronin",
+    "name": "Instinct Mode",
+    "origin": "npcc_ronin",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Instinct Mode",
+        "activation": "Quick",
+        "detail": "Until the end of your next turn, the first time each turn that they are targeted by an attack, you may first use the Carbon Fiber Sword to attack a character within Range as a reaction.",
+        "active_effects": [
+          {
+            "name": "Instinct Mode",
+            "detail": "Until the end of your next turn, the first time each turn that they are targeted by an attack, you may first use the Carbon Fiber Sword to attack a character within Range as a reaction.",
+            "duration": "end_next_turn_self"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_extended_blade_ronin",
+    "name": "Extended Blade",
+    "origin": "npcc_ronin",
+    "type": "System",
+    "effect": "The Ronin’s Carbon Fiber Sword becomes Threat 3. The first time each turn that the Ronin performs a critical hit with it, all characters within Threat take {2/3/4} kinetic damage – including the target.",
+    "mod": "npcf_carbon_fiber_sword_ronin",
+    "range": [
+      {
+        "type": "Threat",
+        "val": 1
+      }
+    ],
+    "active_effects": [
+      {
+        "name": "Extended Blade",
+        "detail": "Your Carbon Fiber Sword becomes Threat 3. The first time each turn that you perform a critical hit with it, all characters within Threat take {2/3/4} kinetic damage – including the target.",
+        "damage": {
+          "type": "Kinetic",
+          "val": [2, 3, 4],
+          "aoe": true
+        }
+      }
+    ]
+  }
+]

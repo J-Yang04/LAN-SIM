@@ -1,0 +1,257 @@
+[
+  {
+    "id": "npcc_assassin",
+    "name": "Assassin",
+    "role": "striker",
+    "info": {
+      "flavor": "Assassins tend towards agility, damage, and speed. These pilots sacrifice comfort for efficiency, stripping out everything from life-support to comms systems and replacing them with increased processing power and stealth capabilities. Assassins work alone or in small groups, piloting their small, sleek mechs through near-impenetrable terrain to catch their targets off-guard.",
+      "tactics": "Assassins are true experts at punishing single characters. Use Assassin’s Mark to choose a target, and then make the most of the Assassin’s high speed and Leap to close the distance. For a nasty combination, pair an Assassin with NPCs that inflict mobility-reducing conditions like Stunned or Prone. Without optional systems like the “Devil’s Cough” Shotgun, Assassins only have access to melee attacks and are fairly vulnerable to sustained damage.",
+      "terse": "Fast and deadly striker that can quickly close distance to punish single targets."
+    },
+    "stats": {
+      "armor": [0, 1, 1],
+      "hp": 15,
+      "evade": [12, 15, 17],
+      "edef": 8,
+      "heatcap": 7,
+      "speed": [6, 6, 8],
+      "sensor": 10,
+      "save": [10, 12, 14],
+      "hull": [0, 1, 1],
+      "agility": [2, 3, 4],
+      "systems": [1, 1, 2],
+      "engineering": [-1, 0, 0],
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_kai_bioplating_assassin",
+    "name": "Kai Bioplating",
+    "origin": "npcc_assassin",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Assassin gains +1 Accuracy on all Agility checks; additionally, they climb and swim at normal speed, ignore difficult terrain, and, when making a standard move, can jump horizontally up to their Speed and vertically up to half their Speed (in any combination).",
+    "active_effects": [
+      {
+        "name": "Kai Bioplating",
+        "detail": "You can climb and swim at normal speed, ignore difficult terrain, and, when making a standard move, can jump horizontally up to your Speed and vertically up to half your Speed (in any combination)."
+      }
+    ],
+    "bonuses": [
+      {
+        "id": "agility",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_heated_blade_assassin",
+    "name": "Heated Blade",
+    "origin": "npcc_assassin",
+    "base": true,
+    "type": "Weapon",
+    "effect": "Deals double damage to Prone, Shredded, Immobilized, or Stunned targets.",
+    "weapon_type": "Main Melee",
+    "attack_bonus": [1, 2, 3],
+    "accuracy": [2, 2, 2],
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [4, 5, 6]
+      }
+    ],
+    "range": [
+      {
+        "type": "Threat",
+        "val": 2
+      }
+    ]
+  },
+  {
+    "id": "npcf_assassins_mark_assassin",
+    "name": "Assassin’s Mark",
+    "origin": "npcc_assassin",
+    "base": true,
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Assassin’s Mark",
+        "activation": "Quick",
+        "detail": "You choose a character in line of sight. For the rest of the scene, these effects apply:<ul><li>You have Resistance to that target’s damage.</li><li>Damage you deal to that target cannot be reduced.</li><li>You gain +1 Accuracy on all saves forced by that target.</li></ul><br>You can only choose a new target if the current target is destroyed.",
+        "active_effects": [
+          {
+            "name": "Assassin’s Mark Active",
+            "detail": "You gain Resistance to damage from their marked target, cannot have damage they deal to that target reduced, and gain +1 Accuracy on all saves forced by that target."
+          }
+        ],
+        "add_special": [
+          {
+            "attribute": "Assassin's Mark Target",
+            "detail": "The Assassin has Resistance to your damage, damage they deal to you cannot be reduced, and they gain +1 Accuracy on all saves you force them to make."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_leap_assassin",
+    "name": "Leap",
+    "origin": "npcc_assassin",
+    "base": true,
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Leap",
+        "activation": "Quick",
+        "detail": "Fly 6 spaces in any direction but must land on a surface. When landing, characters adjacent to you must succeed on an Agility save or be knocked Prone.",
+        "add_status": [
+          {
+            "id": "prone",
+            "save": "agility",
+            "aoe": "adjacent"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_devils_cough_shotgun_assassin",
+    "name": "“Devil’s Cough” Shotgun",
+    "origin": "npcc_assassin",
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_knockback",
+        "val": 2
+      },
+      {
+        "id": "tg_loading"
+      }
+    ],
+    "weapon_type": "Heavy CQB",
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [10, 15, 20]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 3
+      },
+      {
+        "type": "Threat",
+        "val": 3
+      }
+    ]
+  },
+  {
+    "id": "npcf_sap_assassin",
+    "name": "Sap",
+    "origin": "npcc_assassin",
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Sap",
+        "activation": "Quick Tech",
+        "detail": "You choose a character next to them: they must succeed on an Engineering save or be Stunned until the end of their next turn.",
+        "add_status": [
+          {
+            "id": "stunned",
+            "save": "engineering"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      },
+      {
+        "id": "tg_npc_trait"
+      }
+    ]
+  },
+  {
+    "id": "npcf_spinning_kick_assassin",
+    "name": "Spinning Kick",
+    "origin": "npcc_assassin",
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Spinning Kick",
+        "activation": "Quick",
+        "detail": "You choose a character next to you: they must pass a Hull save or be pushed 4 spaces away from you and are knocked Prone.",
+        "save": "hull",
+        "add_status": [
+          {
+            "id": "prone",
+            "save": "hull"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_cloud_projector_assassin",
+    "name": "Cloud Projector",
+    "origin": "npcc_assassin",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Cloud Projector",
+        "activation": "Quick",
+        "detail": "Set off a charge, creating a Burst 3 area of smoke, haze, or some other kind of concealing shroud. You gain soft cover within the affected area, and characters other than you fully inside or outside the area cannot draw line of sight into or out of the area. Characters partially within the area are not affected. This effect lasts until the end of your next turn, or until you uses this system again."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_explosive_knives_assassin",
+    "name": "Explosive Knives",
+    "origin": "npcc_assassin",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Throw Explosive Knife",
+        "activation": "Quick",
+        "detail": "Expend a charge to throw an Explosive damage knife at a character within range 3, making a ranged attack at +{2/4/6}. On a hit, the knife embeds itself in the target and explodes at the end of their next turn, dealing {6/8/10} Explosive damage in a Burst 1 area.",
+        "attack_bonus": [2, 4, 6],
+        "attack": "ranged",
+        "damage": [
+          {
+            "type": "Explosive",
+            "val": [6, 8, 10],
+            "aoe": "burst 1"
+          }
+        ],
+        "range": [
+          {
+            "type": "Range",
+            "val": 3
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_limited",
+        "val": 3
+      }
+    ]
+  }
+]

@@ -1,0 +1,99 @@
+[
+  {
+    "id": "npct_vehicle",
+    "template": true,
+    "name": "Vehicle",
+    "description": "Despite the prevalence of mechs, the majority of armored combat, transport, scouting, and myriad other civilian and military tasks falls to the humble tracked or wheeled vehicle. Powered by fusion, internal combustion, electricity, hydrogen, wind, people, paracausal engines, or something even more unusual, vehicles can carry people, mount weapons, be girded in armor, or otherwise accomplish quickly the simple tasks for which they were designed: moving people and things quickly and in good condition from point A to point B.<br>This template can be applied to any Mech NPC. They lose the Mech tag and become a Vehicle instead.",
+    "forceTag": "vehicle",
+    "prohibitTemplates": ["npct_ship"]
+  },
+  {
+    "id": "npcf_limited_handling_vehicle",
+    "name": "Limited Handling",
+    "base": true,
+    "origin": "npct_vehicle",
+    "type": "Trait",
+    "effect": "The Vehicle must always move in a straight line, although it can move and Boost in separate directions. Additionally, the Vehicle can’t climb or swim, and can only clear Prone when adjacent to an allied character.",
+    "active_effects": [
+      {
+        "name": "Limited Handling",
+        "detail": "You must always move in a straight line, although you can move and Boost in separate directions. Additionally, you can’t climb or swim, and can only clear Prone when adjacent to an allied character."
+      }
+    ]
+  },
+  {
+    "id": "npcf_crew_vehicle",
+    "name": "Crew",
+    "base": true,
+    "origin": "npct_vehicle",
+    "type": "Trait",
+    "effect": "If the Vehicle is larger than Size 1/2, it may have a crew; if so, it has at least as many crew members as half its Size."
+  },
+  {
+    "id": "npcf_no_manipulators_vehicle",
+    "name": "No Manipulators",
+    "base": true,
+    "origin": "npct_vehicle",
+    "type": "Trait",
+    "effect": "The Vehicle can’t pick up objects, manipulate objects or the environment, or Grapple.",
+    "active_effects": [
+      {
+        "name": "No Manipulators",
+        "detail": "You can’t pick up objects, manipulate objects or the environment, or Grapple."
+      }
+    ]
+  },
+  {
+    "id": "npcf_limited_melee_vehicle",
+    "name": "Limited Melee",
+    "base": true,
+    "origin": "npct_vehicle",
+    "type": "Trait",
+    "effect": "The Vehicle can’t make melee attacks other than Ram.",
+    "active_effects": [
+      {
+        "name": "Limited Melee",
+        "detail": "You can’t make melee attacks other than Ram."
+      }
+    ]
+  },
+  {
+    "id": "npcf_flier_vehicle",
+    "name": "Flier",
+    "origin": "npct_vehicle",
+    "type": "Trait",
+    "effect": "The Vehicle can fly when it moves or Boosts.",
+    "synergies": [
+      {
+        "locations": ["move"],
+        "detail": "You can fly when you move or Boost."
+      }
+    ]
+  },
+  {
+    "id": "npcf_transport_vehicle",
+    "name": "Transport",
+    "origin": "npct_vehicle",
+    "type": "Trait",
+    "effect": "The Vehicle can transport one Squad or characters whose combined Size is less than its own Size.",
+    "synergies": [
+      {
+        "locations": ["move"],
+        "detail": "You can transport one Squad or characters whose combined Size is less than your own Size."
+      }
+    ]
+  },
+  {
+    "id": "npcf_treads_or_hover_vehicle",
+    "name": "Treads Or Hover",
+    "origin": "npct_vehicle",
+    "type": "Trait",
+    "effect": "The Vehicle ignores difficult terrain.",
+    "active_effects": [
+      {
+        "name": "Treads Or Hover",
+        "detail": "You ignore difficult terrain."
+      }
+    ]
+  }
+]

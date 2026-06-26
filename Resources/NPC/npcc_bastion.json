@@ -1,0 +1,235 @@
+[
+  {
+    "id": "npcc_bastion",
+    "name": "Bastion",
+    "role": "defender",
+    "info": {
+      "flavor": "Bastions trade the pure defensive edge of Aegis-archetype mechs for greater mobility. They blend area-denial offensive capabilities with hardened defense systems and advanced communication suites. These mechs are favorites of many strong squadron commanders. The efficacy of the pairing was best displayed by the actions of Zander Reeves, a field-promoted auxiliary officer, during engagements with the “Space Between” interstellar pirate guild in the Dromeda system.",
+      "tactics": "Bastions are hardy defenders that use their bulk and size to protect themselves and nearby. Use Friendly Interdiction to defend against distant enemies, like artillery and snipers. Bastions (and their wards) are vulnerable to Knockback and forced movement, as these effects break many of their abilities.",
+      "terse": "Hardy defender that can protect its allies, but is vulnerable to forced movement."
+    },
+    "stats": {
+      "armor": [3, 3, 4],
+      "hp": 10,
+      "evade": [8, 10, 10],
+      "edef": 8,
+      "heatcap": [8, 10, 12],
+      "speed": 4,
+      "sensor": 5,
+      "save": [8, 10, 12],
+      "hull": [2, 4, 6],
+      "agility": [-3, -3, -2],
+      "systems": 0,
+      "engineering": [2, 3, 4],
+      "size": 2,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_rotary_grenade_launcher_bastion",
+    "name": "Rotary Grenade Launcher",
+    "origin": "npcc_bastion",
+    "base": true,
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_arcing"
+      },
+      {
+        "id": "tg_loading"
+      }
+    ],
+    "weapon_type": "Main Launcher",
+    "attack_bonus": [1, 2, 3],
+    "damage": [
+      {
+        "type": "Explosive",
+        "val": [4, 6, 8]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 8
+      },
+      {
+        "type": "Blast",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_heavy_assault_shield_bastion",
+    "name": "Heavy Assault Shield",
+    "origin": "npcc_bastion",
+    "base": true,
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_knockback",
+        "val": 1
+      }
+    ],
+    "weapon_type": "Heavy Melee",
+    "attack_bonus": [1, 2, 3],
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [3, 6, 9]
+      }
+    ],
+    "range": [
+      {
+        "type": "Threat",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_friendly_interdiction_bastion",
+    "name": "Friendly Interdiction",
+    "origin": "npcc_bastion",
+    "base": true,
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Mark Interdiction Target",
+        "activation": "Protocol",
+        "detail": "Mark a character in line of sight. You and one allied character adjacent to it gain Resistance to all damage dealt this character. You may choose a new allied character or target as a protocol. The allied character loses Resistance if they break adjacency.",
+        "add_special": [
+          {
+            "attribute": "Interdiction Target",
+            "detail": "The Bastion and an adjacent allied character have Resistance to your damage."
+          }
+        ]
+      },
+      {
+        "name": "Mark Interdiction Ally",
+        "activation": "Protocol",
+        "detail": "Mark one allied character adjacent to you. They gain Resistance to all damage dealt by the marked Interdiction Target. You may choose a new allied character or target as a protocol. The allied character loses Resistance if they break adjacency.",
+        "add_special": [
+          {
+            "attribute": "Interdiction Ally",
+            "detail": "You have Resistance to damage from the Bastion's Interdiction Target."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_guardian_bastion",
+    "name": "Guardian",
+    "origin": "npcc_bastion",
+    "base": true,
+    "type": "Trait",
+    "effect": "Allied characters can use the Bastion for hard cover.",
+    "active_effects": [
+      {
+        "name": "Guardian",
+        "detail": "Allied characters can use you for hard cover."
+      }
+    ]
+  },
+  {
+    "id": "npcf_near_threat_denial_system_bastion",
+    "name": "Near-Threat Denial System",
+    "origin": "npcc_bastion",
+    "type": "System",
+    "effect": "When characters within range 3 attack the Bastion, they take {2/3/4} AP Explosive damage before rolling.",
+    "active_effects": [
+      {
+        "name": "Near-Threat Denial System",
+        "detail": "When characters within range 3 attack you, they take {2/3/4} AP Explosive damage before rolling.",
+        "damage": [
+          {
+            "type": "Explosive",
+            "val": [2, 3, 4],
+            "ap": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_siege_guardian_bastion",
+    "name": "Siege Guardian",
+    "origin": "npcc_bastion",
+    "type": "Trait",
+    "effect": "Allied characters gain Resistance to damage from Blast, Burst, Line, and Cone attacks while they’re adjacent to the Bastion.",
+    "active_effects": [
+      {
+        "name": "Siege Guardian",
+        "detail": "Allied characters gain Resistance to damage from Blast, Burst, Line, and Cone attacks while they’re adjacent to you."
+      }
+    ]
+  },
+  {
+    "id": "npcf_pause_engine_bastion",
+    "name": "“Pause” Engine",
+    "origin": "npcc_bastion",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Activate Pause Engine",
+        "activation": "Full",
+        "detail": "You and one adjacent allied character are temporarily shielded by a flickering pane of portable blinkspace, gaining Immunity to all damage and effects until the start of you’s next turn. The allied character loses Immunity if it breaks adjacency. At the start of your next turn, they become Stunned until the start of their following turn.",
+        "add_special": [
+          {
+            "attribute": "Pause Engine Target",
+            "detail": "You have Immunity to all damage and effects until the start of the Bastion's next turn. At the start of that turn, you become Stunned until the start of your following turn."
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_fearless_defender_bastion",
+    "name": "Fearless Defender",
+    "origin": "npcc_bastion",
+    "type": "Reaction",
+    "actions": [
+      {
+        "name": "Fearless Defender",
+        "activation": "Reaction",
+        "frequency": "1/round",
+        "trigger": "An allied character in range 5 of you takes damage, and you aren't Immobilized, Slowed, Stunned or otherwise cannot move.",
+        "detail": "Move to an adjacent space and take the damage instead.",
+        "range": [
+          {
+            "type": "Range",
+            "val": 5
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_npc_trait"
+      }
+    ]
+  },
+  {
+    "id": "npcf_deathcounter_bastion",
+    "name": "Deathcounter",
+    "origin": "npcc_bastion",
+    "type": "System",
+    "effect": "The first time the Bastion is successfully hit by a ranged or melee attack each round, all damage is reduced to 0.",
+    "active_effects": [
+      {
+        "name": "Deathcounter",
+        "detail": "The first time you are successfully hit by a ranged or melee attack each round, all damage is reduced to 0."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_shield"
+      }
+    ]
+  }
+]

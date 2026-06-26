@@ -1,0 +1,228 @@
+[
+  {
+    "id": "npcc_priest",
+    "name": "Priest",
+    "role": "support",
+    "info": {
+      "flavor": "Priest-archetype mechs are found among the ranks of technozealot cults, transhumanist movements, and states or corporations that prioritize technological supremacy. These frames are configured to network their sensitive core systems with sympathetic mechs, creating digital super-constructs in order to establish and maintain total theater control. The use of Priest-archetype chassis and strategies were pioneered by a small, esoteric group known as the Messengers of MAIA. Ostensibly a courier group, the Messengers push all systems – synthetic and organic – to their theoretical limits. They even go so far as to share sensory input between linked pilots – an experience known to produce hyper-perception fugues and other ascendant mental states.",
+      "tactics": "Priests are powerful support mechs that function best when partnered with another character they can empower with Investiture. Use their Dispersal Shield to protect vulnerable targets and Investiture to empower an allied striker or defender. Enemies can disarm Investiture by separating Priests from their partners, at which point both become vulnerable to conditions.",
+      "terse": "Powerful support mech that can empower allies."
+    },
+    "stats": {
+      "armor": 0,
+      "hp": [10, 13, 16],
+      "evade": 10,
+      "edef": [12, 15, 18],
+      "heatcap": 10,
+      "speed": [5, 5, 6],
+      "sensor": 10,
+      "save": [11, 13, 15],
+      "hull": -1,
+      "agility": -1,
+      "systems": [2, 4, 6],
+      "engineering": [2, 3, 4],
+      "size": 0.5,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_abjure_priest",
+    "name": "Abjure",
+    "origin": "npcc_priest",
+    "base": true,
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Abjure",
+        "activation": "Quick Tech",
+        "detail": "Make a tech attack against a target within Sensors. On a success, the target takes {2/3/4} Heat each time they make any attack until the end of their next turn.",
+        "attack": "tech",
+        "add_special": [
+          {
+            "attribute": "Abjure Target",
+            "detail": "Take {2/3/4} Heat each time you make any attack until the end of tour next turn.",
+            "duration": "next_turn_end_target"
+          }
+        ]
+      }
+    ],
+    "attack_bonus": [2, 4, 6],
+    "tags": [
+      {
+        "id": "tg_npc_system"
+      }
+    ]
+  },
+  {
+    "id": "npcf_hardened_target_priest",
+    "name": "Hardened Target",
+    "origin": "npcc_priest",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Priest gains +1 Accuracy on Systems saves, and tech attacks against them receive +1 Difficulty.",
+    "bonuses": [
+      {
+        "id": "systems",
+        "accuracy": 1
+      }
+    ],
+    "active_effects": [
+      {
+        "name": "Hardened Target",
+        "detail": "Tech attacks against you receive +1 Difficulty."
+      }
+    ]
+  },
+  {
+    "id": "npcf_investiture_priest",
+    "name": "Investiture",
+    "origin": "npcc_priest",
+    "base": true,
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Investiture",
+        "activation": "Quick",
+        "detail": "Link systems with an allied mech or vehicle within range 5. As long as they remain linked and within range 5, the target gets +{1/2/3} Accuracy on all attacks and can use your systems instead of their own. If either character becomes Jammed, Impaired, or Stunned, however, the other character also receives the condition for the same duration or until the link is disabled. The link is disabled if either character is destroyed or moves more than 5 spaces from the other. You can only link with one character at a time.",
+        "range": [
+          {
+            "type": "Range",
+            "value": 5
+          }
+        ],
+        "add_special": [
+          {
+            "attribute": "Investiture Link",
+            "detail": "You are linked to the Priest and gain +{1/2/3} Accuracy on all attacks and can use their Systems instead of your own. If either you or the Priest become Jammed, Impaired, or Stunned, you also receive the condition for the same duration or until the link is disabled. The link is disabled if you are more than 5 spaces from the Priest or the Priest is destroyed."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_dispersal_shield_priest",
+    "name": "Dispersal Shield",
+    "base": true,
+    "origin": "npcc_priest",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Dispersal Shield",
+        "activation": "Quick",
+        "detail": "Release a cloud of miniature drones that cluster around a nearby mech, providing protection. You or an allied character within Sensors gains Resistance to damage and heat from the next 1d3 attacks that hit. This effect is not cumulative.",
+        "add_resist": [
+          {
+            "resistance": "all",
+            "target": "self"
+          },
+          {
+            "resistance": "all"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_greater_investiture_priest",
+    "name": "Greater Investiture",
+    "origin": "npcc_priest",
+    "type": "Trait",
+    "effect": "Investiture gives its target Resistance to all damage, but the Priest becomes Immobilized while linked.",
+    "mod": "npcf_investiture_priest",
+    "add_resist": [
+      {
+        "resistance": "all"
+      }
+    ],
+    "add_status": [
+      {
+        "id": "immobilized",
+        "target": "self"
+      }
+    ]
+  },
+  {
+    "id": "npcf_empowered_shield_priest",
+    "name": "Empowered Shield",
+    "origin": "npcc_priest",
+    "type": "Trait",
+    "effect": "Dispersal Shield also grants Overshield {5/6/8}.",
+    "mod": "npcf_dispersal_shield_priest",
+    "add_other": [
+      {
+        "type": "overshield",
+        "value": [5, 6, 8]
+      }
+    ]
+  },
+  {
+    "id": "npcf_sanctuary_priest",
+    "name": "Sanctuary",
+    "origin": "npcc_priest",
+    "type": "Tech",
+    "actions": [
+      {
+        "name": "Sanctuary",
+        "activation": "Full Tech",
+        "detail": "Choose an allied character within Sensors. Before attacking the target, characters must first pass a Systems save. On a failure, the target cannot be targeted again by the attacker until the start of that character’s next turn.",
+        "save": "systems"
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_npc_trait"
+      }
+    ]
+  },
+  {
+    "id": "npcf_fortress_priest",
+    "name": "Fortress",
+    "origin": "npcc_priest",
+    "type": "Trait",
+    "effect": "Hardened Target gives +3 Accuracy on Systems saves and deals +3 difficulty on tech attacks, instead of +1.",
+    "mod": "npcf_hardened_target_priest",
+    "bonuses": [
+      {
+        "id": "systems",
+        "accuracy": 2
+      }
+    ]
+  },
+  {
+    "id": "npcf_fractal_assault_priest",
+    "name": "Fractal Assault",
+    "origin": "npcc_priest",
+    "type": "Reaction",
+    "mod": "npcf_investiture_priest",
+    "actions": [
+      {
+        "name": "Fractal Assault",
+        "activation": "Reaction",
+        "trigger": "A character linked by Investiture takes damage.",
+        "detail": "The attacker makes a System save. If it fails, they’re Stunned until the end of their next turn.",
+        "add_status": [
+          {
+            "id": "stunned",
+            "duration": "next_turn_end_target",
+            "save": "systems"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      },
+      {
+        "id": "tg_npc_system"
+      }
+    ]
+  }
+]

@@ -1,0 +1,274 @@
+[
+  {
+    "id": "npcc_seeder",
+    "name": "Seeder",
+    "role": "controller",
+    "info": {
+      "flavor": "Seeder-archetype mechs are sappers, adept at deploying defensive nets of mines and traps. Laden with ordnance and bristling with sensor suites, Seeders operate in small teams: together, they blanket battlefields in traps and pitfalls, planting mines and other area-denial systems to guide the enemy into kill-boxes.",
+      "tactics": "Seeders specialize in area denial, controlling enemy movement with their mines. Since Seeders can place a mine each turn, they can quickly turn part of the battlefield into a mess when left to their own devices. Allied characters don’t trigger Seeders’ mines, but are affected by them if they’re caught in the explosion. Seeders can take optional systems that force characters to spread out or take additional damage.",
+      "terse": "Controller that can deny large areas to enemies."
+    },
+    "stats": {
+      "armor": 2,
+      "hp": [12, 14, 16],
+      "evade": [7, 8, 9],
+      "edef": [10, 10, 11],
+      "heatcap": 10,
+      "speed": 4,
+      "sensor": 15,
+      "save": [12, 15, 18],
+      "hull": [0, 1, 2],
+      "agility": 0,
+      "systems": [2, 3, 4],
+      "engineering": 0,
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_lay_mines_seeder",
+    "name": "Lay Mines",
+    "origin": "npcc_seeder",
+    "base": true,
+    "type": "System",
+    "effect": "The Seeder deploys one of the mines below in a free space within range 3. Once deployed, the Seeder’s mines detonate when a hostile character moves over them, creating a Blast 1 explosion that affects both allied and hostile characters.<br>The Seeder’s mines are Invisible and cannot be targeted, but hostile characters within Sensors can reveal them by succeeding on a Systems check. Characters can disarm them by succeeding on a Systems check as a quick action while in the same space; however, on a failure, the mine detonates.",
+    "deployables": [
+      {
+        "name": "Stun Mine",
+        "activation": "Quick",
+        "frequency": "1/round",
+        "type": "Mine",
+        "range": [
+          {
+            "type": "Range",
+            "val": 3
+          },
+          {
+            "type": "Blast",
+            "val": 1
+          }
+        ],
+        "detail": "Characters in the area that fail an Engineering save become Stunned until the end of their next turn.",
+        "add_status": [
+          {
+            "id": "stunned",
+            "duration": "next_turn_end_target",
+            "aoe": "Blast 1"
+          }
+        ]
+      },
+      {
+        "name": "Explosive Mine",
+        "activation": "Quick",
+        "frequency": "1/round",
+        "type": "Mine",
+        "range": [
+          {
+            "type": "Range",
+            "val": 3
+          },
+          {
+            "type": "Blast",
+            "val": 1
+          }
+        ],
+        "detail": "Characters in the area take {8/12/16} Explosive damage, or half if they pass an Agility save.",
+        "damage": {
+          "type": "Explosive",
+          "val": [8, 12, 16],
+          "aoe": "Blast 1",
+          "save": "agility",
+          "half": true
+        }
+      },
+      {
+        "name": "Sealant Mine",
+        "activation": "Quick",
+        "frequency": "1/round",
+        "type": "Mine",
+        "range": [
+          {
+            "type": "Range",
+            "val": 3
+          },
+          {
+            "type": "Blast",
+            "val": 1
+          }
+        ],
+        "detail": "Characters in the area that fail a Hull save become Immobilized until the end of their next turn, then Slowed until the end of their subsequent turn.",
+        "save": {
+          "type": "hull",
+          "aoe": "Blast 1"
+        },
+        "add_status": [
+          {
+            "id": "immobilized",
+            "duration": "next_turn_end_target",
+            "aoe": "Blast 1"
+          },
+          {
+            "id": "slow",
+            "aoe": "Blast 1"
+          }
+        ]
+      },
+      {
+        "name": "Shock Mine",
+        "activation": "Quick",
+        "frequency": "1/round",
+        "type": "Mine",
+        "range": [
+          {
+            "type": "Range",
+            "val": 3
+          },
+          {
+            "type": "Blast",
+            "val": 1
+          }
+        ],
+        "detail": "Characters in the area that fail a Systems save become Jammed until the end of their next turn, then Impaired until the end of their subsequent turn.",
+        "save": {
+          "type": "systems",
+          "aoe": "Blast 1"
+        },
+        "add_status": [
+          {
+            "id": "jammed",
+            "duration": "next_turn_end_target",
+            "aoe": "Blast 1"
+          },
+          {
+            "id": "impaired",
+            "aoe": "Blast 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "npcf_grav_grenade_launcher_seeder",
+    "name": "Grav-Grenade Launcher",
+    "base": true,
+    "origin": "npcc_seeder",
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_arcing"
+      },
+      {
+        "id": "tg_knockback",
+        "val": 1
+      }
+    ],
+    "weapon_type": "Main Launcher",
+    "attack_bonus": [2, 4, 6],
+    "damage": [
+      {
+        "type": "Explosive",
+        "val": [2, 3, 4]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 8
+      },
+      {
+        "type": "Blast",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_hopping_mines_seeder",
+    "name": "Hopping Mines",
+    "origin": "npcc_seeder",
+    "type": "Trait",
+    "effect": "Mines deployed with Lay Mines also activate when hostile characters fly or move up to 10 spaces above them, jumping up to 10 spaces high to detonate next to the first character they run into.",
+    "mod": "npcf_lay_mines_seeder"
+  },
+  {
+    "id": "npcf_tripwires_seeder",
+    "name": "Tripwires",
+    "origin": "npcc_seeder",
+    "type": "Trait",
+    "effect": "Lay Mines gains Recharge 5+. Mines deployed with Lay Mines now occupy a Line 3 area and detonate from the closest space when hostile characters move into or across the affected area.",
+    "mod": "npcf_lay_mines_seeder",
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  },
+  {
+    "id": "npcf_speed_deployer_seeder",
+    "name": "Speed Deployer",
+    "origin": "npcc_seeder",
+    "type": "Trait",
+    "effect": "Lay Mines deploys two mines at a time, not one.",
+    "mod": "npcf_lay_mines_seeder",
+    "bonuses": [
+      {
+        "id": "deploy_count",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_grav_spike_seeder",
+    "name": "Grav Spike",
+    "origin": "npcc_seeder",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Grav Spike",
+        "activation": "Quick",
+        "detail": "A character within line of sight and range 5 must succeed on a Systems save, or a grav spike attaches itself to them. You can detonate all grav spikes as a protocol, causing targets to automatically take {4/6/8} AP Explosive damage and be pulled 3 spaces in a direction chosen by you. A quick action and passed Systems save removes a grav spike.",
+        "save": "systems"
+      },
+      {
+        "name": "Detonate Grav Spikes",
+        "activation": "Protocol",
+        "detail": "Detonates all grav spikes attached to characters, causing them to automatically take {4/6/8} AP Explosive damage and be pulled 3 spaces in a direction chosen by the Seeder.",
+        "damage": {
+          "type": "Explosive",
+          "val": [4, 6, 8],
+          "ap": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "npcf_det_spike_seeder",
+    "name": "Det Spike",
+    "origin": "npcc_seeder",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Det Spike",
+        "activation": "Full",
+        "detail": "Up to three characters in line of sight and range 5 must succeed on an Systems save, or a det spike attaches itself to them. At the start of your next turn, all det spikes detonate, creating Burst 1 explosions that deals {3/5/7} Explosive damage to all affected characters. Characters can take damage from more than one spike if the affected areas overlap.",
+        "save": "systems"
+      },
+      {
+        "name": "Detonate Det Spikes",
+        "activation": "Start of Turn",
+        "detail": "Detonates all det spikes attached to characters, creating Burst 1 explosions that deals {3/5/7} Explosive damage to all affected characters. Characters can take damage from more than one spike if the affected areas overlap.",
+        "damage": {
+          "type": "Explosive",
+          "val": [3, 5, 7],
+          "aoe": "Burst 1"
+        }
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  }
+]

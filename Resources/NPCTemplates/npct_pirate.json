@@ -1,0 +1,143 @@
+[
+  {
+    "id": "npct_pirate",
+    "template": true,
+    "name": "Pirate",
+    "description": "Pirates live on the boundaries—the forgotten bolt-holes of occupied space. They range far, operating around blink gates, interstellar shipping lanes, and worlds that are yet to be settled. They can be found wherever resources are kept or moved, people are desperate, and the law is stretched thin."
+  },
+  {
+    "id": "npcf_deadly_pirate",
+    "name": "Deadly",
+    "origin": "npct_pirate",
+    "base": true,
+    "type": "Trait",
+    "effect": "The Pirate deals +1d6 bonus damage on critical hits.",
+    "active_effects": [
+      {
+        "name": "Deadly",
+        "detail": "You deal +1d6 bonus damage on critical hits.",
+        "bonus_damage": "1d6"
+      }
+    ]
+  },
+  {
+    "id": "npcf_boarding_leash_pirate",
+    "name": "Boarding Leash",
+    "origin": "npct_pirate",
+    "type": "Weapon",
+    "tags": [
+      {
+        "id": "tg_thrown",
+        "val": 5
+      }
+    ],
+    "weapon_type": "Heavy Melee",
+    "attack_bonus": [1, 2, 3],
+    "accuracy": 1,
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [5, 7, 9]
+      }
+    ],
+    "range": [
+      {
+        "type": "Threat",
+        "val": 1
+      }
+    ],
+    "on_hit": {
+      "detail": "Target must pass a Hull save or be pulled directly to you and automatically Grappled.",
+      "save": "hull"
+    }
+  },
+  {
+    "id": "npcf_splinter_rounds_pirate",
+    "name": "Splinter Rounds",
+    "origin": "npct_pirate",
+    "type": "Trait",
+    "effect": "The Pirate deals +3 bonus damage on critical hits.",
+    "active_effects": [
+      {
+        "name": "Splinter Rounds",
+        "detail": "You deal +3 bonus damage on critical hits.",
+        "bonus_damage": 3
+      }
+    ]
+  },
+  {
+    "id": "npcf_coreworm_rockets_pirate",
+    "name": "Coreworm Rockets",
+    "origin": "npct_pirate",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Coreworm Rockets",
+        "activation": "Full",
+        "detail": "1d3 miniature drones attach themselves to a character within line of sight and Range 10 and begin drilling into their target’s cockpit. In 1d3+2 rounds, if any coreworms are still attached, they reach the cockpit and savage the pilot, reducing them to 0 HP. The target knows how many rounds it will take for the drones to bore though, and how many are attached.<br>The target and allied characters adjacent to them can remove one drone at a time with a successful Systems or Engineering check as a quick action. Additionally, if the target is Shut Down, the coreworms are confused and their timer pauses",
+        "add_special": [
+          {
+            "attribute": "Coreworm Rockets",
+            "detail": "1d3 miniature drones are attached to you and will reach your cockpit in 1d3+2 rounds unless removed. You and allied characters adjacent to you can remove one drone at a time with a successful Systems or Engineering check as a quick action. Additionally, if you are Shut Down, the coreworms are confused and their timer pauses."
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_limited",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_prying_claws_pirate",
+    "name": "Prying Claws",
+    "origin": "npct_pirate",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Prying Claws",
+        "activation": "Full",
+        "detail": "Attempt to pry open the cockpit of an adjacent character. The target must succeed on a Hull save or the pilot is forced to immediately exit their mech as though Dismounting.",
+        "save": "hull"
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_limited",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_slaver_signal_pirate",
+    "name": "Slaver Signal",
+    "origin": "npct_pirate",
+    "type": "System",
+    "actions": [
+      {
+        "name": "Slaver Signal",
+        "activation": "Full",
+        "detail": "A piloted mech or vehicle within Range 10 must make a Systems save. On a failure, all pilots and other Biological characters inside the target are overcome by the signal, becoming Stunned. Unless their mech or vehicle has an AI, it also becomes Stunned. If any affected characters (or their mech or vehicle) take damage, they are jolted awake – ending the effect. Characters adjacent to the target can also end the effect by blotting out the signal with a successful Systems check as a full action. Otherwise, the effect lasts until you are destroyed.",
+        "range": [
+          {
+            "type": "Range",
+            "val": 10
+          }
+        ],
+        "add_status": [
+          {
+            "id": "stunned"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 5
+      }
+    ]
+  }
+]

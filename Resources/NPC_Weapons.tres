@@ -1,0 +1,7 @@
+[gd_resource type="JSON" script_class="NPCWeapons" format=3 uid="uid://b10gx3rk84hna"]
+
+[ext_resource type="Script" uid="uid://cvianhxwpiggq" path="res://Resources/NPC_Weapons.gd" id="1_f64k2"]
+
+[resource]
+data = null
+script = ExtResource("1_f64k2")

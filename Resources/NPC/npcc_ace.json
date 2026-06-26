@@ -1,0 +1,227 @@
+[
+  {
+	"id": "npcc_ace",
+	"name": "Ace",
+	"role": "striker",
+	"info": {
+	  "flavor": "The first person to embody the “Ace” archetype was Aisling Jensen, an auxiliary pilot active during the liberation of Verdana. Knights of the chassis and sky, Aces like Aisling throw their mechs into battle with high-speed strafing runs, agile maneuvers, and reckless feats of daring. Cocky and self-assured, Aces relish a good duel.",
+	  "tactics": "Aces are very fast and reactive strikers that can use Evasive Maneuvers to mitigate dangerous or high-damage attacks. Barrel Roll is most effective against heavy weapons. Their Seeking weapons ignore cover and don’t require line of sight, allowing them to deal consistent damage. Relatively low HP makes Aces vulnerable to sustained damage, and they are relatively weak against tech attacks.",
+	  "terse": "Fast and evasive striker that can deal consistent damage."
+	},
+	"stats": {
+	  "armor": [0, 0, 0],
+	  "hp": [10, 12, 14],
+	  "evade": [12, 15, 18],
+	  "edef": [8, 8, 10],
+	  "heatcap": [8, 8, 8],
+	  "speed": [5, 6, 7],
+	  "sensor": [10, 10, 10],
+	  "save": [10, 12, 14],
+	  "hull": [-2, -2, -2],
+	  "agility": [3, 4, 6],
+	  "systems": [1, 2, 3],
+	  "engineering": [0, 1, 1],
+	  "size": 1,
+	  "activations": 1
+	}
+  },
+  {
+	"id": "npcf_ssc_flight_system_ace",
+	"name": "SSC Flight System",
+	"origin": "npcc_ace",
+	"base": true,
+	"type": "System",
+	"effect": "The Ace can fly whenever they move or Boost.",
+	"active_effects": [
+	  {
+		"name": "Flight",
+		"detail": "You can fly whenever you move or Boost."
+	  }
+	]
+  },
+  {
+	"id": "npcf_missile_launcher_ace",
+	"name": "Missile Launcher",
+	"origin": "npcc_ace",
+	"base": true,
+	"type": "Weapon",
+	"tags": [
+	  {
+		"id": "tg_seeking"
+	  },
+	  {
+		"id": "tg_smart"
+	  }
+	],
+	"weapon_type": "Main Launcher",
+	"attack_bonus": [1, 2, 3],
+	"damage": [
+	  {
+		"type": "Explosive",
+		"val": [4, 6, 8]
+	  }
+	],
+	"range": [
+	  {
+		"type": "Range",
+		"val": 10
+	  },
+	  {
+		"type": "Blast",
+		"val": 1
+	  }
+	]
+  },
+  {
+	"id": "npcf_barrel_roll_ace",
+	"name": "Barrel Roll",
+	"origin": "npcc_ace",
+	"base": true,
+	"type": "Reaction",
+	"actions": [
+	  {
+		"name": "Barrel Roll",
+		"activation": "Reaction",
+		"trigger": "A melee or ranged attack hits the Ace.",
+		"detail": "You perform a barrel roll, flying 6 spaces in any direction and causing the attack to miss. This movement ignores engagement and does not provoke reactions."
+	  }
+	],
+	"tags": [
+	  {
+		"id": "tg_recharge",
+		"val": 5
+	  },
+	  {
+		"id": "tg_npc_trait"
+	  }
+	]
+  },
+  {
+	"id": "npcf_bombing_bay_ace",
+	"name": "Bombing Bay",
+	"origin": "npcc_ace",
+	"type": "System",
+	"effect": "If the Ace is flying when they move or Boost, they may use the \"Drop Bomb\" action as a Free Action once per round.",
+	"actions": [
+	  {
+		"name": "Drop Bomb",
+		"activation": "Free",
+		"frequency": "1/round",
+		"detail": "Cause a Blast 1 explosion that must overlap with at least 1 space occupied by the target. Characters within the affected area must succeed on an Agility save or take {6/8/10} Explosive damage and be knocked Prone.",
+		"range": [
+		  {
+			"type": "Range",
+			"val": 5
+		  },
+		  {
+			"type": "Blast",
+			"val": 1
+		  }
+		],
+		"damage": [
+		  {
+			"type": "Explosive",
+			"val": [6, 8, 10],
+			"save": "agility",
+			"aoe": "blast 1"
+		  }
+		],
+		"add_status": [
+		  {
+			"id": "prone",
+			"save": "agility"
+		  }
+		]
+	  }
+	],
+	"tags": [
+	  {
+		"id": "tg_limited",
+		"val": 3
+	  }
+	]
+  },
+  {
+	"id": "npcf_strafe_ace",
+	"name": "Strafe",
+	"origin": "npcc_ace",
+	"type": "Trait",
+	"actions": [
+	  {
+		"name": "Strafe",
+		"activation": "Quick",
+		"frequency": "1/round",
+		"detail": "Fly {speed} in any direction, automatically dealing {3/4/6} Kinetic damage to one character below or adjacent to the path taken.",
+		"damage": [
+		  {
+			"type": "Kinetic",
+			"val": [3, 4, 6]
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"id": "npcf_missile_swarm_ace",
+	"name": "Missile Swarm",
+	"origin": "npcc_ace",
+	"type": "Weapon",
+	"effect": "This weapon deals double damage to characters with Lock On and doesn’t affect allied characters.",
+	"tags": [
+	  {
+		"id": "tg_loading"
+	  },
+	  {
+		"id": "tg_seeking"
+	  }
+	],
+	"weapon_type": "Main Launcher",
+	"attack_bonus": [1, 2, 3],
+	"damage": [
+	  {
+		"type": "Explosive",
+		"val": [3, 4, 5]
+	  }
+	],
+	"range": [
+	  {
+		"type": "Burst",
+		"val": 5
+	  }
+	]
+  },
+  {
+	"id": "npcf_rapid_response_ace",
+	"name": "Rapid Response",
+	"origin": "npcc_ace",
+	"type": "Reaction",
+	"actions": [
+	  {
+		"name": "Rapid Response",
+		"activation": "Reaction",
+		"frequency": "1/round",
+		"trigger": "An enemy character in line of sight moves.",
+		"detail": "You may Boost."
+	  }
+	],
+	"tags": [
+	  {
+		"id": "tg_npc_trait"
+	  }
+	]
+  },
+  {
+	"id": "npcf_chaff_launchers_ace",
+	"name": "Chaff Launchers",
+	"mod": "npcf_barrel_roll_ace",
+	"origin": "npcc_ace",
+	"type": "Trait",
+	"effect": "After using Barrel Roll, the Ace counts as being in soft cover until the end of their next turn; additionally, Barrel Roll can be used against tech attacks.",
+	"active_effects": [
+	  {
+		"name": "Chaff Launchers",
+		"detail": "After using Barrel Roll, you count as being in soft cover until the end of your next turn; additionally, Barrel Roll can be used against tech attacks."
+	  }
+	]
+  }
+]

@@ -1,0 +1,285 @@
+[
+  {
+    "id": "npcc_engineer",
+    "name": "Engineer",
+    "role": "striker",
+    "info": {
+      "flavor": "Various types of localized Engineer-class mechs are common throughout the galaxy, unique to the worlds or theaters in which they operate. The Engineer has long existed as an archetype, but it remained largely undefined until a full design doctrine was laid out by Corrida Isolde-Nollet, an Armory civil service director on Ras Shamra. In all cases, the mission of Engineers is the same: defend, maintain, secure. Engineers operate best in the middle or rear of the battle line, coordinating the defense of important positions and overseeing comprehensive deployment of all operational assets. Remember: if you can’t get to the enemy, you lose.",
+      "tactics": "Engineers’ Deployable Turrets make them potent force multipliers, as they can deploy one every turn. If enemies don’t deal with an Engineer's turrets quickly, their potential damage quickly skyrockets – even more when they target characters with Engineer’s Mark. Without Engineer’s Mark, turrets attack the nearest target, which players can use to control who takes damage.",
+      "terse": "Force multiplier striker that can deploy turrets to deal damage."
+    },
+    "stats": {
+      "armor": 0,
+      "hp": 20,
+      "evade": [7, 9, 11],
+      "edef": [10, 10, 12],
+      "heatcap": [10, 12, 14],
+      "speed": 3,
+      "sensor": 15,
+      "save": [10, 12, 14],
+      "hull": -1,
+      "agility": -1,
+      "systems": [1, 2, 3],
+      "engineering": [3, 4, 6],
+      "size": 1,
+      "activations": 1
+    }
+  },
+  {
+    "id": "npcf_flak_cannon_engineer",
+    "name": "Flak Cannon",
+    "origin": "npcc_engineer",
+    "base": true,
+    "type": "Weapon",
+    "effect": "This weapon has +2 Accuracy against flying targets.",
+    "tags": [
+      {
+        "id": "tg_smart"
+      }
+    ],
+    "weapon_type": "Heavy Cannon",
+    "attack_bonus": [1, 2, 3],
+    "damage": [
+      {
+        "type": "Kinetic",
+        "val": [3, 4, 5]
+      }
+    ],
+    "range": [
+      {
+        "type": "Range",
+        "val": 15
+      }
+    ]
+  },
+  {
+    "id": "npcf_deployable_turret_engineer",
+    "name": "Deployable Turret",
+    "origin": "npcc_engineer",
+    "base": true,
+    "type": "System",
+    "deployables": [
+      {
+        "name": "Deployable Turret",
+        "activation": "Quick",
+        "size": 0.5,
+        "hp": [5, 8, 10],
+        "evasion": 10,
+        "edef": 10,
+        "type": "Drone",
+        "detail": "One of these self-constructing turrets can be deployed to any free, adjacent space. On the Engineer’s turn, deployed turrets attack the nearest hostile character within Range 10. They attack at +{1/2/3} and deal {4/5/6} Kinetic damage. The Engineer may have six turrets deployed at one time, all of which are disabled if the Engineer is destroyed.",
+        "range": [
+          {
+            "type": "Range",
+            "val": 10
+          }
+        ],
+        "damage": [
+          {
+            "type": "Kinetic",
+            "val": [4, 5, 6]
+          }
+        ],
+        "attack_bonus": [1, 2, 3]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_limited",
+        "val": 6
+      }
+    ]
+  },
+  {
+    "id": "npcf_engineers_mark_engineer",
+    "name": "Engineer’s Mark",
+    "origin": "npcc_engineer",
+    "base": true,
+    "type": "Trait",
+    "actions": [
+      {
+        "name": "Engineer’s Mark",
+        "activation": "Quick",
+        "detail": "Until the end of your next turn, your Deployable Turrets will attack a target of their choice (within Range) instead of attacking the nearest hostile character.",
+        "add_special": [
+          {
+            "attribute": "Engineer's Mark Active",
+            "detail": "Your Deployable Turrets will attack a target of their choice (within Range) instead of attacking the nearest hostile character.",
+            "duration": "next_turn_end_self",
+            "target": "self"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 6
+      }
+    ]
+  },
+  {
+    "id": "npcf_power_deployer_engineer",
+    "name": "Power Deployer",
+    "origin": "npcc_engineer",
+    "type": "Trait",
+    "effect": "The Engineer can deploy two turrets at a time with Deployable Turrets. If they do so, the system counts as Recharge 4+ until it next recharges.",
+    "mod": "npcf_deployable_turret_engineer",
+    "tags": [
+      {
+        "id": "tg_recharge",
+        "val": 4
+      }
+    ],
+    "bonuses": [
+      {
+        "id": "deploy_count",
+        "val": 1
+      }
+    ]
+  },
+  {
+    "id": "npcf_skyshield_protocol_engineer",
+    "name": "Skyshield Protocol",
+    "origin": "npcc_engineer",
+    "type": "Trait",
+    "effect": "Deployable Turrets gain +2 Accuracy against flying targets.",
+    "mod": "npcf_deployable_turret_engineer"
+  },
+  {
+    "id": "npcf_shepherd_field_engineer",
+    "name": "Shepherd Field",
+    "origin": "npcc_engineer",
+    "type": "Trait",
+    "effect": "Drones, objects, and pieces of cover gain Resistance to all damage while next to the Engineer.",
+    "active_effects": [
+      {
+        "name": "Shepherd Field",
+        "detail": "Drones, objects, and pieces of cover gain Resistance to all damage while next to the Engineer."
+      }
+    ]
+  },
+  {
+    "id": "npcf_mobile_turrets_engineer",
+    "name": "Mobile Turrets",
+    "origin": "npcc_engineer",
+    "type": "Trait",
+    "effect": "At the start of the Engineer’s turn, they can move all deployable turrets up to 3 spaces in any direction.",
+    "mod": "npcf_deployable_turret_engineer"
+  },
+  {
+    "id": "npcf_arsenal_engineer",
+    "name": "Arsenal",
+    "origin": "npcc_engineer",
+    "type": "Trait",
+    "effect": "Deployable Turrets can be deployed as Inferno, Hellstorm, Hunter, or Primed Turrets.",
+    "mod": "npcf_deployable_turret_engineer",
+    "deployables": [
+      {
+        "name": "Inferno Turret",
+        "activation": "Quick",
+        "size": 0.5,
+        "hp": [5, 8, 10],
+        "evasion": 10,
+        "edef": 10,
+        "type": "Drone",
+        "detail": "One of these self-constructing turrets can be deployed to any free, adjacent space. On the Engineer’s turn, deployed turrets attack the nearest hostile character within Range 10. They attack at +{1/2/3} and deal {2/3/4} Burn in a Cone 3. The Engineer may have six turrets deployed at one time, all of which are disabled if the Engineer is destroyed."
+      },
+      {
+        "name": "Hellstorm Turret",
+        "activation": "Quick",
+        "size": 0.5,
+        "hp": [5, 8, 10],
+        "evasion": 10,
+        "edef": 10,
+        "type": "Drone",
+        "detail": "One of these self-constructing turrets can be deployed to any free, adjacent space. On the Engineer’s turn, deployed turrets attack the nearest hostile character within Range 15. They attack at +{1/2/3} and deal {2/3/4} Explosive damage in a Blast 1. The Engineer may have six turrets deployed at one time, all of which are disabled if the Engineer is destroyed.",
+        "range": [
+          {
+            "type": "Range",
+            "val": 15
+          },
+          {
+            "type": "Blast",
+            "val": 1
+          }
+        ],
+        "damage": [
+          {
+            "type": "Explosive",
+            "val": [2, 3, 4],
+            "aoe": "blast 1"
+          }
+        ],
+        "attack_bonus": [1, 2, 3]
+      },
+      {
+        "name": "Hunter Turret",
+        "activation": "Quick",
+        "size": 0.5,
+        "hp": [5, 8, 10],
+        "evasion": 10,
+        "edef": 10,
+        "type": "Drone",
+        "detail": "One of these self-constructing turrets can be deployed to any free, adjacent space. On the Engineer’s turn, deployed turrets attack the nearest hostile character within Range 10. They attack at +{1/2/3} and deal {4/5/6} Kinetic damage. The Engineer may have six turrets deployed at one time, all of which are disabled if the Engineer is destroyed.",
+        "tags": [
+          {
+            "id": "tg_reliable",
+            "val": 1
+          }
+        ],
+        "range": [
+          {
+            "type": "Range",
+            "val": 10
+          }
+        ],
+        "damage": [
+          {
+            "type": "Kinetic",
+            "val": [4, 5, 6]
+          }
+        ],
+        "attack_bonus": [1, 2, 3]
+      },
+      {
+        "name": "Primed Turret",
+        "activation": "Quick",
+        "size": 0.5,
+        "hp": [5, 8, 10],
+        "evasion": 10,
+        "edef": 10,
+        "type": "Drone",
+        "detail": "One of these self-constructing turrets can be deployed to any free, adjacent space. On the Engineer’s turn, deployed turrets attack the nearest hostile character within Range 10. They attack at +{1/2/3} and deal {4/5/6} Kinetic damage. The Engineer may have six turrets deployed at one time. When either the turret or Engineer is destroyed, the turret explodes in a Burst 1 area. Characters within the affected area must succeed on an Agility save or take {7/9/11} Explosive damage.",
+        "range": [
+          {
+            "type": "Range",
+            "val": 10
+          }
+        ],
+        "damage": [
+          {
+            "type": "Kinetic",
+            "val": [4, 5, 6]
+          }
+        ],
+        "attack_bonus": [1, 2, 3],
+        "active_effects": [
+          {
+            "name": "Primed Turret Explosion",
+            "condition": "The Primed Turret or Engineer is destroyed.",
+            "detail": "The turret explodes in a Burst 1 area. Characters within the affected area must succeed on an Agility save or take {7/9/11} Explosive damage.",
+            "damage": [
+              {
+                "type": "Explosive",
+                "val": [7, 9, 11],
+                "save": "agility",
+                "aoe": "burst 1"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
